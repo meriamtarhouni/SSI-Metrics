@@ -12,13 +12,19 @@ import { AppComponent } from './app.component';
 import { LoginPageCollaboratorComponent } from './pages/login-page-collaborator/login-page-collaborator.component';
 import { SignupPageCollaboratorComponent } from './pages/signup-page-collaborator/signup-page-collaborator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './pages/navbar/navbar.component';
+import { SidebarComponent } from './pages/sidebar/sidebar.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageCollaboratorComponent,
-    SignupPageCollaboratorComponent
+    SignupPageCollaboratorComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
 	FormsModule,
