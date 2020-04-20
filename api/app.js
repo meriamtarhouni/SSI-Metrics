@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const {Rssi} = require('./db/models');
+
 const { mongoose } = require('./db/mongoose');
 
 app.get('/',(req,res)=>{
