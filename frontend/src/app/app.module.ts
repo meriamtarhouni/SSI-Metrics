@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { LoginPageCollaboratorComponent } from './pages/login-page-collaborator/login-page-collaborator.component';
 import { SignupPageCollaboratorComponent } from './pages/signup-page-collaborator/signup-page-collaborator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageCollaboratorComponent,
-    SignupPageCollaboratorComponent
+    SignupPageCollaboratorComponent,
+    LoginPageRssiComponent
   ],
   imports: [
 	FormsModule,
