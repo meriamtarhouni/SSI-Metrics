@@ -12,8 +12,7 @@ const RssiSchema =  new mongoose.Schema({
     nom: {
         type: String,
         required: true,
-        minlength: 1,
-        unique: true
+        minlength: 1
     },
    
     raison: {
@@ -105,7 +104,7 @@ RssiSchema.methods.createSession = function() {
   
   let rssi = this;
   return rssi.generateRefreshAuthToken().then((refreshToken) => {
-         return saveSessionToDatabase(user, refreshToken);}).then((refreshToken) => {
+         return saveSessionToDatabase(rssi, refreshToken);}).then((refreshToken) => {
            // saved to database successfully
           // now return the refresh token
           return refreshToken;
@@ -171,8 +170,8 @@ RssiSchema.pre('save',function (next){
      // if the password field has been edited/changed then run this code.
     // Generate salt and hash password
     bcrypt.genSalt(costFactor, (err, salt) => {
-        bcrypt.hash(user.password, salt, (err, hash) => {
-            user.password = hash;
+        bcrypt.hash(rssi.password, salt, (err, hash) => {
+            rssi.password = hash;
             next();
         })
     })
@@ -207,7 +206,7 @@ let saveSessionToDatabase = (rssi , refreshToken) => {
 
 //Expiry Time
 let generateRefreshTokenExpiryTime = () => {
-    let daysUntilExpire = "50";
+    let daysUntilExpire = "10";
     let secondsUntilExpire = ((daysUntilExpire * 24) * 60) * 60;
     return ((Date.now() / 1000) + secondsUntilExpire);
 }
@@ -215,4 +214,4 @@ let generateRefreshTokenExpiryTime = () => {
 
 const Rssi = mongoose.model('Rssi', RssiSchema);
 
-module.exports = { Rssi }
+module.exports = {  Rssi }
