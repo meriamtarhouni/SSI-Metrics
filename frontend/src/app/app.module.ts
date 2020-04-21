@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginPageCollaboratorComponent } from './pages/login-page-collaborator/login-page-collaborator.component';
 import { SignupPageCollaboratorComponent } from './pages/signup-page-collaborator/signup-page-collaborator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
@@ -22,6 +23,7 @@ import { FooterComponent } from './pages/footer/footer.component';
     AppComponent,
     LoginPageCollaboratorComponent,
     SignupPageCollaboratorComponent,
+    LoginPageRssiComponent,
     NavbarComponent,
     SidebarComponent,
     FooterComponent
