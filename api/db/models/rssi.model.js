@@ -12,7 +12,8 @@ const RssiSchema =  new mongoose.Schema({
     nom: {
         type: String,
         required: true,
-        minlength: 1
+        minlength: 1,
+        unique: true
     },
    
     raison: {
@@ -44,7 +45,8 @@ const RssiSchema =  new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 5
+        minlength: 5,
+        unique: true
     },
    //Session Objects contain a refresh token and its expiry dateTime (in the form of a unix timestamp)
     sessions: [{
