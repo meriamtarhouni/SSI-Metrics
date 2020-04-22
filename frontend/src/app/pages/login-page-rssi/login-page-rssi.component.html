@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-md-11">
                               <mat-form-field  >
-                                <input matInput placeholder="Adresse Mail" id="email" type="email">
+                                <input #emailInput matInput placeholder="Adresse Mail" id="email" type="email">
                               </mat-form-field>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-11">
                               <mat-form-field  >
-                                <input matInput placeholder="Mot de passe" id="password" type="password">
+                                <input #passwordInput matInput placeholder="Mot de passe" id="password" type="password">
                               </mat-form-field>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
 
                         
                         <br>
-                        <a href="javascript:void(0)" class="btn btn-primary">Connexion</a>
+                        <a (click)="onLoginButtonClicked(emailInput.value,passwordInput.value)" class="btn btn-primary">Connexion</a>
                     </div>
                 </div>
           </div>
