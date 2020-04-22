@@ -122,14 +122,19 @@ RssiSchema.statics.getJWTSecret = () => {
 }
 
 
-RssiSchema.statics.findByIdAndToken = function(_id, token) {
-    const Rssi= this;
+RssiSchema.statics.findByIdAndToken = function (_id, token) {
+    // finds rssi by id and token
+    // used in auth middleware (verifySession)
+
+    const Rssi = this;
 
     return Rssi.findOne({
         _id,
         'sessions.token': token
     });
 }
+
+
 
 RssiSchema.statics.findByCredentials = function (email,password) {
   

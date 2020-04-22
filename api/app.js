@@ -12,6 +12,21 @@ const { mongoose } = require('./db/mongoose');
 app.use(bodyParser.json());
 
 
+
+// CORS HEADERS MIDDLEWARE
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
+
+    res.header(
+        'Access-Control-Expose-Headers',
+        'x-access-token, x-refresh-token'
+    );
+
+    next();
+});
+
 // Verify Refresh Token Middleware (which will be verifying the session)
 let verifySession = (req, res, next) => {
     // grab the refresh token from the request header
@@ -19,7 +34,7 @@ let verifySession = (req, res, next) => {
 
     // grab the _id from the request header
     let _id = req.header('_id');
-
+   
     Rssi.findByIdAndToken(_id, refreshToken).then((rssi) => {
         if (!rssi) {
             // rssi couldn't be found
