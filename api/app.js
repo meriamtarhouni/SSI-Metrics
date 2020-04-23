@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const {Rssi} = require('./db/models');
+const {Rssi,Collaborateur} = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 
@@ -78,6 +78,55 @@ let verifySession = (req, res, next) => {
 }
 
 
+// Verify Refresh Token Middleware (which will be verifying the Collaborator session )
+let verifySessionCollaborateur = (req, res, next) => {
+    // grab the refresh token from the request header
+    let refreshToken = req.header('x-refresh-token');
+
+    // grab the _id from the request header
+    let _id = req.header('_id');
+   
+    Collaborateur.findByIdAndToken(_id, refreshToken).then((collaborateur) => {
+        if (!collaborateur) {
+            // collaborateur couldn't be found
+            return Promise.reject({
+                'error': 'Collaborateur not found. Make sure that the refresh token and  id are correct'
+            });
+        }
+
+
+        // The refresh token exists in the database - but we still have to check if it has expired or not
+
+        req.collaborateur_id = collaborateur_id;
+        req.collaborateurObject = collaborateur;
+        req.refreshToken = refreshToken;
+
+        let isSessionValid = false;
+
+        collaborateur.sessions.forEach((session) => {
+            if (session.token === refreshToken) {
+                // check if the session has expired
+                if (Collaborateur.hasRefreshTokenExpired(session.expiresAt) === false) {
+                    // refresh token has not expired
+                    isSessionValid = true;
+                }
+            }
+        });
+
+        if (isSessionValid) {
+            // the session is VALID - call next() to continue with processing this web request
+            next();
+        } else {
+            // the session is not valid
+            return Promise.reject({
+                'error': 'Refresh token has expired or the session is invalid'
+            })
+        }
+
+    }).catch((e) => {
+        res.status(401).send(e);
+    })
+}
 /* END MIDDLEWARE  */
 
 
@@ -150,8 +199,85 @@ app.get('/rssis/me/access-token', verifySession, (req, res) => {
 
 
 
+/* COLLABORATOR ROUTES */ 
+
+/** Sign up 
+ * 
+ * POST /collaborateur 
+ * 
+ * */ 
+app.post('/collaborateurs', (req,res)=>{
+    let body = req.body;
+    let newCollaborateur= new Collaborateur(body); 
+    newCollaborateur.save().then(()=>{
+        newCollaborateur.createSession(); 
+    }).then((refreshToken)=>{
+
+
+        return newCollaborateur.generateAccessAuthToken().then((accessToken)=> {
+            return { accessToken, refreshToken }
+
+        }); 
+    }).then((authTokens) => {
+        
+        res
+            .header('x-refresh-token', authTokens.refreshToken)
+            .header('x-access-token', authTokens.accessToken)
+            .send(newCollaborateur);
+    }).catch((e) => {
+        res.status(400).send(e);
+    })
+    
+})
+
+
+/**
+ * login 
+ * POST /collaborateur  
+ * 
+ */
+app.post('/collaborateurs/login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    Collaborateur.findByCredentials(email, password).then((collaborateur) => {
+        return collaborateur.createSession().then((refreshToken) => {
+          
+
+            return collaborateur.generateAccessAuthToken().then((accessToken) => {
+               
+                return { accessToken, refreshToken }
+            });
+        }).then((authTokens) => {
+          
+            res
+                .header('x-refresh-token', authTokens.refreshToken)
+                .header('x-access-token', authTokens.accessToken)
+                .send(collaborateur);
+        })
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
+/**
+ * get access token of the collaborator 
+ */
+app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur, (req, res) => {
+    // we know that the caller is authenticated and we have the collaborateur_id and collaborateur  object available to us
+    req.collaborateurObject.generateAccessAuthToken().then((accessToken) => {
+        res.header('x-access-token', accessToken).send({ accessToken });
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
+
+
+
+
+
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
+
 
 
