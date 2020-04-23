@@ -19,10 +19,10 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
 
-    res.header(
+  res.header(
         'Access-Control-Expose-Headers',
         'x-access-token, x-refresh-token'
-    );
+    );  
 
     next();
 });
@@ -203,7 +203,7 @@ app.get('/rssis/me/access-token', verifySession, (req, res) => {
 
 /** Sign up 
  * 
- * POST /collaborateur 
+ * POST /collaborateurs
  * 
  * */ 
 app.post('/collaborateurs', (req,res)=>{
@@ -233,7 +233,7 @@ app.post('/collaborateurs', (req,res)=>{
 
 /**
  * login 
- * POST /collaborateur  
+ * POST /collaborateurs
  * 
  */
 app.post('/collaborateurs/login', (req, res) => {
@@ -266,6 +266,7 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
     // we know that the caller is authenticated and we have the collaborateur_id and collaborateur  object available to us
     req.collaborateurObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
+        //here
     }).catch((e) => {
         res.status(400).send(e);
     });

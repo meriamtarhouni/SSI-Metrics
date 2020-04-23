@@ -132,9 +132,9 @@ CollaborateurSchema.statics.findByIdAndToken = function (_id, token) {
     // finds collaborateur by id and token
     // used in auth middleware (verifySession)
 
-    const collaborateur = this;
+    const Collaborateur = this;
 
-    return collaborateur.findOne({
+    return Collaborateur.findOne({
         _id,
         'sessions.token': token
     });
@@ -144,16 +144,18 @@ CollaborateurSchema.statics.findByIdAndToken = function (_id, token) {
 
 CollaborateurSchema.statics.findByCredentials = function (email,password) {
   
-    let collaborateur = this;
-    return collaborateur.findOne({ email }).then((collaborateur) => {
+    let Collaborateur = this;
+    return Collaborateur.findOne({ email }).then((collaborateur) => {
         if (!collaborateur) return Promise.reject();
 
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, collaborateur.password, (err, res) => {
                 if (res) {
+                  
                     resolve(collaborateur);
                 }
                 else {
+                    
                     reject();
                 }
             })
