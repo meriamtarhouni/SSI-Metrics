@@ -16,6 +16,7 @@ import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { SignupPageRssiComponent } from './pages/signup-page-rssi/signup-page-rssi.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     LoginPageRssiComponent,
     NavbarComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    SignupPageRssiComponent
   ],
   imports: [
 	FormsModule,

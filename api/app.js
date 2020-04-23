@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 });
 
 // Verify Refresh Token Middleware (which will be verifying the session)
-let verifySession = (req, res, next) => {
+let verifySessionRssi = (req, res, next) => {
     // grab the refresh token from the request header
     let refreshToken = req.header('x-refresh-token');
 
@@ -187,7 +187,7 @@ app.post('/rssis/login', (req, res) => {
     });
 })
 
-app.get('/rssis/me/access-token', verifySession, (req, res) => {
+app.get('/rssis/me/access-token', verifySessionRssi, (req, res) => {
     // we know that the caller is authenticated and we have the rssi_id and rssi  object available to us
     req.rssiObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
