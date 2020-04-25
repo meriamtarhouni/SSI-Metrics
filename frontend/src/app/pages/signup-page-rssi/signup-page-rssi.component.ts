@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { AuthRssiService } from 'src/app/auth-rssi.service';
+import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup-page-rssi',
@@ -37,14 +40,18 @@ export class SignupPageRssiComponent implements OnInit {
 
   }
 
-  constructor() { }
+  constructor(private authService: AuthRssiService, private router: Router) { }
 
   ngOnInit(): void {
    
   }
   
-  OnConnectButtonClicked(name : string, raison_sociale: string,email : string,code : string,adresse : string,password : string,motivation:string)
+  OnSignUpButtonClicked(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string)
   {
-    console.log(name,raison_sociale,email,code,adresse,password,motivation);
+    this.authService.signUp(nom,  raison,adresse,code,email,password,motivation).subscribe((res: HttpResponse<any>) => {
+     
+      console.log(res);
+      
+    });
   }
 }

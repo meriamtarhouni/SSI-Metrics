@@ -22,6 +22,20 @@ export class WebRequestService {
         observe: 'response'
       });
    }
+   signUpRSSI(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+    return this.http.post(`${this.ROOT_URL}/rssis`, {
+      nom,
+      raison,
+      adresse,
+      code,
+      email,
+      password,
+      motivation
+    }, {
+        observe: 'response'
+      });
+  
+   }
 
 
 

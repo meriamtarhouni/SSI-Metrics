@@ -7,7 +7,7 @@ import { catchError, tap, switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class WebReqInterceptor implements HttpInterceptor {
+export class WebReqInterceptorRssi implements HttpInterceptor {
 
   constructor(private authService: AuthRssiService) { }
 
@@ -19,6 +19,7 @@ export class WebReqInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
            console.log(error);
+          
            return throwError(error);
       }
     ))

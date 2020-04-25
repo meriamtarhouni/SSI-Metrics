@@ -4,6 +4,7 @@ const app = express();
 const {Rssi,Collaborateur} = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
+const jwt = require('jsonwebtoken');
 
 /* MIDDLEWARE  */
 
@@ -26,6 +27,28 @@ app.use(function (req, res, next) {
 
     next();
 });
+
+
+
+// check whether the request has a valid JWT access token
+let authenticateRssi = (req, res, next) => {
+    let token = req.header('x-access-token');
+
+    // verify the JWT
+    jwt.verify(token, Rssi.getJWTSecret(), (err, decoded) => {
+        if (err) {
+            // there was an error
+            // jwt is invalid - * DO NOT AUTHENTICATE *
+            res.status(401).send(err);
+        } else {
+            // jwt is valid
+            req.rssi_id = decoded._id;
+            next();
+        }
+    });
+}
+
+
 
 // Verify Refresh Token Middleware (which will be verifying the session)
 let verifySessionRssi = (req, res, next) => {

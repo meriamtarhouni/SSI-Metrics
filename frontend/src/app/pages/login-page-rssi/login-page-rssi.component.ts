@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, INJECTOR } from '@angular/core';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
-import { HttpResponse } from '@angular/common/http';
-
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login-page-rssi',
   templateUrl: './login-page-rssi.component.html',
@@ -19,13 +19,17 @@ export class LoginPageRssiComponent implements OnInit {
    
       if (res.status === 200) {
         // we have logged in successfully
-        console.log("Great");
+        console.log("Logged in");
       }
       console.log(res);
       
-    });
+    },
+    (err :HttpErrorResponse) => { if(err.status===400){console.log("Not Logged In"); }}
+    );
   }
   
   
+  
+
   }
 

@@ -23,10 +23,25 @@ export class AuthRssiService {
        
   }
 
+  signUp(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+    
+    return this.webService.signUpRSSI(nom,  raison,adresse,code,email,password,motivation).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+        // the auth tokens will be in the header of this response
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log("Successfully signed up!");
+      })
+    )
+
+
+  }
+
   logout(){
     this.removeSession();
+    this.router.navigate(['/login-rssi']);
   }
-  
+
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }
@@ -51,6 +66,7 @@ export class AuthRssiService {
     localStorage.removeItem('x-refresh-token');
   }
   
+ 
 
 }
 
