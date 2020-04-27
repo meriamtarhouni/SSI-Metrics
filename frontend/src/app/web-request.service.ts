@@ -36,6 +36,14 @@ export class WebRequestService {
       });
   
    }
+   getRssiById(id :String) {
+    return this.http.get(`${this.ROOT_URL}/rssis/${id}`);
+   }
+
+    patch(uri: string, payload: Object) {
+    return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
+    }
+
 
 
 

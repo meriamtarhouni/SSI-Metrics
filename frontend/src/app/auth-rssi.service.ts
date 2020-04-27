@@ -37,6 +37,17 @@ export class AuthRssiService {
 
   }
 
+  getRssiById(rssiId: string)
+  {
+    return this.webService.getRssiById(rssiId);
+  }
+
+  updateRssi(rssiId : string,nom : string,  raison: string,adresse : string,code : string,email : string,motivation:string){
+
+    return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,code,email,motivation});
+  }
+
+
   logout(){
     this.removeSession();
     this.router.navigate(['/login-rssi']);
@@ -66,6 +77,7 @@ export class AuthRssiService {
     localStorage.removeItem('x-refresh-token');
   }
   
+   
  
 
 }

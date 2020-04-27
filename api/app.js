@@ -209,7 +209,7 @@ app.post('/rssis/login', (req, res) => {
         res.status(400).send(e);
     });
 })
-
+//Rssi get access token
 app.get('/rssis/me/access-token', verifySessionRssi, (req, res) => {
     // we know that the caller is authenticated and we have the rssi_id and rssi  object available to us
     req.rssiObject.generateAccessAuthToken().then((accessToken) => {
@@ -218,6 +218,35 @@ app.get('/rssis/me/access-token', verifySessionRssi, (req, res) => {
         res.status(400).send(e);
     });
 })
+//Rssi update
+app.patch('/rssis/:id',(req, res) => {
+    
+    Rssi.findOneAndUpdate({ _id: req.params.id}, {
+        $set: req.body
+    }).then(() => {
+        res.send({ 'message': 'updated successfully'});
+    });
+});
+
+//Rssi delete
+app.delete('/rssis/:id', (req, res) => {
+  
+    Rssi.findOneAndRemove({
+        _id: req.params.id,
+        
+    }).then((removedRssiDoc) => {
+        res.send(removedRssiDoc);
+    })
+});
+//Get Rssi credentials by id
+app.get('/rssis/:id', (req, res) => {
+  
+    Rssi.find({
+        _id: req.params.id,
+    }).then((rssi) => {
+        res.send(rssi);
+    })
+});
 
 
 

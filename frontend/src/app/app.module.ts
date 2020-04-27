@@ -18,6 +18,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { SignupPageRssiComponent } from './pages/signup-page-rssi/signup-page-rssi.component';
 import { WebReqInterceptorRssi } from './web-req-rssi.interceptor';
+import { EditRssiComponent } from './pages/edit-rssi/edit-rssi.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { WebReqInterceptorRssi } from './web-req-rssi.interceptor';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    SignupPageRssiComponent
+    SignupPageRssiComponent,
+    EditRssiComponent
   ],
   imports: [
 	FormsModule,

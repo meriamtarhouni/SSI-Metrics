@@ -11,7 +11,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class SignupPageRssiComponent implements OnInit {
   hide = true;
-
+  rssi_id : string;
   nom = new FormControl('', [Validators.required]);
   code = new FormControl('', [Validators.required]);
   adresse = new FormControl('', [Validators.required]);
@@ -51,6 +51,8 @@ export class SignupPageRssiComponent implements OnInit {
     this.authService.signUp(nom,  raison,adresse,code,email,password,motivation).subscribe((res: HttpResponse<any>) => {
      
       console.log(res);
+      this.rssi_id =res.body._id;
+      this.router.navigate(['/edit-rssi',this.rssi_id]);
       
     });
   }

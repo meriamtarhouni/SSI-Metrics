@@ -5,12 +5,14 @@ import {SignupPageCollaboratorComponent} from '../app/pages/signup-page-collabor
 import { from } from 'rxjs';
 import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.component';
 import { SignupPageRssiComponent } from './pages/signup-page-rssi/signup-page-rssi.component';
+import { EditRssiComponent } from './pages/edit-rssi/edit-rssi.component';
 
 const routes: Routes = [
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },
   { path: 'login-rssi' , component:LoginPageRssiComponent },
-  { path: 'signup-rssi' , component:SignupPageRssiComponent}
+  { path: 'signup-rssi' , component:SignupPageRssiComponent},
+  { path: 'edit-rssi/:rssiId' ,component:EditRssiComponent}
 ];
 
 @NgModule({
