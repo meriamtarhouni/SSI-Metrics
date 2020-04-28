@@ -47,6 +47,10 @@ export class AuthRssiService {
     return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,code,email,motivation});
   }
 
+  deleteRssi(rssiId : string){
+      return this.webService.delete(`rssis/${rssiId}`);
+  }
+
 
   logout(){
     this.removeSession();

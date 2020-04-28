@@ -40,6 +40,14 @@ export class EditRssiComponent implements OnInit {
       
     });
   }
+  onDeleteButtonClicked(){
+    this.rssiService.deleteRssi(this.rssiId).subscribe((res: HttpResponse<any>) => {
+     
+      console.log(res);
+      this.router.navigate(['/signup-rssi']);
+    });
+
+  }
 
 
 
