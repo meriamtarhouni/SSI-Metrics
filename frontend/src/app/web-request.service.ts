@@ -24,5 +24,43 @@ export class WebRequestService {
    }
 
 
+   /*Collaborator Methods*/
+
+   loginCollaborator(email: string,password: string)
+   {
+    return this.http.post(`${this.ROOT_URL}/collaborateurs/login`, {
+      email,
+      password
+    }, {
+        observe: 'response'
+      });
+   }
+
+   signUpCollaborator(email: string,password: string){
+  
+    return this.http.post(`${this.ROOT_URL}/collaborateurs`, {
+      email,
+      password
+    }, {
+        observe: 'response'
+      });
+     
+  
+   }
+   getCollaboratorById(id :String) {
+    return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}`);
+   }
+  getCollaborators() {
+      return this.http.get(`${this.ROOT_URL}/collaborateurs`);
+    }
+
+  patch(uri: string, payload: Object) {
+       return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
+   }
+
+   delete(uri: string) {
+      return this.http.delete(`${this.ROOT_URL}/${uri}`);
+    }
+
 
 }
