@@ -36,17 +36,15 @@ export class WebRequestService {
       });
    }
 
-   signUpCollaborator(email: string,password: string){
-  
+   signUpCollaborator(email: string, password: string) {
+    
     return this.http.post(`${this.ROOT_URL}/collaborateurs`, {
       email,
       password
     }, {
         observe: 'response'
       });
-     
-  
-   }
+  }
    getCollaboratorById(id :String) {
     return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}`);
    }

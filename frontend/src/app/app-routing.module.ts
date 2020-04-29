@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },
   { path: 'login-rssi' , component:LoginPageRssiComponent }, 
-  {path : 'profil-collaborateur', component: ProfilePageCollaboratorComponent}, 
+  {path : 'profil-collaborateur/:collaborateurId', component: ProfilePageCollaboratorComponent}, 
   {path: 'collaborateurs' , component: PageListCollaboratorsComponent}
 ];
 

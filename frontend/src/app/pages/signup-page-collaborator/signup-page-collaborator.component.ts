@@ -43,11 +43,12 @@ export class SignupPageCollaboratorComponent implements OnInit {
   }
   OnSignUpButtonClicked(email: string, password: string) {
     this.authService.signUp(email, password).subscribe((res: HttpResponse<any>) => {
-      console.log("here");
       console.log(res);
-      this.collaborateur_id = res.body._id;
-      this.router.navigate(['/profil-collaborateur', this.collaborateur_id]);
-
+  /* this.collaborateur_id = res.body._id;
+   this.router.navigate(['/profil-collaborateur/', this.collaborateur_id]);
+*/
     });
   }
+
+  
 }

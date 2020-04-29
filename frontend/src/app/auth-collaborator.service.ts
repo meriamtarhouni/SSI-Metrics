@@ -14,6 +14,7 @@ export class AuthCollaboratorService {
 
 
   signUp(email : string,password : string){
+  //  console.log("authser") ; 
     return this.webService.signUpCollaborator(email,password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
