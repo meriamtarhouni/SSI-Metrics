@@ -46,7 +46,7 @@ export class SignupPageCollaboratorComponent implements OnInit {
     this.authService.signUp(email, password, org , nom, ville,pays, cp, motivation).subscribe((res: HttpResponse<any>) => {
       console.log(res);
   this.collaborateur_id = res.body._id;
-   this.router.navigate(['/profil-collaborateur/:collaborateur_id', this.collaborateur_id]);
+   this.router.navigate(['/profil-collaborateur', this.collaborateur_id]);
 
     });
   }
