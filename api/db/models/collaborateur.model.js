@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwtSecret = "51778657246321226641fsdklafjasdkljfsklfjd7148924065";
 
 const CollaborateurSchema = new mongoose.Schema({
+
     email: {
         type: String,
         required: true,
@@ -21,6 +22,42 @@ const CollaborateurSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
+    org: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
+    nom : {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
+    ville : {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
+    pays : {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
+    cp : {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true
+    },
+    motivation: {
+        type: String,
+        required: true,
+        minlength: 1
+    },
+
     sessions: [{
         token: {
             type: String,

@@ -1,7 +1,27 @@
-<p>page-list-collaborators works!</p>
-<div  *ngFor="let collaborateur of collaborateurs" >
-    <div >
-      <p>{{ collaborateur.email }}</p>
+  <div class="main-content">
+    <div class="container-fluid">
+
+  <div class="card">
+    <div class="card-header card-header-info">
+        <h4 class="card-title"> Liste des collaborateurs </h4>
+        <p class="card-category"> Collaborateurs participants à l'implémentation de la norme ISO 27001 dans l'organisation X </p>
     </div>
-   
-  </div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover">
+            <thead class="text-info">
+                <th>Nom Complet </th>
+                <th>Adresse Mail</th>
+                <th>Ville</th>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let collaborateur of collaborateurs" >
+                    <td>Dakota Rice</td>
+                    <td>{{ collaborateur.email }}</td>
+                    <td>Niger</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>

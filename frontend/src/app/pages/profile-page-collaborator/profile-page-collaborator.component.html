@@ -16,55 +16,42 @@
 			<div class="card-body">
 				<form>
 					<div class="row">
-						<div class="col-md-5">
-							<mat-form-field >
-								<input matInput placeholder="Organisation">
-							</mat-form-field>
-						</div>
-						<div class="col-md-3">
-							<mat-form-field  >
-								<input matInput placeholder="Nom d'utilisateur">
-							</mat-form-field>
-						</div>
+						
 						<div class="col-md-4">
+							<mat-form-field >
+								<input #orgInput matInput placeholder="Organisation">
+							</mat-form-field>
+						</div>
+						<div class="col-md-2" ></div>
+						<div class="col-md-6">
+							<mat-form-field  >
+								<input #nomInput matInput placeholder="Nom Complet">
+							</mat-form-field>
+						</div>		
+					</div>
+					<div class="row">
+						<div class="col-md-6">
 							<mat-form-field  >
 								<input #emailInput matInput placeholder="Adresse Mail" type="email">
 							</mat-form-field>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<mat-form-field  >
-							<input matInput placeholder="Prénom" type="text">
-							</mat-form-field>
-						</div>
-						<div class="col-md-6">
-							<mat-form-field  >
-							<input matInput placeholder="Nom" type="text">
-							</mat-form-field>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<mat-form-field  >
-							<input matInput placeholder="Adresse" type="text">
-							</mat-form-field>
-						</div>
+						<div class="col-md-2" ></div>
+						<div class="col-md-4"></div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input matInput placeholder="Ville" type="text">
+							<input #villeInput matInput placeholder="Ville" type="text">
 							</mat-form-field>
 						</div>
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input matInput placeholder="Pays" type="text">
+							<input #paysInput matInput placeholder="Pays" type="text">
 							</mat-form-field>
 						</div>
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input matInput placeholder="Code Postal" type="text">
+							<input cpInput matInput placeholder="Code Postal" type="text">
 							</mat-form-field>
 						</div>
 					</div>

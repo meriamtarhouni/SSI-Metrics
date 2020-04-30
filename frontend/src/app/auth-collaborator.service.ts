@@ -13,9 +13,10 @@ export class AuthCollaboratorService {
 
 
 
-  signUp(email : string,password : string){
-  //  console.log("authser") ; 
-    return this.webService.signUpCollaborator(email,password).pipe(
+  signUp(email : string,password : string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string){
+    
+  console.log("auth service") ; 
+    return this.webService.signUpCollaborator(email,password, org , nom, ville,pays, cp, motivation).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response

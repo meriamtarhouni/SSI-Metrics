@@ -36,11 +36,17 @@ export class WebRequestService {
       });
    }
 
-   signUpCollaborator(email: string, password: string) {
-    
+   signUpCollaborator(email: string, password: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string) {
+    console.log("web service") ; 
     return this.http.post(`${this.ROOT_URL}/collaborateurs`, {
       email,
-      password
+      password, 
+      org , 
+      nom, 
+      ville,
+      pays, 
+      cp, 
+      motivation 
     }, {
         observe: 'response'
       });

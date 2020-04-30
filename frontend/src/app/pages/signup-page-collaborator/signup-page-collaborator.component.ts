@@ -18,6 +18,7 @@ export class SignupPageCollaboratorComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
 
 
+
   getErrorMessageEmail() {
     if (this.email.hasError('required')) {
       return 'Ce champ est obligatoire !';
@@ -41,14 +42,14 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  OnSignUpButtonClicked(email: string, password: string) {
-    this.authService.signUp(email, password).subscribe((res: HttpResponse<any>) => {
+  OnSignUpButtonClicked(email: string, password: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string) {
+    this.authService.signUp(email, password, org , nom, ville,pays, cp, motivation).subscribe((res: HttpResponse<any>) => {
       console.log(res);
-  /* this.collaborateur_id = res.body._id;
-   this.router.navigate(['/profil-collaborateur/', this.collaborateur_id]);
-*/
+  this.collaborateur_id = res.body._id;
+   this.router.navigate(['/profil-collaborateur/:collaborateur_id', this.collaborateur_id]);
+
     });
   }
-
+  
   
 }
