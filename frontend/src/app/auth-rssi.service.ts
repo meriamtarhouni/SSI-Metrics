@@ -69,6 +69,10 @@ export class AuthRssiService {
     return localStorage.getItem('x-refresh-token');
   }
 
+  getRssiId() {
+    return localStorage.getItem('rssi-id');
+  }
+
   private setSession(rssiId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('rssi-id', rssiId);
     localStorage.setItem('x-access-token', accessToken);
@@ -79,6 +83,20 @@ export class AuthRssiService {
     localStorage.removeItem('rssi-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
+  }
+
+  getNewAccessToken() {
+    return this.http.get(`${this.webService.ROOT_URL}/rssis/me/access-token`, {
+      headers: {
+        'x-refresh-token': this.getRefreshToken(),
+        '_id': this.getRssiId()
+      },
+      observe: 'response'
+    }).pipe(
+      tap((res: HttpResponse<any>) => {
+        this.setAccessToken(res.headers.get('x-access-token'));
+      })
+    )
   }
   
    

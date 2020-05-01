@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 
 
 
-// check whether the request has a valid JWT access token
+// check whether the request has a valid JWT access token i.e whether the rssi is authentified
 let authenticateRssi = (req, res, next) => {
     let token = req.header('x-access-token');
 
@@ -38,7 +38,7 @@ let authenticateRssi = (req, res, next) => {
     jwt.verify(token, Rssi.getJWTSecret(), (err, decoded) => {
         if (err) {
             // there was an error
-            // jwt is invalid - * DO NOT AUTHENTICATE *
+            // jwt is invalid - * DO NOT AUTHENTICATE RSSI *
             res.status(401).send(err);
         } else {
             // jwt is valid
@@ -219,7 +219,7 @@ app.get('/rssis/me/access-token', verifySessionRssi, (req, res) => {
     });
 })
 //Rssi update
-app.patch('/rssis/:id',(req, res) => {
+app.patch('/rssis/:id',authenticateRssi,(req, res) => {
     
     Rssi.findOneAndUpdate({ _id: req.params.id}, {
         $set: req.body
@@ -229,7 +229,7 @@ app.patch('/rssis/:id',(req, res) => {
 });
 
 //Rssi delete
-app.delete('/rssis/:id', (req, res) => {
+app.delete('/rssis/:id',authenticateRssi, (req, res) => {
   
     Rssi.findOneAndRemove({
         _id: req.params.id,
@@ -239,7 +239,7 @@ app.delete('/rssis/:id', (req, res) => {
     })
 });
 //Get Rssi credentials by id
-app.get('/rssis/:id', (req, res) => {
+app.get('/rssis/:id',authenticateRssi,(req, res) => {
   
     Rssi.find({
         _id: req.params.id,
