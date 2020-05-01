@@ -20,9 +20,9 @@ export class CollaboratorService {
     return this.webService.getCollaborators();
   }
 
-  updateCollaborator(collaborateurId : string,email : string ){
+  updateCollaborator(collaborateurId : string,email: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string ){
 
-    return this.webService.patch(`collaborateurs/${collaborateurId}`,{email});
+    return this.webService.patch(`collaborateurs/${collaborateurId}`,{email,org,nom,ville,pays,cp,motivation});
   }
 
   deleteCollaborator(collaborateurId : string){

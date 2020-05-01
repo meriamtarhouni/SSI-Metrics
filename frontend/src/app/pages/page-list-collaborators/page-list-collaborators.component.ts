@@ -22,7 +22,7 @@ export class PageListCollaboratorsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        if (params.listId) {
+        if (params.collaborateurId) {
           this.selectedcollaborateurId = params.collaborateurId;
           this.collaboratorService.getCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
             this.collaborateurs = collaborateurs;

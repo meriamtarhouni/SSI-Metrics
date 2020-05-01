@@ -17,7 +17,7 @@ export class ProfilePageCollaboratorComponent implements OnInit {
   collaborateurId: string;
   collaborateur : any;
 
-  hide = true;
+  disable = true;
 
 
   ngOnInit(): void {
@@ -34,13 +34,9 @@ export class ProfilePageCollaboratorComponent implements OnInit {
     })
    
   }
-  onEditButtonClicked(email : string){
-    this.collaboratorService.updateCollaborator(this.collaborateurId,email).subscribe((res: HttpResponse<any>) => {
-     
-      console.log(res);
-      
-    });
-  }
+
+
+  
   onDeleteButtonClicked(){
     this.collaboratorService.deleteCollaborator(this.collaborateurId).subscribe((res: HttpResponse<any>) => {
      
@@ -49,4 +45,14 @@ export class ProfilePageCollaboratorComponent implements OnInit {
     });
 
   }
+  
+
+ onConfirmButtonClicked(email: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string){
+  this.collaboratorService.updateCollaborator(this.collaborateurId,email,org,nom,ville,pays,cp,motivation ).subscribe((res: HttpResponse<any>) => {
+     
+    console.log(res);
+    
+  });
+ }
+ 
 }

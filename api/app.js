@@ -285,7 +285,7 @@ app.post('/collaborateurs/login', (req, res) => {
  * PATCH /collaborateurs/:id
  * Purpose: Update a collaborator profile
  */
-app.patch('/collaborateurs/:id', (req, res) => {
+app.patch('/collaborateurs/:id',authenticateCollaborateur, (req, res) => {
     // We want to update the profile (collaborator document with id in the URL) with the new values specified in the JSON body of the request
     Collaborateur.findOneAndUpdate({ _id: req.params.id}, {
         $set: req.body
@@ -301,7 +301,7 @@ app.patch('/collaborateurs/:id', (req, res) => {
 
  
   
-app.delete('/collaborateurs/:id', (req, res) => {
+app.delete('/collaborateurs/:id',authenticateCollaborateur, (req, res) => {
     // We want to delete the specified list (document with id in the URL)
     Collaborateur.findOneAndRemove({
         _id: req.params.id
@@ -315,10 +315,10 @@ app.delete('/collaborateurs/:id', (req, res) => {
  * GET /collaborateurs
  * Purpose: Get all collaborators
  */0
-app.get('/collaborateurs', (req, res) => {
+app.get('/collaborateurs', authenticateCollaborateur, (req, res) => {
     // + authenticateRssi 
     //+ access org
-    // We want to return an array of all the collaborators that belong to the organisation space  
+    // We want to return an array of all the collaborators that belong to the organisation space  as the authenticates collaborator (Protecting API Routes - [11] premiers 10min)
     Collaborateur.find({}).then((collaborateurs) => {
         res.send(collaborateurs);
     }).catch((e) => {
@@ -334,7 +334,7 @@ app.get('/collaborateurs', (req, res) => {
 
 app.get('/collaborateurs/:collaborateurId', (req, res) => {
     // We want to return the profile that belong to the authenticated collaborator 
-    Collaborateur.find({ _id: req.params.collaborateurId })
+    Collaborateur.find({ _id: req.params.collaborateurId})
     .then((collaborateur) => {
         res.send(collaborateur);
     }).catch((e) => {

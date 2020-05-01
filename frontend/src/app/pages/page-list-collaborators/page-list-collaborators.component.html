@@ -4,20 +4,20 @@
   <div class="card">
     <div class="card-header card-header-info">
         <h4 class="card-title"> Liste des collaborateurs </h4>
-        <p class="card-category"> Collaborateurs participants à l'implémentation de la norme ISO 27001 dans l'organisation X </p>
+        <p class="card-category"> Collaborateurs participants à l'implémentation de la norme ISO 27001 dans l'organisation( X)  </p>
     </div>
     <div class="card-body table-responsive">
         <table class="table table-hover">
             <thead class="text-info">
                 <th>Nom Complet </th>
                 <th>Adresse Mail</th>
-                <th>Ville</th>
+                <th>Ville, Pays</th>
             </thead>
             <tbody>
                 <tr  *ngFor="let collaborateur of collaborateurs" >
-                    <td>Dakota Rice</td>
+                    <td>{{ collaborateur.nom }}</td>
                     <td>{{ collaborateur.email }}</td>
-                    <td>Niger</td>
+                    <td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
                 </tr>
             </tbody>
         </table>
