@@ -43,6 +43,7 @@ export class AuthCollaboratorService {
 
   logout(){
     this.removeSession();
+    this.router.navigate(['/login-collab']);
   }
   
   getAccessToken() {
@@ -57,6 +58,10 @@ export class AuthCollaboratorService {
     return localStorage.getItem('x-refresh-token');
   }
 
+  getCollaboratorId() {
+    return localStorage.getItem('collaborateur-id');
+  }
+
   private setSession(collaborateurId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('collaborateur-id', collaborateurId);
     localStorage.setItem('x-access-token', accessToken);
@@ -68,6 +73,20 @@ export class AuthCollaboratorService {
     localStorage.removeItem('collaborateur-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
+  }
+
+    getNewAccessToken() {
+    return this.http.get(`${this.webService.ROOT_URL}/collaborateurs/collaborateur/access-token`, {
+      headers: {
+        'x-refresh-token': this.getRefreshToken(),
+        '_id': this.getCollaboratorId()
+      },
+      observe: 'response'
+    }).pipe(
+      tap((res: HttpResponse<any>) => {
+        this.setAccessToken(res.headers.get('x-access-token'));
+      })
+    )
   }
   
 }

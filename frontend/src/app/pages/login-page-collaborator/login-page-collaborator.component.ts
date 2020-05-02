@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page-collaborator',
@@ -8,8 +9,9 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./login-page-collaborator.component.css']
 })
 export class LoginPageCollaboratorComponent implements OnInit {
+  collaborateur_id: string;
 
-  constructor( private authCollaboratorService : AuthCollaboratorService) { }
+  constructor( private authCollaboratorService : AuthCollaboratorService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +23,8 @@ export class LoginPageCollaboratorComponent implements OnInit {
         console.log("Great");
       }
       console.log(res);
+      this.collaborateur_id = res.body._id;
+      this.router.navigate(['/profil-collaborateur', this.collaborateur_id]);
       
     });
   }

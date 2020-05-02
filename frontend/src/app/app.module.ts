@@ -18,7 +18,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
-
+import { WebRequestInterceptor } from './web-request-collaborator-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,9 @@ import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/
   MatStepperModule,
   HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

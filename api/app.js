@@ -332,7 +332,7 @@ app.get('/collaborateurs', authenticateCollaborateur, (req, res) => {
  * get profil collaborateur 
  */
 
-app.get('/collaborateurs/:collaborateurId', (req, res) => {
+app.get('/collaborateurs/:collaborateurId',authenticateCollaborateur, (req, res) => {
     // We want to return the profile that belong to the authenticated collaborator 
     Collaborateur.find({ _id: req.params.collaborateurId})
     .then((collaborateur) => {
