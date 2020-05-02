@@ -18,7 +18,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
-import { WebRequestInterceptor } from './web-request-collaborator-interceptor.service';
+import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { WebRequestInterceptor } from './web-request-collaborator-interceptor.se
   HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true }
   ],
   bootstrap: [AppComponent]
 })
