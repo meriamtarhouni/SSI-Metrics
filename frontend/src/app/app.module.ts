@@ -19,6 +19,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
 import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { WebRequestInterceptorCollaborator } from './web-request-collaborator-in
     SidebarComponent,
     FooterComponent,
     ProfilePageCollaboratorComponent,
-    PageListCollaboratorsComponent
+    PageListCollaboratorsComponent,
+    LoginPageComponent
   ],
   imports: [
 	FormsModule,

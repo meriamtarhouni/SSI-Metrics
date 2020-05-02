@@ -43,7 +43,7 @@ export class AuthCollaboratorService {
 
   logout(){
     this.removeSession();
-    this.router.navigate(['/login-collab']);
+    this.router.navigate(['/login']);
   }
   
   getAccessToken() {

@@ -14,10 +14,21 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
   hide = true;
   collaborateur_id: string;
-  password = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  org = new FormControl('', [Validators.required]);
+  nom = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  ville = new FormControl('', [Validators.required]);
+  pays = new FormControl('', [Validators.required]);
+  cp = new FormControl('', [Validators.required, Validators.maxLength(4)]);
+  motivation = new FormControl('', [Validators.required]);
 
 
+  getErrorMessage() {
+    if (this.org.hasError('required') || this.nom.hasError('required')|| this.email.hasError('required')|| this.password.hasError('required') || this.ville.hasError('required')|| this.pays.hasError('required')|| this.cp.hasError('required')|| this.motivation.hasError('required')) {
+      return 'Ce champ est obligatoire !';
+    }  
+  }
 
   getErrorMessageEmail() {
     if (this.email.hasError('required')) {
