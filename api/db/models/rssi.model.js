@@ -48,6 +48,9 @@ const RssiSchema =  new mongoose.Schema({
         minlength: 5,
         unique: true
     },
+    motivation: {
+        type: String
+    },
    //Session Objects contain a refresh token and its expiry dateTime (in the form of a unix timestamp)
     sessions: [{
         token: {
@@ -215,7 +218,8 @@ let saveSessionToDatabase = (rssi , refreshToken) => {
 let generateRefreshTokenExpiryTime = () => {
     let daysUntilExpire = "10";
     let secondsUntilExpire = ((daysUntilExpire * 24) * 60) * 60;
-    return ((Date.now() / 1000) + secondsUntilExpire);
+   
+   return ((Date.now() / 1000) + secondsUntilExpire);
 }
 
 

@@ -5,6 +5,7 @@ const {Rssi,Collaborateur} = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
+
 /* MIDDLEWARE  */
 
 
@@ -28,6 +29,26 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+
+// check whether the request has a valid JWT access token i.e whether the rssi is authentified
+let authenticateRssi = (req, res, next) => {
+    let token = req.header('x-access-token');
+
+    // verify the JWT
+    jwt.verify(token, Rssi.getJWTSecret(), (err, decoded) => {
+        if (err) {
+            // there was an error
+            // jwt is invalid - * DO NOT AUTHENTICATE RSSI *
+            res.status(401).send(err);
+        } else {
+            // jwt is valid
+            req.rssi_id = decoded._id;
+            next();
+        }
+    });
+}
+
 // check whether the request of the Collaborateur has a valid JWT access token
 let authenticateCollaborateur = (req, res, next) => {
     let token = req.header('x-access-token');
@@ -47,8 +68,9 @@ let authenticateCollaborateur = (req, res, next) => {
 }
 
 
+
 // Verify Refresh Token Middleware (which will be verifying the session)
-let verifySession = (req, res, next) => {
+let verifySessionRssi = (req, res, next) => {
     // grab the refresh token from the request header
     let refreshToken = req.header('x-refresh-token');
 
@@ -207,8 +229,8 @@ app.post('/rssis/login', (req, res) => {
         res.status(400).send(e);
     });
 })
-
-app.get('/rssis/me/access-token', verifySession, (req, res) => {
+//Rssi get access token
+app.get('/rssis/me/access-token', verifySessionRssi, (req, res) => {
     // we know that the caller is authenticated and we have the rssi_id and rssi  object available to us
     req.rssiObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
@@ -216,6 +238,35 @@ app.get('/rssis/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     });
 })
+//Rssi update
+app.patch('/rssis/:id',authenticateRssi,(req, res) => {
+    
+    Rssi.findOneAndUpdate({ _id: req.params.id}, {
+        $set: req.body
+    }).then(() => {
+        res.send({ 'message': 'updated successfully'});
+    });
+});
+
+//Rssi delete
+app.delete('/rssis/:id',authenticateRssi, (req, res) => {
+  
+    Rssi.findOneAndRemove({
+        _id: req.params.id,
+        
+    }).then((removedRssiDoc) => {
+        res.send(removedRssiDoc);
+    })
+});
+//Get Rssi credentials by id
+app.get('/rssis/:id',authenticateRssi,(req, res) => {
+  
+    Rssi.find({
+        _id: req.params.id,
+    }).then((rssi) => {
+        res.send(rssi);
+    })
+});
 
 
 

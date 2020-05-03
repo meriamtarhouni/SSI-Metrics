@@ -23,10 +23,40 @@ export class AuthRssiService {
        
   }
 
+  signUp(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+    
+    return this.webService.signUpRSSI(nom,  raison,adresse,code,email,password,motivation).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+        // the auth tokens will be in the header of this response
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log("Successfully signed up!");
+      })
+    )
+
+
+  }
+
+  getRssiById(rssiId: string)
+  {
+    return this.webService.getRssiById(rssiId);
+  }
+
+  updateRssi(rssiId : string,nom : string,  raison: string,adresse : string,code : string,email : string,motivation:string){
+
+    return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,code,email,motivation});
+  }
+
+  deleteRssi(rssiId : string){
+      return this.webService.delete(`rssis/${rssiId}`);
+  }
+
+
   logout(){
     this.removeSession();
+    this.router.navigate(['/login-rssi']);
   }
-  
+
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }
@@ -37,6 +67,10 @@ export class AuthRssiService {
  
   getRefreshToken() {
     return localStorage.getItem('x-refresh-token');
+  }
+
+  getRssiId() {
+    return localStorage.getItem('rssi-id');
   }
 
   private setSession(rssiId: string, accessToken: string, refreshToken: string) {
@@ -50,7 +84,23 @@ export class AuthRssiService {
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }
+
+  getNewAccessToken() {
+    return this.http.get(`${this.webService.ROOT_URL}/rssis/me/access-token`, {
+      headers: {
+        'x-refresh-token': this.getRefreshToken(),
+        '_id': this.getRssiId()
+      },
+      observe: 'response'
+    }).pipe(
+      tap((res: HttpResponse<any>) => {
+        this.setAccessToken(res.headers.get('x-access-token'));
+      })
+    )
+  }
   
+   
+ 
 
 }
 
