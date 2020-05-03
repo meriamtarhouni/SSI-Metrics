@@ -22,6 +22,35 @@ export class WebRequestService {
         observe: 'response'
       });
    }
+   signUpRSSI(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+    return this.http.post(`${this.ROOT_URL}/rssis`, {
+      nom,
+      raison,
+      adresse,
+      code,
+      email,
+      password,
+      motivation
+    }, {
+        observe: 'response'
+      });
+  
+   }
+   getRssiById(id :String) {
+    return this.http.get(`${this.ROOT_URL}/rssis/${id}`);
+   }
+
+
+
+
+
+   patch(uri: string, payload: Object) {
+       return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
+   }
+   delete(uri: string) {
+      return this.http.delete(`${this.ROOT_URL}/${uri}`);
+    }
+
 
 
    /*Collaborator Methods*/

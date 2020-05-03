@@ -16,6 +16,9 @@ import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { SignupPageRssiComponent } from './pages/signup-page-rssi/signup-page-rssi.component';
+import { WebReqInterceptorRssi } from './web-req-rssi.interceptor';
+import { EditRssiComponent } from './pages/edit-rssi/edit-rssi.component';
 import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
 import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
@@ -30,6 +33,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
+    SignupPageRssiComponent,
+    EditRssiComponent,
     ProfilePageCollaboratorComponent,
     PageListCollaboratorsComponent,
     LoginPageComponent
@@ -47,8 +52,10 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
   MatStepperModule,
   HttpClientModule
   ],
+
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true }
   ],
   bootstrap: [AppComponent]
 })

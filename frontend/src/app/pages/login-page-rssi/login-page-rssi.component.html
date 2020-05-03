@@ -9,7 +9,7 @@
                 </div>
                     <div class="card-body">
                         
-                     >
+                     
                         
                         <div class="row">            
                             <div class="col-md-1">
@@ -35,10 +35,17 @@
                                   </div>
                             </div>
                             <div class="col-md-11">
-                              <mat-form-field  >
-                                <input #passwordInput matInput placeholder="Mot de passe" id="password" type="password">
-                              </mat-form-field>
-                            </div>
+                              <div class="row">
+                                <div class="col-md-10">
+                                  <mat-form-field>
+                                    <input #passwordInput matInput placeholder="Mot de passe" id="password" [type]="hide ? 'password' : 'text'">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-1">
+                                 <i class="material-icons" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                                </div>
+                             </div>
+                          </div>
                         </div>
 
 
