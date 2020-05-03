@@ -16,7 +16,10 @@ import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
-
+import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
+import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
+import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { FooterComponent } from './pages/footer/footer.component';
     LoginPageRssiComponent,
     NavbarComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    ProfilePageCollaboratorComponent,
+    PageListCollaboratorsComponent,
+    LoginPageComponent
   ],
   imports: [
 	FormsModule,
@@ -41,7 +47,9 @@ import { FooterComponent } from './pages/footer/footer.component';
   MatStepperModule,
   HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
