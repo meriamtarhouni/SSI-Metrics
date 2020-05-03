@@ -16,6 +16,7 @@ import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-space.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     LoginPageRssiComponent,
     NavbarComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    CreateWorkSpaceComponent
   ],
   imports: [
 	FormsModule,

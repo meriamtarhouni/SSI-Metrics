@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const {Rssi,Collaborateur} = require('./db/models');
+const { Rssi, Collaborateur, Workspace } = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 
@@ -131,12 +131,42 @@ let verifySessionCollaborateur = (req, res, next) => {
 
 
 
+/* WORKSPACE ROUTES */
+
+// Get all Workspaces
+app.get('/workspaces', (req, res) => {
+	console.log(req.body);
+    Workspace.find({}).then((workspaces) => {
+        res.send(workspaces);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+app.post('/workspaces', (req, res) => {
+    let newWorkspace = new Workspace(req.body);
+    newWorkspace.save().then((workspaceDoc) => {
+        res.send(workspaceDoc);
+    }).catch((e) => {
+        res.status(400).send(e);
+    })
+});
+
+
 
 /* RSSI ROUTES */
 
+// Get all RSSIs
+app.get('/rssis', (req, res) => {
+    Rssi.find({}).then((rssis) => {
+        res.send(rssis);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
 //Sign Up routes
 app.post('/rssis', (req, res) => {
-  
 
     let body = req.body;
     let newRssi = new Rssi(body);
@@ -200,6 +230,16 @@ app.get('/rssis/me/access-token', verifySession, (req, res) => {
 
 
 /* COLLABORATOR ROUTES */ 
+
+// Get all Collaborateurs
+app.get('/collaborateurs', (req, res) => {
+    Collaborateur.find({}).then((collaborateurs) => {
+        res.send(collaborateurs);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
 
 /** Sign up 
  * 
