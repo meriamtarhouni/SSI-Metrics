@@ -14,10 +14,10 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
   hide = true;
   collaborateur_id: string;
-  org = new FormControl('', [Validators.required]);
+  org = new FormControl('', [Validators.required]);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
   nom = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   ville = new FormControl('', [Validators.required]);
   pays = new FormControl('', [Validators.required]);
   cp = new FormControl('', [Validators.required, Validators.maxLength(4)]);
