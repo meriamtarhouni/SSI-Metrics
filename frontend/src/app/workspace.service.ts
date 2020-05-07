@@ -12,10 +12,9 @@ export class WorkspaceService {
   constructor(private authRssiService: AuthRssiService, private http : HttpClient, private webService:WebRequestService) { }
 
   createWorkspace(nom: string, password: string){
-	let rssiId = 'eaef3f612921e61783190f6';
-	return this.webService.createWorkspace(nom, password, rssiId).pipe(
+	return this.webService.createWorkspace(nom, password).pipe(
       tap((res: HttpResponse<any>) => {
-        console.log("Workspace created.");
+        console.log("Workspace created!");
       })
     )
   }

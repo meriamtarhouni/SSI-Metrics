@@ -143,12 +143,21 @@ app.get('/workspaces', (req, res) => {
     });
 })
 
-app.post('/workspaces', (req, res) => {
-    let newWorkspace = new Workspace(req.body);
+// Create a workspace
+app.post('/workspaces', verifySession, (req, res) => {
+	let currentRssiId = req.header('_id');
+    let newWorkspace = new Workspace({
+		nom: req.body.nom,
+		password: req.body.password,
+		rssiId: currentRssiId,
+	});
     newWorkspace.save().then((workspaceDoc) => {
         res.send(workspaceDoc);
+    }).then(() => {
+        res.sendStatus(200);
     }).catch((e) => {
-        res.status(400).send(e);
+		// console.log(e);
+        res.sendStatus(400);
     })
 });
 
