@@ -19,6 +19,9 @@ export class CollaboratorService {
   {
     return this.webService.getCollaborators();
   }
+  getOrgCollaborators(){
+	  return this.webService.getOrgCollaborators();
+  }
 
   updateCollaborator(collaborateurId : string,email: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string ){
 

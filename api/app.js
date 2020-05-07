@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, rssi-id");
 
   res.header(
         'Access-Control-Expose-Headers',
@@ -75,7 +75,7 @@ let verifySessionRssi = (req, res, next) => {
     let refreshToken = req.header('x-refresh-token');
 
     // grab the _id from the request header
-    let _id = req.header('_id');
+    let _id = req.header('rssi-id');
    
     Rssi.findByIdAndToken(_id, refreshToken).then((rssi) => {
         if (!rssi) {
@@ -127,7 +127,7 @@ let verifySessionCollaborateur = (req, res, next) => {
 
     // grab the _id from the request header
     let _id = req.header('_id');
-   
+
     Collaborateur.findByIdAndToken(_id, refreshToken).then((collaborateur) => {
         if (!collaborateur) {
             // collaborateur couldn't be found
@@ -187,19 +187,20 @@ app.get('/workspaces', (req, res) => {
 })
 
 // Create a workspace
-app.post('/workspaces', verifySession, (req, res) => {
-	let currentRssiId = req.header('_id');
+app.post('/workspaces', verifySessionRssi, (req, res) => {
+    let rssiId = req.header('rssi-id');
+
     let newWorkspace = new Workspace({
 		nom: req.body.nom,
 		password: req.body.password,
-		rssiId: currentRssiId,
+		rssiId: rssiId,
 	});
     newWorkspace.save().then((workspaceDoc) => {
         res.send(workspaceDoc);
     }).then(() => {
         res.sendStatus(200);
     }).catch((e) => {
-		// console.log(e);
+		console.log(e);
         res.sendStatus(400);
     })
 });
@@ -235,6 +236,7 @@ app.post('/rssis', (req, res) => {
     }).then((authTokens) => {
         
         res
+			.header('rssi-id', newRssi._id)
             .header('x-refresh-token', authTokens.refreshToken)
             .header('x-access-token', authTokens.accessToken)
             .send(newRssi);
@@ -251,15 +253,14 @@ app.post('/rssis/login', (req, res) => {
 
     Rssi.findByCredentials(email, password).then((rssi) => {
         return rssi.createSession().then((refreshToken) => {
-          
-
-            return rssi.generateAccessAuthToken().then((accessToken) => {
+			return rssi.generateAccessAuthToken().then((accessToken) => {
                
                 return { accessToken, refreshToken }
             });
         }).then((authTokens) => {
           
             res
+				.header('rssi-id', rssi._id)
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)
                 .send(rssi);
@@ -315,6 +316,34 @@ app.get('/rssis/:id',authenticateRssi,(req, res) => {
 // Get all Collaborateurs
 app.get('/collaborateurs', (req, res) => {
     Collaborateur.find({}).then((collaborateurs) => {
+        res.send(collaborateurs);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+// Get all Collaborateurs from the same organization
+app.get('/collaborateurs/org', verifySessionRssi, (req, res) => {
+	let currentOrg = '';
+	let rssiId = req.header('rssi-id');
+   
+    Rssi.findById(rssiId).then((rssi) => {
+        if (!rssi) {
+            // rssi couldn't be found
+            return Promise.reject({
+                'error': 'Rssi not found. Make sure that the refresh token and  id are correct'
+            });
+        }
+
+		currentOrg = rssi.nom;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+
+    }).catch((e) => {
+        res.status(401).send(e);
+    })
+
+	console.log('currentOrg = ' + currentOrg);
+
+    Collaborateur.find({org: currentOrg}).then((collaborateurs) => {
         res.send(collaborateurs);
     }).catch((e) => {
         res.send(e);

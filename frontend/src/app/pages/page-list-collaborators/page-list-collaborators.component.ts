@@ -24,7 +24,7 @@ export class PageListCollaboratorsComponent implements OnInit {
       (params: Params) => {
         if (params.collaborateurId) {
           this.selectedcollaborateurId = params.collaborateurId;
-          this.collaboratorService.getCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
+          this.collaboratorService.getOrgCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
             this.collaborateurs = collaborateurs;
           })
         } else {
@@ -33,7 +33,7 @@ export class PageListCollaboratorsComponent implements OnInit {
       }
     )
 
-    this.collaboratorService.getCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
+    this.collaboratorService.getOrgCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
       this.collaborateurs = collaborateurs;
     })
     

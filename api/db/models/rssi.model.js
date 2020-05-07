@@ -18,19 +18,19 @@ const RssiSchema =  new mongoose.Schema({
    
     raison: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1
 
     },
     adresse: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1
 
     },
     code: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1,
         unique: true
 
@@ -46,7 +46,7 @@ const RssiSchema =  new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        unique: true
+        // unique: true
     },
     motivation: {
         type: String
@@ -55,11 +55,11 @@ const RssiSchema =  new mongoose.Schema({
     sessions: [{
         token: {
             type: String,
-            required: true
+            // required: true
         },
         expiresAt: {
             type: Number,
-            required: true
+            // required: true
         }
     }]
 });

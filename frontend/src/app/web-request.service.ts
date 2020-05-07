@@ -43,8 +43,8 @@ export class WebRequestService {
 
 	createWorkspace(nom: string, password: string){
 		return this.http.post(`${this.ROOT_URL}/workspaces`, {
-			nom,
-			password,
+			nom: nom,
+			password: password,
 		});
 	}
 
@@ -88,9 +88,12 @@ export class WebRequestService {
    getCollaboratorById(id :String) {
     return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}`);
    }
-  getCollaborators() {
+  	getCollaborators() {
       return this.http.get(`${this.ROOT_URL}/collaborateurs`);
     }
 
+	getOrgCollaborators(){
+      return this.http.get(`${this.ROOT_URL}/collaborateurs/org`);
+	}
 
 }

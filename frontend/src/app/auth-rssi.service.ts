@@ -89,7 +89,7 @@ export class AuthRssiService {
     return this.http.get(`${this.webService.ROOT_URL}/rssis/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
-        '_id': this.getRssiId()
+        'rssi-id': this.getRssiId()
       },
       observe: 'response'
     }).pipe(
