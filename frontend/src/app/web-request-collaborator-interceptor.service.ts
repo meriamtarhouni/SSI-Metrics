@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
-import { AuthRssiService } from './auth-rssi.service';
-import { Observable, throwError, empty, Subject } from 'rxjs';
+import { AuthCollaboratorService } from './auth-collaborator.service';
+import { Observable, throwError, empty, Subject  } from 'rxjs';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+export class WebRequestInterceptorCollaborator implements  HttpInterceptor{
 
-export class WebReqInterceptorRssi implements HttpInterceptor {
- 
+  constructor(private authService: AuthCollaboratorService) { }
+
   refreshingAccessToken: boolean;
 
   accessTokenRefreshed: Subject<any> = new Subject();
-
-  constructor(private authService: AuthRssiService) { }
-
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     // Handle the request
@@ -24,9 +22,13 @@ export class WebReqInterceptorRssi implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
            console.log(error);
-           if (error.status === 401 && !this.refreshingAccessToken) {
-                   
-            return this.refreshAccessToken()
+
+
+   if (error.status === 401) {
+          // 401 error so we are unauthorized
+
+          // refresh the access token
+          return this.refreshAccessToken ()
             .pipe(
               switchMap(() => {
                 request = this.addAuthHeader(request);
@@ -38,24 +40,13 @@ export class WebReqInterceptorRssi implements HttpInterceptor {
                 return empty();
               })
             )
-           }
+        }
            return throwError(error);
       }
     ))
   
   }
-   
-  refreshAccessToken() { 
-    this.refreshingAccessToken = true;
-    return this.authService.getNewAccessToken().pipe(
-      tap(() => {
-        this.refreshingAccessToken = false;
-        console.log("Access Token Refreshed!");
-      })
-    )
-  }
-
- /* refreshAccessToken() {
+  refreshAccessToken() {
     if (this.refreshingAccessToken) {
       return new Observable(observer => {
         this.accessTokenRefreshed.subscribe(() => {
@@ -74,14 +65,10 @@ export class WebReqInterceptorRssi implements HttpInterceptor {
           this.accessTokenRefreshed.next();
         })
       )
-    }  
-  }*/
-
-
-
-
-
-   addAuthHeader(request: HttpRequest<any>) {
+    }
+    
+  }
+  addAuthHeader(request: HttpRequest<any>) {
     // get the access token
     const token = this.authService.getAccessToken();
 
@@ -97,4 +84,3 @@ export class WebReqInterceptorRssi implements HttpInterceptor {
   }
 
 }
-

@@ -7,12 +7,30 @@ import { shareReplay, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthRssiService {
+export class AuthCollaboratorService {
 
   constructor(private http : HttpClient, private webService:WebRequestService,private router: Router ) { }
 
+
+
+  signUp(email : string,password : string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string){
+    
+  console.log("auth service") ; 
+    return this.webService.signUpCollaborator(email,password, org , nom, ville,pays, cp, motivation).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+        // the auth tokens will be in the header of this response
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log("Successfully signed up!");
+      })
+    )
+ 
+
+
+  }
+
   login(email : string,password :string){
-    return this.webService.loginRssi(email, password).pipe(
+    return this.webService.loginCollaborator(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
@@ -23,40 +41,11 @@ export class AuthRssiService {
        
   }
 
-  signUp(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
-    
-    return this.webService.signUpRSSI(nom,  raison,adresse,code,email,password,motivation).pipe(
-      shareReplay(),
-      tap((res: HttpResponse<any>) => {
-        // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-        console.log("Successfully signed up!");
-      })
-    )
-
-
-  }
-
-  getRssiById(rssiId: string)
-  {
-    return this.webService.getRssiById(rssiId);
-  }
-
-  updateRssi(rssiId : string,nom : string,  raison: string,adresse : string,code : string,email : string,motivation:string){
-
-    return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,code,email,motivation});
-  }
-
-  deleteRssi(rssiId : string){
-      return this.webService.delete(`rssis/${rssiId}`);
-  }
-
-
   logout(){
     this.removeSession();
-    this.router.navigate(['/login-rssi']);
+    this.router.navigate(['/login']);
   }
-
+  
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }
@@ -69,27 +58,28 @@ export class AuthRssiService {
     return localStorage.getItem('x-refresh-token');
   }
 
-  getRssiId() {
-    return localStorage.getItem('rssi-id');
+  getCollaboratorId() {
+    return localStorage.getItem('collaborateur-id');
   }
 
-  private setSession(rssiId: string, accessToken: string, refreshToken: string) {
-    localStorage.setItem('rssi-id', rssiId);
+  private setSession(collaborateurId: string, accessToken: string, refreshToken: string) {
+    localStorage.setItem('collaborateur-id', collaborateurId);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
 
+
   private removeSession() {
-    localStorage.removeItem('rssi-id');
+    localStorage.removeItem('collaborateur-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }
 
-  getNewAccessToken() {
-    return this.http.get(`${this.webService.ROOT_URL}/rssis/me/access-token`, {
+    getNewAccessToken() {
+    return this.http.get(`${this.webService.ROOT_URL}/collaborateurs/collaborateur/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
-        '_id': this.getRssiId()
+        '_id': this.getCollaboratorId()
       },
       observe: 'response'
     }).pipe(
@@ -99,8 +89,4 @@ export class AuthRssiService {
     )
   }
   
-   
- 
-
 }
-

@@ -17,7 +17,13 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-space.component';
-
+import { SignupPageRssiComponent } from './pages/signup-page-rssi/signup-page-rssi.component';
+import { WebReqInterceptorRssi } from './web-req-rssi.interceptor';
+import { EditRssiComponent } from './pages/edit-rssi/edit-rssi.component';
+import { ProfilePageCollaboratorComponent } from './pages/profile-page-collaborator/profile-page-collaborator.component';
+import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
+import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,12 @@ import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    CreateWorkSpaceComponent
+    CreateWorkSpaceComponent,
+    SignupPageRssiComponent,
+    EditRssiComponent,
+    ProfilePageCollaboratorComponent,
+    PageListCollaboratorsComponent,
+    LoginPageComponent
   ],
   imports: [
 	FormsModule,
@@ -43,7 +54,11 @@ import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-
   MatStepperModule,
   HttpClientModule
   ],
-  providers: [],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
