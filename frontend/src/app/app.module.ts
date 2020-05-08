@@ -23,6 +23,7 @@ import { ProfilePageCollaboratorComponent } from './pages/profile-page-collabora
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
 import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { PhaseComponent } from './pages/phase/phase.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     EditRssiComponent,
     ProfilePageCollaboratorComponent,
     PageListCollaboratorsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    PhaseComponent
   ],
   imports: [
 	FormsModule,

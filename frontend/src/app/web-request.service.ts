@@ -86,6 +86,9 @@ export class WebRequestService {
   getCollaborators() {
       return this.http.get(`${this.ROOT_URL}/collaborateurs`);
     }
-
+   
+    get(uri: string) {
+      return this.http.get(`${this.ROOT_URL}/${uri}`);
+    }
 
 }

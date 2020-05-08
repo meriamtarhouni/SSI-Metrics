@@ -9,6 +9,7 @@ import { EditRssiComponent } from './pages/edit-rssi/edit-rssi.component';
 import {ProfilePageCollaboratorComponent} from  './pages/profile-page-collaborator/profile-page-collaborator.component'; 
 import {PageListCollaboratorsComponent} from './pages/page-list-collaborators/page-list-collaborators.component'; 
 import {LoginPageComponent} from '../app/pages/login-page/login-page.component';
+import { PhaseComponent } from './pages/phase/phase.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'signup-rssi' , component:SignupPageRssiComponent},
   { path: 'edit-rssi/:rssiId' ,component:EditRssiComponent},
   {path : 'profil-collaborateur/:collaborateurId', component: ProfilePageCollaboratorComponent}, 
-  {path: 'collaborateurs' , component: PageListCollaboratorsComponent}
+  {path: 'collaborateurs' , component: PageListCollaboratorsComponent},
+  {path: 'phases', component: PhaseComponent}
 ];
 
 @NgModule({
