@@ -10,6 +10,7 @@ import {ProfilePageCollaboratorComponent} from  './pages/profile-page-collaborat
 import {PageListCollaboratorsComponent} from './pages/page-list-collaborators/page-list-collaborators.component'; 
 import {LoginPageComponent} from '../app/pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
+import { ExigenceComponent } from './pages/exigence/exigence.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'edit-rssi/:rssiId' ,component:EditRssiComponent},
   {path : 'profil-collaborateur/:collaborateurId', component: ProfilePageCollaboratorComponent}, 
   {path: 'collaborateurs' , component: PageListCollaboratorsComponent},
-  {path: 'phases', component: PhaseComponent}
+  {path: 'phases', component: PhaseComponent},
+  {path: 'exigences/:phaseId',component:ExigenceComponent}
 ];
 
 @NgModule({

@@ -24,6 +24,7 @@ import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/
 import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
+import { ExigenceComponent } from './pages/exigence/exigence.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PhaseComponent } from './pages/phase/phase.component';
     ProfilePageCollaboratorComponent,
     PageListCollaboratorsComponent,
     LoginPageComponent,
-    PhaseComponent
+    PhaseComponent,
+    ExigenceComponent
   ],
   imports: [
 	FormsModule,
