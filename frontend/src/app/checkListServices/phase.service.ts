@@ -11,5 +11,7 @@ export class PhaseService {
   getPhases(){
     return this.webReqService.get('phases');
   }
- 
+  getPhasesById(phaseId){
+    return this.webReqService.get(`phases/${phaseId}/`);
+  }
 }

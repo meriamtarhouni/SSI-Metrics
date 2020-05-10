@@ -26,6 +26,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
 import { ExigenceComponent } from './pages/exigence/exigence.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

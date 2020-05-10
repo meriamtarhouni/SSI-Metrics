@@ -12,6 +12,8 @@ import {LoginPageComponent} from '../app/pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
 import { ExigenceComponent } from './pages/exigence/exigence.component';
 
+
+
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path : 'profil-collaborateur/:collaborateurId', component: ProfilePageCollaboratorComponent}, 
   {path: 'collaborateurs' , component: PageListCollaboratorsComponent},
   {path: 'phases', component: PhaseComponent},
-  {path: 'exigences/:phaseId',component:ExigenceComponent}
+  {path: 'exigences/:phaseId',component:ExigenceComponent},
+  {path: 'exigences/:phaseId/:exigenceId',component:ExigenceComponent}
+  
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 ﻿﻿var express = require('express');
-const {Rssi,Phase,Exigence}= require('../db/models') ; 
+const {Rssi,Phase,Exigence,Tache,Sous_tache}= require('../db/models') ; 
 //A router object is an isolated instance of middleware and routes.
 var checklist = express.Router();
 var mongoose = require('mongoose');
@@ -33,6 +33,17 @@ checklist.get('/phases',authenticate,(req,res) => {
     })
   });
 
+//Get phase credentials by Id
+checklist.get('/phases/:id',authenticate,(req, res) => {
+  
+    Phase.find({
+        _id: req.params.id,
+    }).then((phase) => {
+        res.send(phase);
+    })
+});
+
+
 
 //Get all requirements(exigence) in a specific Phase
 
@@ -46,9 +57,30 @@ checklist.get('/phases/:phaseId/exigences', authenticate,(req,res)=> {
 
 });
 
+//Get all tasks in a specific requirement(Exigence)
+
+checklist.get('/exigences/:exigenceId/taches',authenticate,(req,res)=>{
+   
+    Tache.find({
+        exigence_id: req.params.exigenceId
+    }).then((taches)=>{
+        res.send(taches);
+    })
+
+});
 
 
+//Get all subTasks in a specific Task
 
+checklist.get('/taches/:tacheId/sousTaches',authenticate,(req,res)=>{
+     
+    Sous_tache.find({
+        tache_id: req.params.tacheId
+    }).then((sous_taches)=>{
+        res.send(sous_taches);
+    })
+
+});
 
 
 
