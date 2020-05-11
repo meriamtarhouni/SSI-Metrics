@@ -49,7 +49,5 @@ export class ExigenceComponent implements OnInit {
     )
   }
 
-
-
-
+ 
 }
