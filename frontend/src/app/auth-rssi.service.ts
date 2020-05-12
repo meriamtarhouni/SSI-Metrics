@@ -17,15 +17,16 @@ export class AuthRssiService {
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-        console.log("LOGGED IN!");
+        // console.log("LOGGED IN!");
+		// console.log(res.body._id);
       })
     )
        
   }
 
-  signUp(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+  signUp(nom : string,  raison: string,adresse : string,org : string,email : string,password : string,motivation:string){
     
-    return this.webService.signUpRSSI(nom,  raison,adresse,code,email,password,motivation).pipe(
+    return this.webService.signUpRSSI(nom,  raison,adresse,org,email,password,motivation).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
@@ -42,9 +43,9 @@ export class AuthRssiService {
     return this.webService.getRssiById(rssiId);
   }
 
-  updateRssi(rssiId : string,nom : string,  raison: string,adresse : string,code : string,email : string,motivation:string){
+  updateRssi(rssiId : string,nom : string,  raison: string,adresse : string,org : string,email : string,motivation:string){
 
-    return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,code,email,motivation});
+    return this.webService.patch(`rssis/${rssiId}`,{nom,raison,adresse,org,email,motivation});
   }
 
   deleteRssi(rssiId : string){
@@ -74,7 +75,7 @@ export class AuthRssiService {
   }
 
   private setSession(rssiId: string, accessToken: string, refreshToken: string) {
-    localStorage.setItem('rssi-id', rssiId);
+	localStorage.setItem('rssi-id', rssiId);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }

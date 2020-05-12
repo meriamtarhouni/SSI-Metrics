@@ -11,6 +11,16 @@ export class WebRequestService {
    }
 
 
+   /* Workspace Methods */
+	
+	createWorkspace(nom: string, password: string, rssiId: string){
+		return this.http.post(`${this.ROOT_URL}/workspaces`, {
+			nom: nom,
+			password: password,
+			rssiId: rssiId
+		});
+	}
+
    /*RSSI Methods*/
 
    loginRssi(email: string,password: string)
@@ -22,12 +32,12 @@ export class WebRequestService {
         observe: 'response'
       });
    }
-   signUpRSSI(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string){
+   signUpRSSI(nom : string,  raison: string,adresse : string,org : string,email : string,password : string,motivation:string){
     return this.http.post(`${this.ROOT_URL}/rssis`, {
       nom,
       raison,
       adresse,
-      code,
+      org,
       email,
       password,
       motivation
@@ -39,15 +49,6 @@ export class WebRequestService {
    getRssiById(id :String) {
     return this.http.get(`${this.ROOT_URL}/rssis/${id}`);
    }
-
-
-	createWorkspace(nom: string, password: string){
-		return this.http.post(`${this.ROOT_URL}/workspaces`, {
-			nom: nom,
-			password: password,
-		});
-	}
-
 
    patch(uri: string, payload: Object) {
        return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
@@ -92,8 +93,8 @@ export class WebRequestService {
       return this.http.get(`${this.ROOT_URL}/collaborateurs`);
     }
 
-	getOrgCollaborators(){
-      return this.http.get(`${this.ROOT_URL}/collaborateurs/org`);
+	getOrgCollaborators(rssiId: string){
+      return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${rssiId}`);
 	}
 
 }

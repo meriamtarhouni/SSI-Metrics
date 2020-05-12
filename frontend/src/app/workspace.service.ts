@@ -9,13 +9,14 @@ import { tap } from 'rxjs/operators';
 })
 export class WorkspaceService {
 
-  constructor(private authRssiService: AuthRssiService, private http : HttpClient, private webService:WebRequestService) { }
+	constructor(private authRssiService: AuthRssiService, private http : HttpClient, private webService:WebRequestService) { }
 
-  createWorkspace(nom: string, password: string){
-	return this.webService.createWorkspace(nom, password).pipe(
-      tap((res: HttpResponse<any>) => {
-        console.log("Workspace created!");
-      })
-    )
-  }
+	createWorkspace(nom: string, password: string){
+		let rssiId = this.authRssiService.getRssiId();
+		return this.webService.createWorkspace(nom, password, rssiId).pipe(
+			tap((res: HttpResponse<any>) => {
+				console.log("Workspace created!");
+			})
+		)
+	}
 }

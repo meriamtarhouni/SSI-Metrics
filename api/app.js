@@ -187,13 +187,11 @@ app.get('/workspaces', (req, res) => {
 })
 
 // Create a workspace
-app.post('/workspaces', verifySessionRssi, (req, res) => {
-    let rssiId = req.header('rssi-id');
-
+app.post('/workspaces', authenticateRssi, (req, res) => {
     let newWorkspace = new Workspace({
 		nom: req.body.nom,
 		password: req.body.password,
-		rssiId: rssiId,
+		rssiId: req.body.rssiId,
 	});
     newWorkspace.save().then((workspaceDoc) => {
         res.send(workspaceDoc);
@@ -236,7 +234,7 @@ app.post('/rssis', (req, res) => {
     }).then((authTokens) => {
         
         res
-			.header('rssi-id', newRssi._id)
+			// .header('rssi-id', newRssi._id)
             .header('x-refresh-token', authTokens.refreshToken)
             .header('x-access-token', authTokens.accessToken)
             .send(newRssi);
@@ -258,9 +256,8 @@ app.post('/rssis/login', (req, res) => {
                 return { accessToken, refreshToken }
             });
         }).then((authTokens) => {
-          
+        //   console.log(authTokens);
             res
-				.header('rssi-id', rssi._id)
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)
                 .send(rssi);
@@ -323,31 +320,32 @@ app.get('/collaborateurs', (req, res) => {
 })
 
 // Get all Collaborateurs from the same organization
-app.get('/collaborateurs/org', verifySessionRssi, (req, res) => {
+app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
 	let currentOrg = '';
-	let rssiId = req.header('rssi-id');
    
-    Rssi.findById(rssiId).then((rssi) => {
+    Rssi.findById(req.params.rssiId).then((rssi) => {
         if (!rssi) {
             // rssi couldn't be found
             return Promise.reject({
                 'error': 'Rssi not found. Make sure that the refresh token and  id are correct'
             });
         }
+		else{
+			// console.log('currentName = ' + rssi.nom);
+			currentOrg = rssi.nom;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+		}
 
-		currentOrg = rssi.nom;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+		// console.log('currentOrg = ' + currentOrg);
+
+		Collaborateur.find({org: currentOrg}).then((collaborateurs) => {
+			res.send(collaborateurs);
+		}).catch((e) => {
+			res.send(e);
+		});
 
     }).catch((e) => {
         res.status(401).send(e);
     })
-
-	console.log('currentOrg = ' + currentOrg);
-
-    Collaborateur.find({org: currentOrg}).then((collaborateurs) => {
-        res.send(collaborateurs);
-    }).catch((e) => {
-        res.send(e);
-    });
 })
 
 

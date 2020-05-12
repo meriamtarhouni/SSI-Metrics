@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WorkspaceService } from 'src/app/workspace.service';
 import { HttpResponse } from '@angular/common/http';
 

@@ -30,42 +30,42 @@ const CollaborateurSchema = new mongoose.Schema({
     },
     nom : {
         type: String,
-        // required: true,
+        required: true,
         minlength: 1,
         trim: true
     },
     ville : {
         type: String,
-        // required: true,
+        required: true,
         minlength: 1,
         trim: true
     },
     pays : {
         type: String,
-        // required: true,
+        required: true,
         minlength: 1,
         trim: true
     },
     cp : {
         type: String,
-        // required: true,
+        required: true,
         minlength: 1,
         trim: true
     },
     motivation: {
         type: String,
-        // required: true,
+        required: true,
         minlength: 1
     },
 
     sessions: [{
         token: {
             type: String,
-            // required: true
+            required: true
         },
         expiresAt: {
             type: Number,
-            // required: true
+            required: true
         }
     }]
 });
