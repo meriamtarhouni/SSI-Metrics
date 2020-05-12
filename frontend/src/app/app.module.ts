@@ -23,6 +23,12 @@ import { ProfilePageCollaboratorComponent } from './pages/profile-page-collabora
 import { PageListCollaboratorsComponent } from './pages/page-list-collaborators/page-list-collaborators.component';
 import { WebRequestInterceptorCollaborator } from './web-request-collaborator-interceptor.service';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { PhaseComponent } from './pages/phase/phase.component';
+import { ExigenceComponent } from './pages/exigence/exigence.component';
+import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +43,11 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     EditRssiComponent,
     ProfilePageCollaboratorComponent,
     PageListCollaboratorsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    PhaseComponent,
+    ExigenceComponent,
+    SousTacheComponent,
+    AddCollaborateurComponent
   ],
   imports: [
 	FormsModule,
@@ -50,12 +60,14 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 	MatButtonModule,
 	MatCheckboxModule,
   MatStepperModule,
-  HttpClientModule
+  HttpClientModule,
+  MatDialogModule
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })

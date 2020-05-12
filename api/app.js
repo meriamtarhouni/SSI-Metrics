@@ -5,7 +5,7 @@ const {Rssi,Collaborateur} = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
-
+const checkListRouter=require('./routers/checkList');
 /* MIDDLEWARE  */
 
 
@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-
+app.use(checkListRouter);
 
 // check whether the request has a valid JWT access token i.e whether the rssi is authentified
 let authenticateRssi = (req, res, next) => {
