@@ -35,7 +35,7 @@ export class AuthCollaboratorService {
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-        console.log("LOGGED IN!");
+        // console.log("LOGGED IN!");
       })
     )
        
@@ -46,6 +46,10 @@ export class AuthCollaboratorService {
     this.router.navigate(['/login']);
   }
   
+  isLoggedIn(){
+	  return localStorage.hasOwnProperty('collaborateur-id');
+  }
+
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }

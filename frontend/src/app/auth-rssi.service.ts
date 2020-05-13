@@ -18,7 +18,6 @@ export class AuthRssiService {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         // console.log("LOGGED IN!");
-		// console.log(res.body._id);
       })
     )
        
@@ -58,6 +57,10 @@ export class AuthRssiService {
     this.router.navigate(['/login-rssi']);
   }
 
+  isLoggedIn(){
+	  return localStorage.hasOwnProperty('rssi-id');
+  }
+
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }
@@ -90,7 +93,7 @@ export class AuthRssiService {
     return this.http.get(`${this.webService.ROOT_URL}/rssis/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
-        'rssi-id': this.getRssiId()
+        '_id': this.getRssiId()
       },
       observe: 'response'
     }).pipe(
@@ -104,4 +107,3 @@ export class AuthRssiService {
  
 
 }
-
