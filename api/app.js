@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, rssi-id");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
 
   res.header(
         'Access-Control-Expose-Headers',
@@ -75,7 +75,7 @@ let verifySessionRssi = (req, res, next) => {
     let refreshToken = req.header('x-refresh-token');
 
     // grab the _id from the request header
-    let _id = req.header('rssi-id');
+    let _id = req.header('_id');
    
     Rssi.findByIdAndToken(_id, refreshToken).then((rssi) => {
         if (!rssi) {
@@ -127,7 +127,7 @@ let verifySessionCollaborateur = (req, res, next) => {
 
     // grab the _id from the request header
     let _id = req.header('_id');
-
+   
     Collaborateur.findByIdAndToken(_id, refreshToken).then((collaborateur) => {
         if (!collaborateur) {
             // collaborateur couldn't be found
@@ -203,6 +203,17 @@ app.post('/workspaces', authenticateRssi, (req, res) => {
     })
 });
 
+// Delete a workspace
+app.delete('/workspaces/:rssiId/:id',authenticateRssi, (req, res) => {
+  
+    Workspace.findOneAndRemove({
+        _id: req.params.id,
+		rssiId: req.params.rssiId,
+        
+    }).then((removedWorkspaceDoc) => {
+        res.send(removedWorkspaceDoc);
+    })
+});
 
 
 /* RSSI ROUTES */
@@ -218,6 +229,7 @@ app.get('/rssis', (req, res) => {
 
 //Sign Up routes
 app.post('/rssis', (req, res) => {
+  
 
     let body = req.body;
     let newRssi = new Rssi(body);
@@ -234,7 +246,6 @@ app.post('/rssis', (req, res) => {
     }).then((authTokens) => {
         
         res
-			// .header('rssi-id', newRssi._id)
             .header('x-refresh-token', authTokens.refreshToken)
             .header('x-access-token', authTokens.accessToken)
             .send(newRssi);
@@ -251,12 +262,14 @@ app.post('/rssis/login', (req, res) => {
 
     Rssi.findByCredentials(email, password).then((rssi) => {
         return rssi.createSession().then((refreshToken) => {
-			return rssi.generateAccessAuthToken().then((accessToken) => {
+          
+
+            return rssi.generateAccessAuthToken().then((accessToken) => {
                
                 return { accessToken, refreshToken }
             });
         }).then((authTokens) => {
-        //   console.log(authTokens);
+          
             res
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)
@@ -489,6 +502,4 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
-
-
 
