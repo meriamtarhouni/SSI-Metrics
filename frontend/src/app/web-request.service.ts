@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +45,7 @@ export class WebRequestService {
     });
 
   }
-  
+
   getRssiById(id: String) {
     return this.http.get(`${this.ROOT_URL}/rssis/${id}`);
   }
@@ -84,9 +88,13 @@ export class WebRequestService {
   getCollaboratorById(id: String) {
     return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}`);
   }
-  
+
   getCollaborators() {
     return this.http.get(`${this.ROOT_URL}/collaborateurs`);
+  }
+
+  getOrgCollaborators(rssiId: string) {
+    return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${rssiId}`);
   }
 
   get(uri: string) {
