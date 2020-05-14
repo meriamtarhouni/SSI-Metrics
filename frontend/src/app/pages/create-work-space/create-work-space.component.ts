@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceService } from 'src/app/workspace.service';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { AuthRssiService } from 'src/app/auth-rssi.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PageListCollaboratorsComponent } from '../page-list-collaborators/page-list-collaborators.component';
 
 @Component({
 	selector: 'app-create-work-space',
@@ -9,9 +12,18 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class CreateWorkSpaceComponent implements OnInit {
 
-	constructor(private workspaceService: WorkspaceService) { }
-
+	constructor(private workspaceService: WorkspaceService,private authRssiService: AuthRssiService,public dialog: MatDialog) { }
+	
+	currentRssiId: string;
+	organisation : string;
 	ngOnInit(): void {
+		this.currentRssiId=this.authRssiService.getRssiId();
+		//console.log(this.currentRssiId);
+        this.authRssiService.getRssiById(this.currentRssiId).subscribe((rssi:any)=>{
+			  this.organisation=rssi[0].org;
+			 // console.log(this.organisation);
+	 
+		})
 	}
 
 	onCreateButtonClicked(nom: string, password: string){
@@ -19,5 +31,14 @@ export class CreateWorkSpaceComponent implements OnInit {
 			console.log(res);
 		});
 	}
+
+	onClick(){
+
+		const dialogRef = this.dialog.open(PageListCollaboratorsComponent,{
+		  height: '500px',
+		  width: '800px',
+		});
+	
+	  }
 
 }

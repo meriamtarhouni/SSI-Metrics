@@ -19,6 +19,7 @@ export class PageListCollaboratorsComponent implements OnInit {
 
  
   selectedcollaborateurId: string;
+  organisationName : string;
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
@@ -35,6 +36,8 @@ export class PageListCollaboratorsComponent implements OnInit {
 
     this.collaboratorService.getOrgCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
       this.collaborateurs = collaborateurs;
+      this.organisationName=this.collaborateurs[0].org;
+    
     })
     
   }

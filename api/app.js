@@ -345,7 +345,7 @@ app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
         }
 		else{
 			// console.log('currentName = ' + rssi.nom);
-			currentOrg = rssi.nom;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+			currentOrg = rssi.org;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
 		}
 
 		// console.log('currentOrg = ' + currentOrg);
