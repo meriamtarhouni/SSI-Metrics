@@ -4,6 +4,7 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PageListCollaboratorsComponent } from '../page-list-collaborators/page-list-collaborators.component';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-create-work-space',
@@ -12,10 +13,11 @@ import { PageListCollaboratorsComponent } from '../page-list-collaborators/page-
 })
 export class CreateWorkSpaceComponent implements OnInit {
 
-	constructor(private workspaceService: WorkspaceService,private authRssiService: AuthRssiService,public dialog: MatDialog) { }
+	constructor(private workspaceService: WorkspaceService,private authRssiService: AuthRssiService,public dialog: MatDialog, private router: Router) { }
 	
 	currentRssiId: string;
 	organisation : string;
+	workspaceId : string;
 	ngOnInit(): void {
 		this.currentRssiId=this.authRssiService.getRssiId();
 		//console.log(this.currentRssiId);
@@ -26,9 +28,14 @@ export class CreateWorkSpaceComponent implements OnInit {
 		})
 	}
 
-	onCreateButtonClicked(nom: string, password: string){
-		this.workspaceService.createWorkspace(nom, password).subscribe((res: HttpResponse<any>) => {
-			console.log(res);
+	onCreateButtonClicked(nom: string){
+		this.workspaceService.createWorkspace(nom).subscribe((res: any) => {
+			//console.log(res);
+			console.log(res._id);
+			this.workspaceId=res._id;
+			console.log("WorkspaceId",this.workspaceId);
+			this.router.navigate(['/workspace',this.workspaceId]);
+
 		});
 	}
 

@@ -11,9 +11,9 @@ export class WorkspaceService {
 
 	constructor(private http : HttpClient, private webService:WebRequestService) { }
 
-	createWorkspace(nom: string, password: string){
+	createWorkspace(nom: string){
 		let rssiId = this.getCurrentRssiId();
-		return this.webService.createWorkspace(nom, password, rssiId).pipe(
+		return this.webService.createWorkspace(nom,rssiId).pipe(
 			tap((res: any) => {
 				this.setWorkSpaceSession(res._id);
 				console.log("Workspace created!");
@@ -21,9 +21,12 @@ export class WorkspaceService {
 		)
 	}
 
-	private setWorkSpaceSession(workspaceId: string) {
-		localStorage.setItem('workspace-id', workspaceId);
-		
+	getWorkSpaceByid(id :string){   
+         return this.webService.getWorkSpaceById(id);
+	}
+
+    setWorkSpaceSession(workspaceId: string) {
+		localStorage.setItem('workspace-id', workspaceId);		
 	  }
 
 	private getCurrentRssiId(){

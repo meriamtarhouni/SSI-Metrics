@@ -47,27 +47,12 @@
               </div>
             </div>
             
-            <div class="row">            
-                <div class="col-md-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">mode_edit</i>
-                        </span>
-                      </div>
-                </div>
-                <div class="col-md-11">
-                  <mat-form-field  >
-                    <input matInput #passwordInput placeholder="Mot de passe" id="password" type="password">
-                  </mat-form-field>
-                </div>
-            </div>
-
-
+           
             
             <br>
             <div class="row">
               <div class="col-md-5"></div>
-              <div class="col-md_4"> <a (click)="onCreateButtonClicked(nameInput.value, passwordInput.value)" class="btn btn-info">Créer</a></div>
+              <div class="col-md_4"> <a (click)="onCreateButtonClicked(nameInput.value)" class="btn btn-info">Créer</a></div>
             </div>
            
         </div>

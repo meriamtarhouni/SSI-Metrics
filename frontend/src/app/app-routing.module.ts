@@ -13,6 +13,7 @@ import {LoginPageComponent} from '../app/pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
 import { ExigenceComponent } from './pages/exigence/exigence.component';
 import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
+import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 
 
 
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'phases', component: PhaseComponent},
   {path: 'exigences/:phaseId',component:ExigenceComponent},
   {path: 'exigences/:phaseId/:exigenceId',component:ExigenceComponent},
-  {path: 'sousTaches/:tacheId',component:SousTacheComponent}
+  {path: 'sousTaches/:tacheId',component:SousTacheComponent},
+  {path: 'workspace/:workspaceId',component:WorkSpaceComponent}
   
 ];
 

@@ -29,6 +29,7 @@ import { ExigenceComponent } from './pages/exigence/exigence.component';
 import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
+import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collabo
     PhaseComponent,
     ExigenceComponent,
     SousTacheComponent,
-    AddCollaborateurComponent
+    AddCollaborateurComponent,
+    WorkSpaceComponent
   ],
   imports: [
 	FormsModule,

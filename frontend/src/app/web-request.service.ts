@@ -14,14 +14,20 @@ export class WebRequestService {
     this.ROOT_URL = 'http://localhost:3000';
   }
 
-  createWorkspace(nom: string, password: string, rssiId: string) {
+
+  /*WorkSpace Methods */
+  createWorkspace(nom: string, rssiId: string) {
     return this.http.post(`${this.ROOT_URL}/workspaces`, {
       nom: nom,
-      password: password,
       rssiId: rssiId
     });
   }
+  getWorkSpaceById(id: String) {
+    return this.http.get(`${this.ROOT_URL}/workspaces/${id}`);
+  }
 
+
+  /* Rssi Methods */
   loginRssi(email: string, password: string) {
     return this.http.post(`${this.ROOT_URL}/rssis/login`, {
       email,
@@ -30,7 +36,7 @@ export class WebRequestService {
       observe: 'response'
     });
   }
-
+  
   signUpRSSI(nom: string, raison: string, adresse: string, org: string, email: string, password: string, motivation: string) {
     return this.http.post(`${this.ROOT_URL}/rssis`, {
       nom,
@@ -57,6 +63,9 @@ export class WebRequestService {
     return this.http.delete(`${this.ROOT_URL}/${uri}`);
   }
 
+  hasWorkSpace(id: String){
+    return this.http.get(`${this.ROOT_URL}/rssis/${id}/workspace`);
+  }
 
 
   /*Collaborator Methods*/
