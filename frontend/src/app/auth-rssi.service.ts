@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { WebRequestService } from './web-request.service';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs/operators';
+import { WorkspaceService } from './workspace.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthRssiService {
 
-  constructor(private http : HttpClient, private webService:WebRequestService,private router: Router ) { }
+  constructor(private http : HttpClient, private webService:WebRequestService,private router: Router,private workspaceService:WorkspaceService ) { }
 
   login(email : string,password :string){
+
     return this.webService.loginRssi(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        //Verify whether this Rssi has already a workspace
+        this.webService.hasWorkSpace(res.body._id).subscribe((res : any)=>{
+           
+            this.workspaceService.setWorkSpaceSession(res[0]._id);
+          
+        })
         // console.log("LOGGED IN!");
       })
     )
@@ -54,6 +62,7 @@ export class AuthRssiService {
 
   logout(){
     this.removeSession();
+    this.workspaceService.removeWorkspaceSession();
     this.router.navigate(['/login-rssi']);
   }
 
@@ -61,6 +70,12 @@ export class AuthRssiService {
 	  return localStorage.hasOwnProperty('rssi-id');
   }
 
+  hasWorkSpace(){
+    return localStorage.hasOwnProperty('workspace-id');
+  }
+  getWorkSpace(){
+    return localStorage.getItem('workspace-id');
+  }
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }

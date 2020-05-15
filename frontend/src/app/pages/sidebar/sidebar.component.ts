@@ -10,22 +10,32 @@ import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 export class SidebarComponent implements OnInit {
 
   constructor(private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService) { }
-
+   rssi :string;
+   workspace : string;
   ngOnInit(): void {
+	  this.rssi=this.authRssiService.getRssiId();
+	  this.workspace=this.authRssiService.getWorkSpace();
+	  
   }
 
   getUserState(){                                     // MUST BE CHANGED TO AN EVENT LISTENER
 	  let isRssi = this.authRssiService.isLoggedIn();
 	  let isCollaborator = this.authCollaboratorService.isLoggedIn();
+	  let hasWorkspace=this.authRssiService.hasWorkSpace();
+	 
 
 	  console.assert(!isRssi || !isCollaborator);
 
+	  if (isRssi && hasWorkspace){
+		 return '0' ;
+	  }
 	  if(isRssi){
 		return '1';
 	  }
-	  else if(isCollaborator){
+	  if(isCollaborator){
 		return '2';
 	  }
+	  
 	  else{
 	  	return '3';
 	  }
@@ -33,6 +43,9 @@ export class SidebarComponent implements OnInit {
   
   getUserStateMsg(){
 	  switch(this.getUserState()) { 
+		case '0':{
+			return 'Logged in as: RSSI';
+		}
 		case '1': { 
 			return 'Logged in as: RSSI';
 		} 

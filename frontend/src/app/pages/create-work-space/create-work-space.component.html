@@ -1,54 +1,68 @@
 <div class="main-content">
-    <div class="container-fluid">
-       <div class="row">
-        <div class="col-md-4"></div>
-           <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-header card-header-tabs card-header-info ">
-                        <h3 class="card-title">Créer un Espace de Travail</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">            
-                            <div class="col-md-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">business_center</i>
-                                    </span>
-                                  </div>
-                            </div>
-                            <div class="col-md-11">
-                              <mat-form-field  >
-                                <input matInput #nameInput placeholder="Nom" id="name" >
-                              </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="row">            
-                            <div class="col-md-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">mode_edit</i>
-                                    </span>
-                                  </div>
-                            </div>
-                            <div class="col-md-11">
-                              <mat-form-field  >
-                                <input matInput #passwordInput placeholder="Mot de passe" id="password" type="password">
-                              </mat-form-field>
-                            </div>
-                        </div>
-
-
-                        
-                        <br>
-                        <a (click)="onCreateButtonClicked(nameInput.value, passwordInput.value)" class="btn btn-info">Créer</a>
-                    </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header-info card-profile">
+						<div class="card-avatar ">
+							<a href="javascript:void(0)">
+								<img class="img" src="./assets/img/faces/landing.png" />
+							</a>
+						</div>
+					</div>
+          <div class="card-body">
+            <div class="row">            
+                <div class="col-md-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">business_center</i>
+                        </span>
+                      </div>
                 </div>
-          </div>
-        
-          <div class="col-md-3"></div>
-        </div>    
-   </div>
+                <div class="col-md-11">
+                  <mat-form-field  >
+                    <input matInput #nameInput [value]="organisation+'_SSI Metrics'" id="name" >
+                  </mat-form-field>
+                </div>
+            </div>
+            
+            <div class="row">            
+              <div class="col-md-1">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">people_alt</i>
+                      </span>
+                    </div>
+              </div>
+              <div class="col-md-10">
+                <span class="input-group-text">
+                   Ajouter des collaborateurs :
+                </span>
+              </div>
+              <div class="col-md-1">
+                <span class="input-group-text">
+                  <i class="material-icons" style="color:#00bcd4;" (click)="onClick()">add_box</i>
+                </span>
+              </div>
+            </div>
+            
+           
+            
+            <br>
+            <div class="row">
+              <div class="col-md-5"></div>
+              <div class="col-md_4"> <a (click)="onCreateButtonClicked(nameInput.value)" class="btn btn-info">Créer</a></div>
+            </div>
+           
+        </div>
+
+				 
+				</div>
+			</div>
+
+
+			<div class="col-md-2"></div>
+		</div>
+	</div>
 </div>
-
-

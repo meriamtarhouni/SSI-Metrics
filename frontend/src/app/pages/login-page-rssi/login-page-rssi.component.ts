@@ -54,9 +54,9 @@ export class LoginPageRssiComponent implements OnInit {
         this.rssi_id =res.body._id;
         this.router.navigate(['/edit-rssi',this.rssi_id]);
 		
-		console.log(localStorage.getItem('rssi-id'));
-		console.log(localStorage.getItem('x-access-token'));
-		console.log(localStorage.getItem('x-refresh-token'));
+		//console.log(localStorage.getItem('rssi-id'));
+		//console.log(localStorage.getItem('x-access-token'));
+		//console.log(localStorage.getItem('x-refresh-token'));
       }
       
     },

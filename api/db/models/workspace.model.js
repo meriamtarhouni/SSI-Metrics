@@ -9,10 +9,8 @@ const WorkspaceSchema =  new mongoose.Schema({
         minlength: 1,
         unique: true
     },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5,
+    collaborateurs: {
+        type: Array
     },
 	rssiId:{
 		type: mongoose.Types.ObjectId,
@@ -22,7 +20,7 @@ const WorkspaceSchema =  new mongoose.Schema({
    
 });
 
-
+/*
 // * A middelware that hashes the password
 WorkspaceSchema.pre('save',function (next){
    let workspace = this;
@@ -42,7 +40,7 @@ WorkspaceSchema.pre('save',function (next){
        next();
    }
 });
-
+*/
 
 const Workspace = mongoose.model('Workspace', WorkspaceSchema);
 

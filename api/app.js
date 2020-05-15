@@ -190,7 +190,7 @@ app.get('/workspaces', (req, res) => {
 app.post('/workspaces', authenticateRssi, (req, res) => {
     let newWorkspace = new Workspace({
 		nom: req.body.nom,
-		password: req.body.password,
+		collaborateurs: req.body.collaborateurs,
 		rssiId: req.body.rssiId,
 	});
     newWorkspace.save().then((workspaceDoc) => {
@@ -215,6 +215,15 @@ app.delete('/workspaces/:rssiId/:id',authenticateRssi, (req, res) => {
     })
 });
 
+//Get workspace credentials byId
+app.get('/workspaces/:id',authenticateRssi,(req, res) => {
+  
+    Workspace.find({
+        _id: req.params.id,
+    }).then((workspace) => {
+        res.send(workspace);
+    })
+});
 
 /* RSSI ROUTES */
 
@@ -318,7 +327,20 @@ app.get('/rssis/:id',authenticateRssi,(req, res) => {
     })
 });
 
-
+//Verify whethet the current Rssi already has a workspace
+app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
+   
+   Workspace.find({
+    rssiId:req.params.id,
+   }).then((workspace)=>{
+     if(workspace[0]==Array[0]){
+        res.send(400);
+      }
+      else{
+        res.send(workspace);
+      }    
+   })
+})
 
 
 /* COLLABORATOR ROUTES */ 
@@ -345,7 +367,7 @@ app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
         }
 		else{
 			// console.log('currentName = ' + rssi.nom);
-			currentOrg = rssi.nom;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+			currentOrg = rssi.org;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
 		}
 
 		// console.log('currentOrg = ' + currentOrg);
