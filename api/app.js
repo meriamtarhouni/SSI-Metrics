@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 
-const {Rssi,Collaborateur} = require('./db/models');
+const { Rssi, Collaborateur, Workspace } = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
-
+const checkListRouter=require('./routers/checkList');
 /* MIDDLEWARE  */
 
 
@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-
+app.use(checkListRouter);
 
 // check whether the request has a valid JWT access token i.e whether the rssi is authentified
 let authenticateRssi = (req, res, next) => {
@@ -174,8 +174,67 @@ let verifySessionCollaborateur = (req, res, next) => {
 
 
 
+/* WORKSPACE ROUTES */
+
+// Get all Workspaces
+app.get('/workspaces', (req, res) => {
+	console.log(req.body);
+    Workspace.find({}).then((workspaces) => {
+        res.send(workspaces);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+// Create a workspace
+app.post('/workspaces', authenticateRssi, (req, res) => {
+    let newWorkspace = new Workspace({
+		nom: req.body.nom,
+		collaborateurs: req.body.collaborateurs,
+		rssiId: req.body.rssiId,
+	});
+    newWorkspace.save().then((workspaceDoc) => {
+        res.send(workspaceDoc);
+    }).then(() => {
+        res.sendStatus(200);
+    }).catch((e) => {
+		console.log(e);
+        res.sendStatus(400);
+    })
+});
+
+// Delete a workspace
+app.delete('/workspaces/:rssiId/:id',authenticateRssi, (req, res) => {
+  
+    Workspace.findOneAndRemove({
+        _id: req.params.id,
+		rssiId: req.params.rssiId,
+        
+    }).then((removedWorkspaceDoc) => {
+        res.send(removedWorkspaceDoc);
+    })
+});
+
+//Get workspace credentials byId
+app.get('/workspaces/:id',authenticateRssi,(req, res) => {
+  
+    Workspace.find({
+        _id: req.params.id,
+    }).then((workspace) => {
+        res.send(workspace);
+    })
+});
 
 /* RSSI ROUTES */
+
+// Get all RSSIs
+app.get('/rssis', (req, res) => {
+    Rssi.find({}).then((rssis) => {
+        res.send(rssis);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
 
 //Sign Up routes
 app.post('/rssis', (req, res) => {
@@ -268,10 +327,62 @@ app.get('/rssis/:id',authenticateRssi,(req, res) => {
     })
 });
 
-
+//Verify whethet the current Rssi already has a workspace
+app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
+   
+   Workspace.find({
+    rssiId:req.params.id,
+   }).then((workspace)=>{
+     if(workspace[0]==Array[0]){
+        res.send(400);
+      }
+      else{
+        res.send(workspace);
+      }    
+   })
+})
 
 
 /* COLLABORATOR ROUTES */ 
+
+// Get all Collaborateurs
+app.get('/collaborateurs', (req, res) => {
+    Collaborateur.find({}).then((collaborateurs) => {
+        res.send(collaborateurs);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+// Get all Collaborateurs from the same organization
+app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
+	let currentOrg = '';
+   
+    Rssi.findById(req.params.rssiId).then((rssi) => {
+        if (!rssi) {
+            // rssi couldn't be found
+            return Promise.reject({
+                'error': 'Rssi not found. Make sure that the refresh token and  id are correct'
+            });
+        }
+		else{
+			// console.log('currentName = ' + rssi.nom);
+			currentOrg = rssi.org;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
+		}
+
+		// console.log('currentOrg = ' + currentOrg);
+
+		Collaborateur.find({org: currentOrg}).then((collaborateurs) => {
+			res.send(collaborateurs);
+		}).catch((e) => {
+			res.send(e);
+		});
+
+    }).catch((e) => {
+        res.status(401).send(e);
+    })
+})
+
 
 /** Sign up 
  * 
@@ -413,6 +524,4 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
-
-
 

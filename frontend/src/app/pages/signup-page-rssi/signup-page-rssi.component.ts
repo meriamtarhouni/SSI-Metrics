@@ -13,13 +13,13 @@ export class SignupPageRssiComponent implements OnInit {
   hide = true;
   rssi_id : string;
   nom = new FormControl('', [Validators.required]);
-  code = new FormControl('', [Validators.required]);
+  org = new FormControl('', [Validators.required]);
   adresse = new FormControl('', [Validators.required]);
   password =new FormControl('', [Validators.required, Validators.minLength(5)]);
   email = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
-    if (this.nom.hasError('required') || this.code.hasError('required')|| this.adresse.hasError('required')|| this.password.hasError('required')) {
+    if (this.nom.hasError('required') || this.org.hasError('required')|| this.adresse.hasError('required')|| this.password.hasError('required')) {
       return 'Ce champ est obligatoire !';
     }  
   }
@@ -46,9 +46,9 @@ export class SignupPageRssiComponent implements OnInit {
    
   }
   
-  OnSignUpButtonClicked(nom : string,  raison: string,adresse : string,code : string,email : string,password : string,motivation:string)
+  OnSignUpButtonClicked(nom : string,  raison: string,adresse : string,org : string,email : string,password : string,motivation:string)
   {
-    this.authService.signUp(nom,  raison,adresse,code,email,password,motivation).subscribe((res: HttpResponse<any>) => {
+    this.authService.signUp(nom,  raison,adresse,org,email,password,motivation).subscribe((res: HttpResponse<any>) => {
      
       console.log(res);
       this.rssi_id =res.body._id;

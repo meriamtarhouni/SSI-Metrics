@@ -33,8 +33,8 @@ export class EditRssiComponent implements OnInit {
     })
    
   }
-  onEditButtonClicked(nom : string,  raison: string,adresse : string,code : string,email : string,motivation:string){
-    this.rssiService.updateRssi(this.rssiId,nom,raison,adresse,code,email,motivation).subscribe((res: HttpResponse<any>) => {
+  onEditButtonClicked(nom : string,  raison: string,adresse : string,org : string,email : string,motivation:string){
+    this.rssiService.updateRssi(this.rssiId,nom,raison,adresse,org,email,motivation).subscribe((res: HttpResponse<any>) => {
      
       console.log(res);
       

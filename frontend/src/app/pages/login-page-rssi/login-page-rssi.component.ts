@@ -3,6 +3,7 @@ import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ConnectableObservable } from 'rxjs';
 declare var $: any;
 @Component({
   selector: 'app-login-page-rssi',
@@ -49,11 +50,14 @@ export class LoginPageRssiComponent implements OnInit {
    
       if (res.status === 200) {
         // we have logged in successfully
-        console.log("Logged in");
+        // console.log("Logged in");
         this.rssi_id =res.body._id;
         this.router.navigate(['/edit-rssi',this.rssi_id]);
+		
+		//console.log(localStorage.getItem('rssi-id'));
+		//console.log(localStorage.getItem('x-access-token'));
+		//console.log(localStorage.getItem('x-refresh-token'));
       }
-      console.log(res);
       
     },
     (err :HttpErrorResponse) => { if(err.status===400){console.log("Not Logged In"); 

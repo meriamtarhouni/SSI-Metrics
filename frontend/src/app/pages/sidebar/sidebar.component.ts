@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthRssiService } from 'src/app/auth-rssi.service';
+import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +9,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService) { }
+   rssi :string;
+   workspace : string;
   ngOnInit(): void {
+	  this.rssi=this.authRssiService.getRssiId();
+	  this.workspace=this.authRssiService.getWorkSpace();
+	  
+  }
+
+  getUserState(){                                     // MUST BE CHANGED TO AN EVENT LISTENER
+	  let isRssi = this.authRssiService.isLoggedIn();
+	  let isCollaborator = this.authCollaboratorService.isLoggedIn();
+	  let hasWorkspace=this.authRssiService.hasWorkSpace();
+	 
+
+	  console.assert(!isRssi || !isCollaborator);
+
+	  if (isRssi && hasWorkspace){
+		 return '0' ;
+	  }
+	  if(isRssi){
+		return '1';
+	  }
+	  if(isCollaborator){
+		return '2';
+	  }
+	  
+	  else{
+	  	return '3';
+	  }
+  }
+  
+  getUserStateMsg(){
+	  switch(this.getUserState()) { 
+		case '0':{
+			return 'Logged in as: RSSI';
+		}
+		case '1': { 
+			return 'Logged in as: RSSI';
+		} 
+		case '2': { 
+			return 'Logged in as: Collaborator';
+		} 
+		default: { 
+	  		return 'Not logged in';
+		} 
+	  } 
   }
 
 }

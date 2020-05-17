@@ -45,8 +45,8 @@
 						
 						<div class="col-md-6">
 							<mat-form-field  >
-							<input #codeInput matInput placeholder="code" type="text" [formControl]="code" required>
-							<mat-error *ngIf="code.invalid">{{getErrorMessage()}}</mat-error>
+							<input #codeInput matInput placeholder="Organisation" type="text" [formControl]="org" required>
+							<mat-error *ngIf="org.invalid">{{getErrorMessage()}}</mat-error>
 							</mat-form-field>
 						</div>
 

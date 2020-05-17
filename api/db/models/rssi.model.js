@@ -28,7 +28,7 @@ const RssiSchema =  new mongoose.Schema({
         minlength: 1
 
     },
-    code: {
+    org: {
         type: String,
         required: true,
         minlength: 1,
@@ -46,7 +46,7 @@ const RssiSchema =  new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        unique: true
+        // unique: true                Shouldn't be unique
     },
     motivation: {
         type: String
