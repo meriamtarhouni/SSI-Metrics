@@ -1,5 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-
+@import "../node_modules/bulma/bulma.sass" ;
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Lato:400,800,900');
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+/* GLOBAL STYLES */
+html, body {
+    height: 100%;
+  /*  background-image: url('./assets/background.svg');*/
+    background-size: cover;
+
+    overflow-y: auto !important;
+}
