@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const { Rssi, Collaborateur, Workspace } = require('./db/models');
+const { Rssi, Collaborateur, Workspace, Invitation } = require('./db/models');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
@@ -327,7 +327,7 @@ app.get('/rssis/:id',authenticateRssi,(req, res) => {
     })
 });
 
-//Verify whethet the current Rssi already has a workspace
+//Verify whether the current Rssi already has a workspace
 app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
    
    Workspace.find({
@@ -341,6 +341,54 @@ app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
       }    
    })
 })
+
+
+/**
+ * Inviting a collaborator
+ */
+app.post('/rssis/invite/:id_c',authenticateRssi,(req,res)=>{
+	// Workspace.find({rssiId:req.params.id_r,}).then((workspace)=>{
+	Workspace.find({rssiId:req.rssi_id,}).then((workspace)=>{
+		if(workspace[0]==Array[0]){
+			res.send(400);
+		}
+		else{
+			Collaborateur.find({_id: req.params.id_c}).then((collaborateur)=>{
+				if(collaborateur[0]==Array[0]){
+					res.send(400);
+				}
+				else if(collaborateur.has_workspace == true){
+					res.send(400);
+				}
+				else{
+					let invitation = new Invitation({
+						workspaceId: workspace[0]._id,
+						collaboratorId: collaborateur[0]._id,
+						accepted: false,
+					});
+
+					invitation.save().then((invitationDoc) => {
+						Collaborateur.findOneAndUpdate({ _id: invitation.collaboratorId}, {
+							has_invitation: true,
+							invitationId: invitationDoc._id,
+						}).then(() => {
+							res.send(200);
+						}).catch(()=>{
+							res.send(400);
+						});
+					}).then(() => {
+						res.sendStatus(200);
+					}).catch((e) => {
+						res.sendStatus(400);
+					})
+				}
+			})
+		}    
+   }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
+
 
 
 /* COLLABORATOR ROUTES */ 
@@ -392,6 +440,10 @@ app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
 app.post('/collaborateurs', (req,res)=>{
     let body = req.body;
     let newCollaborateur= new Collaborateur(body); 
+	
+	newCollaborateur.has_invitation = false;
+	newCollaborateur.has_workspace = false;
+
     newCollaborateur.save().then(()=>{
         newCollaborateur.createSession(); 
     }).then((refreshToken)=>{
@@ -517,8 +569,41 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
     });
 })
 
+/**
+ * Accepting an invitation
+ */
+app.post('/collaborateurs/accept_invite/:id_invit',authenticateCollaborateur,(req,res)=>{
+	Collaborateur.findById(req.collaborateur_id).then((collaborateur)=>{
+		if(!collaborateur){
+            return Promise.reject({
+                'error': 'Collaborator not found'
+            });
+		}
 
+		if(!collaborateur.has_invitation){
+			res.send(400);
+		}
+		else if(req.params.id_invit != collaborateur.invitationId){
+			res.send(400);
+		}
+		else{
+			Invitation.find({_id:collaborateur.invitationId, collaboratorId: collaborateur._id, accepted: false}).then((invitation)=>{
+				if(invitation[0]==Array[0]){
+					res.send(400);
+				}
+				else{
+					// update collaborator
 
+					// update accepted status of this invitation
+
+					// add collab to workspace list
+				}
+			})
+		}    
+   }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
 
 
 app.listen(3000, () => {
