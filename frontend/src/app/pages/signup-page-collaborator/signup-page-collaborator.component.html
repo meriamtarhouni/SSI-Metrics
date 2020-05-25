@@ -14,20 +14,20 @@
 						
 						<div class="col-md-4">
 							<mat-form-field >
-								<input #orgInput matInput placeholder="Organisation" [formControl]="org" >
+								<input #orgInput matInput placeholder="Organisation" [formControl]="org" required>
 							</mat-form-field>
 						</div>
 						<div class="col-md-2" ></div>
 						<div class="col-md-6">
 							<mat-form-field  >
-								<input #nomInput matInput placeholder="Nom Complet" [formControl]="nom">
+								<input #nomInput matInput placeholder="Nom Complet" [formControl]="nom" required>
 							</mat-form-field>
 						</div>		
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<mat-form-field  >
-								<input #emailInput matInput placeholder="Adresse Mail" type="email" [formControl]="email">
+								<input #emailInput matInput placeholder="Adresse Mail" type="email" [formControl]="email" required>
 							</mat-form-field>
 						</div>
 						<div class="col-md-2" ></div>
@@ -42,17 +42,17 @@
 					<div class="row">
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input #villeInput matInput placeholder="Ville" type="text"[formControl]="ville">
+							<input #villeInput matInput placeholder="Ville" type="text"[formControl]="ville" required>
 							</mat-form-field>
 						</div>
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input #paysInput matInput placeholder="Pays" type="text"[formControl]="pays">
+							<input #paysInput matInput placeholder="Pays" type="text"[formControl]="pays" required>
 							</mat-form-field>
 						</div>
 						<div class="col-md-4">
 							<mat-form-field  >
-							<input #cpInput matInput placeholder="Code Postal" type="number"[formControl]="cp" >
+							<input #cpInput matInput placeholder="Code Postal" type="number"[formControl]="cp" required>
 							</mat-form-field>
 						</div>
 					</div>
