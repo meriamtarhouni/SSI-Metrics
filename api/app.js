@@ -225,6 +225,8 @@ app.get('/workspaces/:id',authenticateRssi,(req, res) => {
     })
 });
 
+
+
 /* RSSI ROUTES */
 
 // Get all RSSIs
@@ -344,7 +346,7 @@ app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
 
 
 /**
- * Inviting a collaborator
+ * Inviting a collaborator to the workspace
  */
 app.post('/rssis/invite/:id_c',authenticateRssi,(req,res)=>{
 	Workspace.findOne({rssiId:req.rssi_id,}).then((workspace)=>{
@@ -387,6 +389,50 @@ app.post('/rssis/invite/:id_c',authenticateRssi,(req,res)=>{
         res.status(400).send(e);
     });
 })
+
+
+/**
+ * Remove collaborator from workspace
+ */
+app.patch('/rssis/remove_collaborator/:id_c',authenticateRssi, (req, res) => {
+	Workspace.findOne({rssiId:req.rssi_id,}).then((workspace)=>{
+		let workspaceId = workspace._id;
+		if(!workspace){
+			res.status(400).send('Workspace not found');
+		}
+		else{
+			Collaborateur.findOne({id: req.params.id_c, has_workspace: true, workspaceId: workspaceId._id}).then((collaborateur)=>{
+				let collabId = collaborateur._id;
+				if(!collaborateur){
+					res.status(400).send('Collaborator not found');
+				}
+				else{
+					// remove collaborator from workspace's array
+					Workspace.findByIdAndUpdate(workspaceId,{
+						$push:{
+							collaborateurs: collabId,
+						},
+					}).then(() => {
+						res.sendStatus(200);
+					}).catch((e)=>{
+						res.status(400).send(e);
+					});
+
+					// update collaborator
+					Collaborateur.findByIdAndUpdate(collabId, {
+						has_workspace: false,
+					}).then(() => {
+						res.sendStatus(200);
+					}).catch((e)=>{
+						res.status(400).send(e);
+					});
+				}
+			})
+		}    
+   }).catch((e) => {
+        res.status(400).send(e);
+    });
+});
 
 
 
