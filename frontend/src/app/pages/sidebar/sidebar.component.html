@@ -2,41 +2,44 @@
        
     <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
 
-<div class="logo">
-    <a href="#" class="simple-text">
-        <div class="logo-img">
-            <img src="/assets/img/angular2-logo-red.png"/>
-        </div>
-        SSI METRICS
-    </a>
-</div>
-<div class="sidebar-wrapper">
+	<div class="logo">
+		<a href="#" class="simple-text">
+			<div class="logo-img">
+				<img src="/assets/img/angular2-logo-red.png"/>
+			</div>
+			SSI METRICS
+		</a>
+	</div>
+	<div class="sidebar-wrapper" [ngSwitch]="this.getUserState()">
 
-    <ul class="nav" [ngSwitch]="this.getUserState()" >
-        <!-- <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
-            </a>
-        </li> -->
-        <li class="list-group-item list-group-item-info"> {{ this.getUserStateMsg() }} </li>
-        <br>
-		<li><a routerLink="/login" routerLinkActive="active" *ngSwitchCase="3"> Se connecter </a></li>
-        <br>
-        <li><a routerLink="/signup-rssi" routerLinkActive="active" *ngSwitchCase="3"> Créer un Compte RSSI</a></li>
-        <li><a routerLink="/signup-collab" routerLinkActive="active" *ngSwitchCase="3"> Créer un Compte Collaborateur</a></li>
-        <li><a routerLink="/create-space" routerLinkActive="active" *ngSwitchCase="1"> Créer un Espace de Travail</a></li>
-        <li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="1"> Mon Profil</a></li>
-        <li><a routerLink="/workspace/{{workspace}}" routerLinkActive="active" *ngSwitchCase="0"> Espace de travail </a></li>
-        <li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="0"> Mon Profil</a></li>
-        <br>
-        
-        <li><a routerLink="/profil-collaborateur/:collaborateurId" routerLinkActive="active" *ngSwitchCase="2"> Mon Profil</a></li>
-        <br> 
-        <!-- <li><a routerLink="/collaborateurs" routerLinkActive="active" *ngSwitchCase="1"> Les collaborateurs de mon organisation </a></li>  -->
-  
-        
-    </ul>
-</div>
+		<li class="list-group-item list-group-item-info"> {{ this.getUserStateMsg() }} </li>
+		
+		<br>
+		
+		<ul class="nav" *ngSwitchCase="3" >
+			<li><a routerLink="/login" routerLinkActive="active"> Se connecter </a></li>
+			<br>
+			<li><a routerLink="/signup-rssi" routerLinkActive="active"> Créer un Compte RSSI</a></li>
+			<li><a routerLink="/signup-collab" routerLinkActive="active"> Créer un Compte Collaborateur</a></li>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="2" >
+			<li><a routerLink="/profil-collaborateur/{{collaborator}}" routerLinkActive="active" *ngSwitchCase="2"> Mon Profil</a></li>
+			<!-- <br> -->
+			<!-- <li><a routerLink="/collaborateurs" routerLinkActive="active" *ngSwitchCase="1"> Les collaborateurs de mon organisation </a></li>  -->
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="1" >
+			<li><a routerLink="/create-space" routerLinkActive="active" *ngSwitchCase="1"> Créer un Espace de Travail</a></li>
+			<br>
+			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="1"> Mon Profil</a></li>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="0" >
+			<li><a routerLink="/workspace/{{workspace}}" routerLinkActive="active" *ngSwitchCase="0"> Espace de travail </a></li>
+			<br>
+			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="0"> Mon Profil</a></li>
+		</ul>
+	</div>
 </div>
 <router-outlet></router-outlet>

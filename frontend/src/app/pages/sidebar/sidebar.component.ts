@@ -12,9 +12,12 @@ export class SidebarComponent implements OnInit {
   constructor(private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService) { }
    rssi :string;
    workspace : string;
+   collaborator: string;
+   
   ngOnInit(): void {
 	  this.rssi=this.authRssiService.getRssiId();
 	  this.workspace=this.authRssiService.getWorkSpace();
+	  this.collaborator=this.authCollaboratorService.getCollaboratorId();
 	  
   }
 
