@@ -635,4 +635,3 @@ app.patch('/collaborateurs/accept_invite/:id_invit',authenticateCollaborateur,(r
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
-
