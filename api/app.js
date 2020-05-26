@@ -490,7 +490,7 @@ app.post('/collaborateurs', (req,res)=>{
 	newCollaborateur.has_workspace = false;
 
     newCollaborateur.save().then(()=>{
-        newCollaborateur.createSession(); 
+        return newCollaborateur.createSession(); 
     }).then((refreshToken)=>{
 
 
