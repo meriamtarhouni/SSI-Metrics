@@ -24,21 +24,21 @@
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="2" >
-			<li><a routerLink="/profil-collaborateur/{{collaborator}}" routerLinkActive="active" *ngSwitchCase="2"> Mon Profil</a></li>
-			<!-- <br> -->
-			<!-- <li><a routerLink="/collaborateurs" routerLinkActive="active" *ngSwitchCase="1"> Les collaborateurs de mon organisation </a></li>  -->
+			<li><a routerLink="/profil-collaborateur/{{collaborator}}" routerLinkActive="active"> Mon Profil</a></li>
+			<br>
+			<li><a routerLink="/collaborateurs" routerLinkActive="active"> Les collaborateurs de mon organisation </a></li> 
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="1" >
-			<li><a routerLink="/create-space" routerLinkActive="active" *ngSwitchCase="1"> Créer un Espace de Travail</a></li>
+			<li><a routerLink="/create-space" routerLinkActive="active"> Créer un Espace de Travail</a></li>
 			<br>
-			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="1"> Mon Profil</a></li>
+			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="0" >
-			<li><a routerLink="/workspace/{{workspace}}" routerLinkActive="active" *ngSwitchCase="0"> Espace de travail </a></li>
+			<li><a routerLink="/workspace/{{workspace}}" routerLinkActive="active"> Espace de travail </a></li>
 			<br>
-			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active" *ngSwitchCase="0"> Mon Profil</a></li>
+			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
 	</div>
 </div>

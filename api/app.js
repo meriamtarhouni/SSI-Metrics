@@ -448,32 +448,12 @@ app.get('/collaborateurs', (req, res) => {
 })
 
 // Get all Collaborateurs from the same organization
-app.get('/collaborateurs/org/:rssiId', authenticateRssi, (req, res) => {
-	let currentOrg = '';
-   
-    Rssi.findById(req.params.rssiId).then((rssi) => {
-        if (!rssi) {
-            // rssi couldn't be found
-            return Promise.reject({
-                'error': 'Rssi not found. Make sure that the refresh token and  id are correct'
-            });
-        }
-		else{
-			// console.log('currentName = ' + rssi.nom);
-			currentOrg = rssi.org;       // ADD THE ORGANIZATION FIELD TO RSSI AND CHANGE THIS    
-		}
-
-		// console.log('currentOrg = ' + currentOrg);
-
-		Collaborateur.find({org: currentOrg}).then((collaborateurs) => {
-			res.send(collaborateurs);
-		}).catch((e) => {
-			res.send(e);
-		});
-
-    }).catch((e) => {
-        res.status(401).send(e);
-    })
+app.get('/collaborateurs/org/:org', authenticateCollaborateur, (req, res) => {
+	Collaborateur.find({org: req.params.org}).then((collaborateurs) => {
+		res.send(collaborateurs);
+	}).catch((e) => {
+		res.status(400).send(e);
+	});
 })
 
 

@@ -27,7 +27,6 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PhaseComponent } from './pages/phase/phase.component';
 import { ExigenceComponent } from './pages/exigence/exigence.component';
 import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 
@@ -63,15 +62,13 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 	MatInputModule,
 	MatButtonModule,
 	MatCheckboxModule,
-  MatStepperModule,
-  HttpClientModule,
-  MatDialogModule
+	MatStepperModule,
+	HttpClientModule,
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })
