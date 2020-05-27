@@ -23,6 +23,13 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/workspaces/${id}`);
   }
 
+  inviteCollab(collabId: string){
+    this.http.post(`/rssis/invite/${collabId}`, {});
+  }
+
+  acceptInvitation(){
+    this.http.patch(`/collaborateurs/accept_invite`, {});
+  }
 
   /* Rssi Methods */
   loginRssi(email: string, password: string) {

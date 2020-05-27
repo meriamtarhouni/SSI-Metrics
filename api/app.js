@@ -597,7 +597,17 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
 /**
  * Accepting an invitation
  */
-app.patch('/collaborateurs/accept_invite/:id_invit',authenticateCollaborateur,(req,res)=>{
+app.patch('/collaborateurs/accept_invite',authenticateCollaborateur,(req,res)=>{
+    let id_invitation = '';
+    Invitation.findOne({collaboratorId: req.collaborateur_id, accepted: false}).then((invitation)=>{
+        if(!invitation){
+            res.status(400).send('Invitation not found');
+        }
+        else{
+            id_invitation = invitation._id;
+        }
+    })
+
 	Collaborateur.findById(req.collaborateur_id).then((collaborateur)=>{
 		if(!collaborateur){
             return Promise.reject({
@@ -610,7 +620,7 @@ app.patch('/collaborateurs/accept_invite/:id_invit',authenticateCollaborateur,(r
 		if(!collaborateur.has_invitation){
 			res.status(400).send('Collaborator was not invited');
 		}
-		else if(req.params.id_invit != collaborateur.invitationId){
+		else if(id_invitation != collaborateur.invitationId){
 			res.status(400).send('Invalid invitation id for this collaborator');
 		}
 		else{
@@ -631,7 +641,7 @@ app.patch('/collaborateurs/accept_invite/:id_invit',authenticateCollaborateur,(r
 					});
 
 					// update accepted status of this invitation
-					Invitation.findByIdAndUpdate(req.params.id_invit, {
+					Invitation.findByIdAndUpdate(id_invitation, {
 						accepted: true,
 					}).then(() => {
 						res.send(200);
