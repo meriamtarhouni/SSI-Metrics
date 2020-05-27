@@ -32,6 +32,7 @@ import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collabo
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SousTacheComponent,
     AddCollaborateurComponent,
     WorkSpaceComponent,
-    ChecklistComponent
+    ChecklistComponent,
+    WorkSpaceCollaboratorViewComponent
   ],
   imports: [
 	FormsModule,

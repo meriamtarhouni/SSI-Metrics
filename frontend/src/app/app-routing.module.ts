@@ -15,8 +15,7 @@ import { ExigenceComponent } from './pages/exigence/exigence.component';
 import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import{ChecklistComponent} from './pages/checklist/checklist.component'
-
-
+import{WorkSpaceCollaboratorViewComponent}from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -33,6 +32,7 @@ const routes: Routes = [
   {path: 'exigences/:phaseId/:exigenceId',component:ExigenceComponent},
   {path: 'sousTaches/:tacheId',component:SousTacheComponent},
   {path: 'workspace/:workspaceId',component:WorkSpaceComponent},
+  {path: 'workspace',component:WorkSpaceCollaboratorViewComponent},
   {path: 'checklist',component:ChecklistComponent}
   
 ];
