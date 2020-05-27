@@ -57,6 +57,20 @@ const CollaborateurSchema = new mongoose.Schema({
         required: true,
         minlength: 1
     },
+	has_invitation: {
+        type: Boolean,
+        required: true,
+    },
+	invitationId:{
+		type: mongoose.Types.ObjectId,
+	},
+	has_workspace: {
+        type: Boolean,
+        required: true,
+    },
+	workspaceId:{
+		type: mongoose.Types.ObjectId,
+	},
 
     sessions: [{
         token: {

@@ -14,7 +14,7 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
   hide = true;
   collaborateur_id: string;
-  org = new FormControl('', [Validators.required]);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  org = new FormControl('', [Validators.required]);
   nom = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
@@ -25,9 +25,9 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
 
   getErrorMessage() {
-    if (this.org.hasError('required') || this.nom.hasError('required')|| this.email.hasError('required')|| this.password.hasError('required') || this.ville.hasError('required')|| this.pays.hasError('required')|| this.cp.hasError('required')|| this.motivation.hasError('required')) {
+    if (this.org.hasError('required') || this.nom.hasError('required') || this.email.hasError('required') || this.password.hasError('required') || this.ville.hasError('required') || this.pays.hasError('required') || this.cp.hasError('required') || this.motivation.hasError('required')) {
       return 'Ce champ est obligatoire !';
-    }  
+    }
   }
 
   getErrorMessageEmail() {
@@ -49,18 +49,17 @@ export class SignupPageCollaboratorComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthCollaboratorService, private collaboratorService: CollaboratorService, private router: Router) { }
+  constructor(private authService: AuthCollaboratorService, private collaboratorService: CollaboratorService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
-  OnSignUpButtonClicked(email: string, password: string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string) {
-    this.authService.signUp(email, password, org , nom, ville,pays, cp, motivation).subscribe((res: HttpResponse<any>) => {
+  ngOnInit(): void {}
+  OnSignUpButtonClicked(email: string, password: string, org: string, nom: string, ville: string, pays: string, cp: string, motivation: string) {
+    this.authService.signUp(email, password, org, nom, ville, pays, cp, motivation).subscribe((res: HttpResponse < any > ) => {
       console.log(res);
-  this.collaborateur_id = res.body._id;
-   this.router.navigate(['/profil-collaborateur', this.collaborateur_id]);
+      this.collaborateur_id = res.body._id;
+      this.router.navigate(['/profil-collaborateur', this.collaborateur_id]);
 
     });
   }
-  
-  
+
+
 }

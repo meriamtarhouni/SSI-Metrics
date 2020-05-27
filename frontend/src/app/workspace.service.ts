@@ -25,6 +25,10 @@ export class WorkspaceService {
          return this.webService.getWorkSpaceById(id);
 	}
 
+	inviteCollab(collabId: string){
+		this.webService.inviteCollab(collabId);
+	}
+
     setWorkSpaceSession(workspaceId: string) {
 		localStorage.setItem('workspace-id', workspaceId);		
 	  }

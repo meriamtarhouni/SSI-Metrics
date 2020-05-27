@@ -1,5 +1,60 @@
 <div class="main-content">
     <div class="container-fluid">
-       <p>work-space works!</p>
+      
+        <h2>{{this.workSpaceNoun}}</h2>
     </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-info" style="height: 200px;">
+                    <span class="material-icons" style="font-size: 100px; ;color:white; margin-left: 35%; margin-top: 13%;">supervised_user_circle </span>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Collaborateurs</h4>
+                    <p class="card-category">
+                        <span class="text-success"><i class="fa fa-long-arrow-up"></i></span>Afficher la liste des Collaborateurs </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                      
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="col-md-4" (click)="onPhasesClick()">
+            <div class="card card-chart">
+                <div class="card-header card-header-info" style="height: 200px;">
+                    <span class="material-icons" style="font-size: 100px; ;color:white; margin-left: 35%; margin-top: 13%;">data_usage </span>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Cycle PDCA</h4>
+                    <p class="card-category">Commencer la gestion de qualité </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-info" style="height: 200px;">
+                    <span class="material-icons" style="font-size: 100px; ;color:white; margin-left: 35%; margin-top: 13%;">timeline</span>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Interface de reporting</h4>
+                    <p class="card-category">Accéder a l'interface de reporting  </p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
