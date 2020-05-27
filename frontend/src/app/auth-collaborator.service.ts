@@ -20,7 +20,7 @@ export class AuthCollaboratorService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log("Successfully signed up!");
       })
     )
@@ -34,7 +34,7 @@ export class AuthCollaboratorService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         // console.log("LOGGED IN!");
       })
     )
@@ -66,8 +66,13 @@ export class AuthCollaboratorService {
     return localStorage.getItem('collaborateur-id');
   }
 
-  private setSession(collaborateurId: string, accessToken: string, refreshToken: string) {
+  getCollaboratorOrg() {
+    return localStorage.getItem('collaborateur-org');
+  }
+
+  private setSession(collaborateurId: string, collaborateurOrg: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('collaborateur-id', collaborateurId);
+    localStorage.setItem('collaborateur-org', collaborateurOrg);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
@@ -75,6 +80,7 @@ export class AuthCollaboratorService {
 
   private removeSession() {
     localStorage.removeItem('collaborateur-id');
+    localStorage.removeItem('collaborateur-org');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }

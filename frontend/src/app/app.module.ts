@@ -54,15 +54,15 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
     WorkSpaceComponent
   ],
   imports: [
-	FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-	MatInputModule,
-	MatButtonModule,
-	MatCheckboxModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
   MatStepperModule,
   HttpClientModule,
   MatDialogModule

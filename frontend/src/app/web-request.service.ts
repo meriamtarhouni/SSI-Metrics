@@ -1,9 +1,6 @@
-import {
-  Injectable
-} from '@angular/core';
-import {
-  HttpClient
-} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Collaborateur } from './models/collaborateur.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +23,13 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/workspaces/${id}`);
   }
 
+  inviteCollab(collabId: string){
+    this.http.post(`/rssis/invite/${collabId}`, {});
+  }
+
+  acceptInvitation(){
+    this.http.patch(`/collaborateurs/accept_invite`, {});
+  }
 
   /* Rssi Methods */
   loginRssi(email: string, password: string) {
@@ -102,8 +106,8 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/collaborateurs`);
   }
 
-  getOrgCollaborators(rssiId: string) {
-    return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${rssiId}`);
+  getOrgCollaborators(collabOrg: string) {
+	return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${collabOrg}`);
   }
 
   get(uri: string) {
