@@ -476,15 +476,17 @@ app.post('/collaborateurs', (req,res)=>{
 
 
         return newCollaborateur.generateAccessAuthToken().then((accessToken)=> {
+            console.log(refreshToken); 
             return { accessToken, refreshToken }
+           
 
         }); 
     }).then((authTokens) => {
         
         res
-            .header('x-refresh-token', authTokens.refreshToken)
-            .header('x-access-token', authTokens.accessToken)
-            .send(newCollaborateur);
+                .header('x-refresh-token', authTokens.refreshToken)
+                .header('x-access-token', authTokens.accessToken)
+                .send(newCollaborateur);
     }).catch((e) => {
         res.status(400).send(e);
     })

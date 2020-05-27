@@ -22,6 +22,8 @@ export class AuthCollaboratorService {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log("Successfully signed up!");
+        console.log(res.headers.get('x-refresh-token')); 
+        
       })
     )
  

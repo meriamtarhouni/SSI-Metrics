@@ -1,0 +1,66 @@
+<div class="main-content">
+
+
+  <div class="board"  *ngFor="let phase of phases">
+
+    <div class="board-bar">
+       <p class="board-name"> {{phase.nom}}</p> 
+    </div>
+
+    <div class="board-wrapper">
+
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column">
+
+          <div class="column-title">
+            PAS MIS EN OEUVRE
+          </div>
+
+          <div class="tasks-container"
+          cdkDropList
+          [cdkDropListData]="todo"
+          (cdkDropListDropped)="drop($event)">
+            <div class="task" *ngFor="let task of done" cdkDrag>
+              {{ task }}
+            </div>
+          </div>
+        </div>
+        <div class="board-column">
+
+          <div class="column-title">
+          EN COURS
+          </div>
+
+          <div class="tasks-container"
+          cdkDropList
+          [cdkDropListData]="inprogress"
+          (cdkDropListDropped)="drop($event)">
+            <div class="task" *ngFor="let task of inprogress" cdkDrag>
+              {{ task }}
+            </div>
+          </div>
+        </div>
+        <div class="board-column">
+
+          <div class="column-title">
+            TERMINÉ
+          </div>
+
+          <div class="tasks-container"
+          cdkDropList
+          [cdkDropListData]="done"
+          (cdkDropListDropped)="drop($event)">
+            <div class="task" *ngFor="let task of done" cdkDrag>
+              {{ task }}
+            </div>
+          </div>
+        </div>
+
+  
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

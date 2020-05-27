@@ -30,6 +30,9 @@ import { SousTacheComponent } from './pages/sous-tache/sous-tache.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
+import { ChecklistComponent } from './pages/checklist/checklist.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 
 
 @NgModule({
@@ -51,7 +54,9 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
     ExigenceComponent,
     SousTacheComponent,
     AddCollaborateurComponent,
-    WorkSpaceComponent
+    WorkSpaceComponent,
+    ChecklistComponent,
+    WorkSpaceCollaboratorViewComponent
   ],
   imports: [
     FormsModule,
@@ -65,7 +70,8 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
     MatCheckboxModule,
   MatStepperModule,
   HttpClientModule,
-  MatDialogModule
+  MatDialogModule,
+  DragDropModule
   ],
 
   providers: [

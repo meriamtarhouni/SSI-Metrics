@@ -110,6 +110,8 @@ CollaborateurSchema.methods.generateAccessAuthToken = function () {
     })
 }
 
+//The following method will generate the refresh token 
+
 CollaborateurSchema.methods.generateRefreshAuthToken = function () {
     // This method simply generates a 64byte hex string - it doesn't save it to the database. saveSessionToDatabase() does that.
     return new Promise((resolve, reject) => {
@@ -128,11 +130,12 @@ CollaborateurSchema.methods.createSession = function () {
     let collaborateur = this;
 
     return collaborateur.generateRefreshAuthToken().then((refreshToken) => {
-        return saveSessionToDatabase(collaborateur, refreshToken);
-    }).then((refreshToken) => {
+        return saveSessionToDatabase(collaborateur, refreshToken);}).then((refreshToken) => {
         // saved to database successfully
         // now return the refresh token
+       // console.log(refreshToken);
         return refreshToken;
+      
     }).catch((e) => {
         return Promise.reject('Failed to save session to database.\n' + e);
     })
