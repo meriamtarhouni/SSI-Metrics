@@ -5,7 +5,7 @@ import {CollaboratorService } from 'src/app/collaborator.service' ;
 import { FormControl, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import {Collaborateur} from 'src/app/models/collaborateur.model'
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-page-list-collaborators',
@@ -14,36 +14,15 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class PageListCollaboratorsComponent implements OnInit {
   collaborateurs: Collaborateur[];
+  organisationName: string;
 
-  constructor(private route: ActivatedRoute, private collaboratorService: CollaboratorService, private router: Router,public dialogRef: MatDialogRef<PageListCollaboratorsComponent>) { }
-  
+  constructor(private route: ActivatedRoute, private authCollaboratorService: AuthCollaboratorService,private collaboratorService: CollaboratorService, private router: Router ) {}
 
- 
-  selectedcollaborateurId: string;
-  organisationName : string;
   ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => {
-        if (params.collaborateurId) {
-          this.selectedcollaborateurId = params.collaborateurId;
-          this.collaboratorService.getOrgCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
-            this.collaborateurs = collaborateurs;
-          })
-        } else {
-          this.collaborateurs = undefined;
-        }
-      }
-    )
-
-    this.collaboratorService.getOrgCollaborators().subscribe((collaborateurs: Collaborateur[]) => {
-      this.collaborateurs = collaborateurs;
-      this.organisationName=this.collaborateurs[0].org;
-    
-    })
-    
-  }
-  onCloseButtonClicked(){
-   
-    this.dialogRef.close();
+	this.organisationName = this.authCollaboratorService.getCollaboratorOrg();
+	this.collaboratorService.getOrgCollaborators(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
+		this.collaborateurs = collaborateurs;
+		// console.log(this.collaborateurs);
+	});
   }
 }
