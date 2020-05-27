@@ -22,6 +22,8 @@ export class AuthCollaboratorService {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log("Successfully signed up!");
+        console.log(res.headers.get('x-refresh-token')); 
+        
       })
     )
  
@@ -66,19 +68,19 @@ export class AuthCollaboratorService {
     return localStorage.getItem('collaborateur-id');
   }
 
+
   private setSession(collaborateurId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('collaborateur-id', collaborateurId);
-    localStorage.setItem('x-access-token', accessToken);
-    localStorage.setItem('x-refresh-token', refreshToken);
-  }
-
-
-  private removeSession() {
-    localStorage.removeItem('collaborateur-id');
-    localStorage.removeItem('x-access-token');
-    localStorage.removeItem('x-refresh-token');
-  }
-
+      localStorage.setItem('x-access-token', accessToken);
+      localStorage.setItem('x-refresh-token', refreshToken);
+    }
+  
+    private removeSession() {
+      localStorage.removeItem('collaborateur-id');
+      localStorage.removeItem('x-access-token');
+      localStorage.removeItem('x-refresh-token');
+    }
+  
     getNewAccessToken() {
     return this.http.get(`${this.webService.ROOT_URL}/collaborateurs/collaborateur/access-token`, {
       headers: {
