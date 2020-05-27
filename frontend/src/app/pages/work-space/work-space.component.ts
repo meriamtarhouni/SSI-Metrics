@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WorkspaceService } from 'src/app/workspace.service';
+
 
 @Component({
   selector: 'app-work-space',
@@ -9,11 +10,12 @@ import { WorkspaceService } from 'src/app/workspace.service';
 })
 export class WorkSpaceComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private workSpaceService : WorkspaceService) { }
+  constructor(private route: ActivatedRoute,private workSpaceService : WorkspaceService,private router: Router) { }
   
   workSpaceId : string;
   workspace : any;
-
+  workSpaceNoun : string;
+  collaborateurs :any;
   ngOnInit(): void {
 
     this.route.params.subscribe(
@@ -25,11 +27,17 @@ export class WorkSpaceComponent implements OnInit {
     
     this.workspace=this.workSpaceService.getWorkSpaceByid(this.workSpaceId).subscribe((workspace :any)=>{
       this.workspace=workspace[0];
-      //console.log(this.workspace);
-     
+      console.log(this.workspace);
+      this.workSpaceNoun=this.workspace.nom;
+      console.log(this.workSpaceNoun);
     })
-
+    
+    
 
   }
 
+   onPhasesClick(){
+     this.router.navigate(['/phases']);
+   }
+ 
 }

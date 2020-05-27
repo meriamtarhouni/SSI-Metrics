@@ -336,7 +336,8 @@ app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
     rssiId:req.params.id,
    }).then((workspace)=>{
      if(workspace[0]==Array[0]){
-        res.send(400);
+        //res.sendStatus(400);
+        console.log("Workspace non existant");
       }
       else{
         res.send(workspace);
