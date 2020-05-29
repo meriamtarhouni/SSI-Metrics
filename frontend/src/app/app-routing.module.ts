@@ -31,8 +31,8 @@ const routes: Routes = [
   {path: 'exigences/:phaseId',component:ExigenceComponent},
   {path: 'exigences/:phaseId/:exigenceId',component:ExigenceComponent},
   {path: 'sousTaches/:tacheId',component:SousTacheComponent},
-  {path: 'workspace/:workspaceId',component:WorkSpaceComponent},
-  {path: 'workspace',component:WorkSpaceCollaboratorViewComponent},
+  {path: 'workspace/rssi/:workspaceId',component:WorkSpaceComponent},
+  {path: 'workspace/collaborator/',component:WorkSpaceCollaboratorViewComponent},
   {path: 'checklist',component:ChecklistComponent}
   
 ];

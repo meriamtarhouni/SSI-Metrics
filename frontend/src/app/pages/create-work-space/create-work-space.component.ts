@@ -34,7 +34,7 @@ export class CreateWorkSpaceComponent implements OnInit {
 			console.log(res._id);
 			this.workspaceId=res._id;
 			console.log("WorkspaceId",this.workspaceId);
-			this.router.navigate(['/workspace',this.workspaceId]);
+			this.router.navigate(['/workspace/rssi',this.workspaceId]);
 
 		});
 	}
