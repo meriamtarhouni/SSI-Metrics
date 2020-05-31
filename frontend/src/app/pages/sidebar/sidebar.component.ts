@@ -77,4 +77,18 @@ export class SidebarComponent implements OnInit {
 		});
 	}
 
+	onLogoutCollaborateurClicked() {
+		this.authCollaboratorService.logout()
+		// we have logged out successfully
+		console.log("Great");
+
+
+	}
+	onLogoutRssiClicked() {
+		this.authRssiService.logout()
+		// we have logged out successfully
+		console.log("Great");
+
+	}
+
 }

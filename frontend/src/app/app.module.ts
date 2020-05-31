@@ -15,7 +15,6 @@ import { LoginPageCollaboratorComponent } from './pages/login-page-collaborator/
 import { SignupPageCollaboratorComponent } from './pages/signup-page-collaborator/signup-page-collaborator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.component';
-import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-space.component';
@@ -44,7 +43,6 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
     LoginPageCollaboratorComponent,
     SignupPageCollaboratorComponent,
     LoginPageRssiComponent,
-    NavbarComponent,
     SidebarComponent,
     FooterComponent,
     CreateWorkSpaceComponent,

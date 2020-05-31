@@ -35,8 +35,7 @@ const routes: Routes = [
   { path: 'workspace/rssi/:workspaceId', component: WorkSpaceComponent },
   { path: 'workspace/rssi/:workspaceId/collaborators', component: CollaboratorsListRssiComponent },
   { path: 'workspace/collaborator/:workspaceId', component: WorkSpaceCollaboratorViewComponent },
-  { path: 'checklist', component: ChecklistComponent }
-
+  { path: 'checklist/:phaseId', component: ChecklistComponent }
 ];
 
 @NgModule({
