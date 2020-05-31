@@ -12,7 +12,7 @@ import { WarningComponent } from '../warning/warning.component';
 })
 export class LoginPageCollaboratorComponent implements OnInit {
   collaborateur_id: string;
-
+  hide = true;
   constructor( private authCollaboratorService : AuthCollaboratorService, private router: Router,public dialog: MatDialog) { }
 
   ngOnInit(): void {
