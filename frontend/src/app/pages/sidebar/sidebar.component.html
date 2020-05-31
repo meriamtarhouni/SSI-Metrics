@@ -1,15 +1,17 @@
 <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
        
-    <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+   
 
 	<div class="logo">
 		<a href="#" class="simple-text">
 			<div class="logo-img">
-				<img src="/assets/img/angular2-logo-red.png"/>
+				<img src="/assets/img/small_logo.png"/>
 			</div>
-			SSI METRICS
+		<br>
 		</a>
 	</div>
+
+	
 	<div class="sidebar-wrapper" [ngSwitch]="this.getUserState()">
 
 		<li class="list-group-item list-group-item-info"> {{ this.getUserStateMsg() }} </li>
