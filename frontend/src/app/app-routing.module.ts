@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'sousTaches/:tacheId',component:SousTacheComponent},
   {path: 'workspace/:workspaceId',component:WorkSpaceComponent},
   {path: 'workspace',component:WorkSpaceCollaboratorViewComponent},
-  {path: 'checklist',component:ChecklistComponent}
+  {path: 'checklist/:phaseId',component:ChecklistComponent}
   
 ];
 

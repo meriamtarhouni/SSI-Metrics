@@ -9,6 +9,14 @@ const Sous_tache = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "tache"
       },
+      phase_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "phase"
+      },
+      exigence_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "exigence"
+      },
       date_debut: Date,
       date_fin:Date,
       clause: String,

@@ -1,10 +1,10 @@
 <div class="main-content">
 
 
-  <div class="board"  *ngFor="let phase of phases">
+  <div class="board" >
 
     <div class="board-bar">
-       <p class="board-name"> {{phase.nom}}</p> 
+       <p class="board-name"> Plan </p> 
     </div>
 
     <div class="board-wrapper">
@@ -20,8 +20,9 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of done" cdkDrag>
-              {{ task }}
+            <div class="task" *ngFor="let task of todo" cdkDrag>
+              {{task.clause}}
+              {{task.label}}
             </div>
           </div>
         </div>
@@ -36,7 +37,8 @@
           [cdkDropListData]="inprogress"
           (cdkDropListDropped)="drop($event)">
             <div class="task" *ngFor="let task of inprogress" cdkDrag>
-              {{ task }}
+              {{task.clause}}
+              {{ task.label}}
             </div>
           </div>
         </div>
@@ -51,7 +53,8 @@
           [cdkDropListData]="done"
           (cdkDropListDropped)="drop($event)">
             <div class="task" *ngFor="let task of done" cdkDrag>
-              {{ task }}
+              {{task.clause}}
+              {{ task.label }}
             </div>
           </div>
         </div>
