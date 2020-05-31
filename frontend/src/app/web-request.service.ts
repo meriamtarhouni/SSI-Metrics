@@ -30,7 +30,7 @@ export class WebRequestService {
 
   acceptInvitation() {
     console.log("Accepting invitation");
-    return this.http.patch(`${this.ROOT_URL}/accept_invite/invitation`, {});
+    return this.http.patch(`${this.ROOT_URL}/accept_invitation`, {});
   }
 
   /* Rssi Methods */

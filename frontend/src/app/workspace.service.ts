@@ -5,15 +5,15 @@ import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class WorkspaceService {
 
-	constructor(private http : HttpClient, private webService:WebRequestService) { }
+	constructor(private http: HttpClient, private webService: WebRequestService) { }
 
-	createWorkspace(nom: string){
+	createWorkspace(nom: string) {
 		let rssiId = this.getCurrentRssiId();
-		return this.webService.createWorkspace(nom,rssiId).pipe(
+		return this.webService.createWorkspace(nom, rssiId).pipe(
 			tap((res: any) => {
 				this.setWorkSpaceSession(res._id);
 				console.log("Workspace created!");
@@ -21,31 +21,35 @@ export class WorkspaceService {
 		)
 	}
 
-	getWorkSpaceByid(id :string){   
-         return this.webService.getWorkSpaceById(id);
+	getWorkSpaceByid(id: string) {
+		return this.webService.getWorkSpaceById(id);
 	}
 
-	inviteCollab(collabId: string){
-		this.webService.inviteCollab(collabId);
+	inviteCollab(collabId: string) {
+		return this.webService.inviteCollab(collabId);
 	}
 
-    setWorkSpaceSession(workspaceId: string) {
-		localStorage.setItem('workspace-id', workspaceId);		
-	  }
+	acceptInvitation() {
+		return this.webService.acceptInvitation();
+	}
+
+	setWorkSpaceSession(workspaceId: string) {
+		localStorage.setItem('workspace-id', workspaceId);
+	}
 
 	getOrgCollaboratorsRssi(rssiOrg: string) {
-	    return this.webService.getOrgCollaboratorsRssi(rssiOrg);
+		return this.webService.getOrgCollaboratorsRssi(rssiOrg);
 	}
 
-	private getCurrentRssiId(){
+	private getCurrentRssiId() {
 		return localStorage.getItem('rssi-id');
 	}
-	removeWorkspaceSession(){
+	removeWorkspaceSession() {
 
 		localStorage.removeItem('workspace-id');
 	}
 
-    
+
 
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { WebRequestService } from '../../web-request.service';
+import { WorkspaceService } from '../../workspace.service';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 })
 export class SidebarComponent implements OnInit {
 
-	constructor(private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService) { }
+	constructor(private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService, private workspaceService: WorkspaceService) { }
 	rssiId: string;
 	rssiWorkspaceId: string;
 	collaboratorId: string;
@@ -71,7 +72,7 @@ export class SidebarComponent implements OnInit {
 	}
 
 	acceptInvitation() {
-		this.webService.acceptInvitation().subscribe((res: any) => {
+		this.workspaceService.acceptInvitation().subscribe((res: any) => {
 			// console.log("Invitation accepted!");
 		});
 	}

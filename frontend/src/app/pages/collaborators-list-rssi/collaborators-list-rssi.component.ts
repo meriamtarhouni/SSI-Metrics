@@ -57,17 +57,18 @@ export class CollaboratorsListRssiComponent implements OnInit {
 	}
 
 	inviteCollab(event, collabId: string) {
-		this.workspaceService.inviteCollab(collabId);
-		let collabToInvite: Collaborateur;
-		this.unInvitedCollabs.forEach((collab: Collaborateur) => {
-			if (collab._id == collabId) {
-				collabToInvite = collab;
-			}
-		});
-		let index = this.unInvitedCollabs.indexOf(collabToInvite);
-		this.unInvitedCollabs.splice(index, 1);
-		this.invitedCollabs.push(collabToInvite);
+		this.workspaceService.inviteCollab(collabId).subscribe((res: any) => {
+			let collabToInvite: Collaborateur;
+			this.unInvitedCollabs.forEach((collab: Collaborateur) => {
+				if (collab._id == collabId) {
+					collabToInvite = collab;
+				}
+			});
+			let index = this.unInvitedCollabs.indexOf(collabToInvite);
+			this.unInvitedCollabs.splice(index, 1);
+			this.invitedCollabs.push(collabToInvite);
 
-		this.updateNumbers();
+			this.updateNumbers();
+		});
 	}
 }
