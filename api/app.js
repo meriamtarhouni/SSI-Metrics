@@ -628,13 +628,13 @@ app.get('/collaborateurs/org/rssi/:org', authenticateRssi, (req, res) => {
                  if(!collaborateur.has_invitation){
                      res.status(400).send('Collaborator was not invited');
                  }
-                 else if(invitation._id !== collaborateur.invitationId){
+                 else if(invitation._id != collaborateur.invitationId){
                      console.log(invitation._id);
                      console.log(collaborateur.invitationId);
                      res.status(400).send('Invalid invitation id for this collaborator');
                  }
                  else{
-                     Invitation.findOne({_id:collaborateur.invitationId, collaboratorId: collaborateur._id, accepted: false}).then((invitation)=>{
+                     Invitation.findOne({_id: collaborateur.invitationId, collaboratorId: collaborateur._id, accepted: false}).then((invitation)=>{
                          if(!invitation){
                              res.status(400).send('Invitation not found');
                          }
