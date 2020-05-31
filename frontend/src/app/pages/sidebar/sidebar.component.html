@@ -18,29 +18,39 @@
 		
 		<br>
 		
-		<ul class="nav" *ngSwitchCase="3" >
+		<ul class="nav" *ngSwitchCase="5" >
 			<li><a routerLink="/login" routerLinkActive="active"> Se connecter </a></li>
 			<br>
 			<li><a routerLink="/signup-rssi" routerLinkActive="active"> Créer un Compte RSSI</a></li>
 			<li><a routerLink="/signup-collab" routerLinkActive="active"> Créer un Compte Collaborateur</a></li>
 		</ul>
 
-		<ul class="nav" *ngSwitchCase="2" >
-			<li><a routerLink="/profil-collaborateur/{{collaborator}}" routerLinkActive="active"> Mon Profil</a></li>
+		<ul class="nav" *ngSwitchCase="4" >
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="3" >
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
 			<br>
-			<li><a routerLink="/collaborateurs" routerLinkActive="active"> Les collaborateurs de mon organisation </a></li> 
+			<li><button (click)="acceptInvitation()">Accept your invitation!</button></li>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="2" >
+			<li><a routerLink="workspace/collaborator/{{collabWorkspaceId}}" routerLinkActive="active"> Espace de travail </a></li> 
+			<br>
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="1" >
 			<li><a routerLink="/create-space" routerLinkActive="active"> Créer un Espace de Travail</a></li>
 			<br>
-			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active"> Mon Profil</a></li>
+			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="0" >
-			<li><a routerLink="/workspace/{{workspace}}" routerLinkActive="active"> Espace de travail </a></li>
+			<li><a routerLink="/workspace/rssi/{{rssiWorkspaceId}}" routerLinkActive="active"> Espace de travail </a></li>
 			<br>
-			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active"> Mon Profil</a></li>
+			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
 		<ul *ngSwitchCase="2"class="align-bottom" >
 			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >

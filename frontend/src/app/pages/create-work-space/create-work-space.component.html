@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-11">
                   <mat-form-field  >
-                    <input matInput #nameInput [value]="organisation+'_SSI Metrics'" id="name" >
+                    <input matInput #nameInput [value]="organisationName+'_SSI Metrics'" id="name" >
                   </mat-form-field>
                 </div>
             </div>
@@ -39,12 +39,42 @@
                 <span class="input-group-text">
                    Ajouter des collaborateurs :
                 </span>
+                <!-- <div class="main-content"> -->
+                  <!-- <div class="container-fluid"> -->
+
+                    <div class="card">
+                      <div class="card-body table-responsive" id="tableParent">
+                        <table class="table table-hover">
+                            <thead class="text-info">
+                                <th></th>
+                                <th>Nom Complet </th>
+                                <th>Adresse Mail</th>
+                                <th>Ville, Pays</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let collaborateur of collaborateurs; let i = index" >
+                                  <td>
+                                    <div class="custom-control custom-checkbox">
+                                      <input (click)="onCollabClicked($event, collaborateur._id)" type="checkbox" class="custom-control-input" id="checkbox-{{i}}">
+                                      <label class="custom-control-label" for="checkbox-{{i}}"></label>
+                                    </div>
+                                  </td>
+                                  <td>{{ collaborateur.nom }}</td>
+                                  <td>{{ collaborateur.email }}</td>
+                                  <td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  <!-- </div> -->
+                <!-- </div> -->
               </div>
-              <div class="col-md-1">
+              <!-- <div class="col-md-1">
                 <span class="input-group-text">
                   <i class="material-icons" style="color:#00bcd4;" (click)="onClick()">add_box</i>
                 </span>
-              </div>
+              </div> -->
             </div>
             
            
