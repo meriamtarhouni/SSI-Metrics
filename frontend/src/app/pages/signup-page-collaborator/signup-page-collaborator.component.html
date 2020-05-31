@@ -32,10 +32,17 @@
 						</div>
 						<div class="col-md-2" ></div>
 						<div class="col-md-4">
-							<mat-form-field>
-								<input #passwordInput matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-								<mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
-							</mat-form-field>
+							<div class="row">
+							   <div class="col-md-9">
+							    <mat-form-field>
+								   <input #passwordInput matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+								   <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+								</mat-form-field>
+							  </div>
+							  <div class="col-md-2">
+								 <i class="material-icons" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+							  </div>
+						   </div>
 						</div>
 					</div>
 
@@ -187,14 +194,20 @@
 					<div class="col-md-12">
 					
 						<div class="form-group">
-							<label class="bmd-label-floating">Motivation : Pourquoivoulez-vous joindre l'équipe implementation de la norme ISO 27001</label>
+							<label class="bmd-label-floating">Motivation : Pourquoi voulez-vous joindre l'équipe implementation de la norme ISO 27001 ?</label>
 							<textarea  #motivationInput matInput  class="form-control" rows="5" [formControl]="motivation"></textarea>
 						</div>
 					</div>
 				</div>
 								
-				
+				<div class="row">
+                             
+					<div class="col-md-8"></div>
+					<div class="col-md-2">
 					<button mat-raised-button type="submit" class="btn btn-info pull-right" (click)="OnSignUpButtonClicked(emailInput.value,passwordInput.value, orgInput.value, nomInput.value, villeInput.value, paysInput.value, cpInput.value, motivationInput.value)">Créer un compte</button>
+					</div>
+				</div>
+					
 					<div class="clearfix"></div>
 				</form>
 			</div>

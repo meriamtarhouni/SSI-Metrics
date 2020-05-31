@@ -43,7 +43,7 @@ export class SignupPageCollaboratorComponent implements OnInit {
       return 'Ce champ est obligatoire !';
     }
 
-    return this.password.hasError('minlength') ? 'Le mot de passe doit contenir au moins 5 caractères' : '';
+    return this.password.hasError('minlength') ? 'Le mot de passe doit contenir au moins 8 caractères' : '';
 
   }
 

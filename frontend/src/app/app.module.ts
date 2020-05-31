@@ -34,6 +34,7 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
+import { WarningComponent } from './pages/warning/warning.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 
 
@@ -58,6 +59,7 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
     WorkSpaceComponent,
     ChecklistComponent,
     WorkSpaceCollaboratorViewComponent,
+    WarningComponent,
     CollaboratorsListRssiComponent
   ],
   imports: [
