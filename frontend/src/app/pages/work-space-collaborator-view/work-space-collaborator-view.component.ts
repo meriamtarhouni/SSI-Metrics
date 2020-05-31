@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PhaseService } from 'src/app/checkListServices/phase.service';
+declare var $: any;
 @Component({
   selector: 'app-work-space-collaborator-view',
   templateUrl: './work-space-collaborator-view.component.html',
