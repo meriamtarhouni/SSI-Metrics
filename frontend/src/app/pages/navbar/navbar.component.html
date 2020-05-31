@@ -54,15 +54,16 @@
                     </a>
                
                 </li>
-                <li class="nav-item">
-                <button class="btn btn-round btn-just-icon btn-success" (click)="onLogoutCollaborateurClicked()" >
-                    <i class="material-icons">exit_to_app</i>
-                  </button>
-                  <button class="btn btn-round btn-just-icon btn-warning" (click)="onLogoutRssiClicked()" >
-                    <i class="material-icons">exit_to_app</i>
-                  </button>
-               
+                <li class="nav-item" [ngSwitch]="this.getUserState()">
+                    <div *ngSwitchCase="3"></div>
+                    <button *ngSwitchCase="2" class="btn btn-round btn-just-icon btn-success" (click)="onLogoutCollaborateurClicked()" >
+                        <i class="material-icons">exit_to_app</i>
+                    </button>
+                    <button *ngSwitchCase="1"class="btn btn-round btn-just-icon btn-success"  (click)="onLogoutRssiClicked()">
+                        <i class="material-icons">exit_to_app</i>
+                    </button>
                 </li>
+
             </ul>
         </div>
     </div>
