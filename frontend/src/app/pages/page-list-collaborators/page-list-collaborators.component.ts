@@ -5,7 +5,6 @@ import {CollaboratorService } from 'src/app/collaborator.service' ;
 import { FormControl, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import {Collaborateur} from 'src/app/models/collaborateur.model'
-import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-page-list-collaborators',
@@ -19,10 +18,10 @@ export class PageListCollaboratorsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private authCollaboratorService: AuthCollaboratorService,private collaboratorService: CollaboratorService, private router: Router ) {}
 
   ngOnInit() {
-	this.organisationName = this.authCollaboratorService.getCollaboratorOrg();
-	this.collaboratorService.getOrgCollaborators(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
-		this.collaborateurs = collaborateurs;
-		// console.log(this.collaborateurs);
-	});
+  	this.organisationName = this.authCollaboratorService.getCollaboratorOrg();
+  	this.collaboratorService.getOrgCollaborators(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
+  		this.collaborateurs = collaborateurs;
+  		// console.log(this.collaborateurs);
+  	});
   }
 }
