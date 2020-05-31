@@ -4,6 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +15,6 @@ import { LoginPageCollaboratorComponent } from './pages/login-page-collaborator/
 import { SignupPageCollaboratorComponent } from './pages/signup-page-collaborator/signup-page-collaborator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageRssiComponent } from './pages/login-page-rssi/login-page-rssi.component';
-import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { CreateWorkSpaceComponent } from './pages/create-work-space/create-work-space.component';
@@ -31,9 +32,10 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/d
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 import { WarningComponent } from './pages/warning/warning.component';
+import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 
 
 @NgModule({
@@ -42,7 +44,6 @@ import { WarningComponent } from './pages/warning/warning.component';
     LoginPageCollaboratorComponent,
     SignupPageCollaboratorComponent,
     LoginPageRssiComponent,
-    NavbarComponent,
     SidebarComponent,
     FooterComponent,
     CreateWorkSpaceComponent,
@@ -58,7 +59,8 @@ import { WarningComponent } from './pages/warning/warning.component';
     WorkSpaceComponent,
     ChecklistComponent,
     WorkSpaceCollaboratorViewComponent,
-    WarningComponent
+    WarningComponent,
+    CollaboratorsListRssiComponent
   ],
   imports: [
     FormsModule,
@@ -70,16 +72,17 @@ import { WarningComponent } from './pages/warning/warning.component';
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-  MatStepperModule,
-  HttpClientModule,
-  MatDialogModule,
-  DragDropModule
+    MatStepperModule,
+    HttpClientModule,
+    MatDialogModule,
+    DragDropModule,
+    MatTabsModule,
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
   bootstrap: [AppComponent]
 })

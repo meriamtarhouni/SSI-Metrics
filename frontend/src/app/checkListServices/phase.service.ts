@@ -11,6 +11,9 @@ export class PhaseService {
   getPhases(){
     return this.webReqService.get('phases');
   }
+  getAllPhases(){
+    return this.webReqService.get('PDCA');
+  }
   getPhasesById(phaseId){
     return this.webReqService.get(`phases/${phaseId}/`);
   }
