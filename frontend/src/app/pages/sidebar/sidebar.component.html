@@ -42,19 +42,19 @@
 			<br>
 			<li><a routerLink="/edit-rssi/{{rssi}}" routerLinkActive="active"> Mon Profil</a></li>
 		</ul>
-		<ul *ngSwitchCase="2">
-			<button  class="btn btn-round btn-just-icon btn-success" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i>
+		<ul *ngSwitchCase="2"class="align-bottom" >
+			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
+				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
 		</ul>
-		<ul *ngSwitchCase="0">
-			<button class="btn btn-round btn-just-icon btn-success"  (click)="onLogoutRssiClicked()">
-				<i class="material-icons">exit_to_app</i>
+		<ul *ngSwitchCase="0"class="align-bottom" >
+			<button class="btn  btn-success"  (click)="onLogoutRssiClicked()">
+				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
 		</ul>	
-		<ul *ngSwitchCase="1">
-			<button class="btn btn-round btn-just-icon btn-success"  (click)="onLogoutRssiClicked()">
-				<i class="material-icons">exit_to_app</i>
+		<ul *ngSwitchCase="1"class="align-bottom" >
+			<button class="btn  btn-success"  (click)="onLogoutRssiClicked()">
+				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
 		</ul>	
 		
