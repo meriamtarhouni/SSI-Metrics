@@ -33,6 +33,10 @@ export class WorkspaceService {
 		localStorage.setItem('workspace-id', workspaceId);		
 	  }
 
+	getOrgCollaboratorsRssi(rssiOrg: string) {
+	    return this.webService.getOrgCollaboratorsRssi(rssiOrg);
+	}
+
 	private getCurrentRssiId(){
 		return localStorage.getItem('rssi-id');
 	}

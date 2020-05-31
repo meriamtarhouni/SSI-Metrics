@@ -23,12 +23,14 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/workspaces/${id}`);
   }
 
-  inviteCollab(collabId: string){
-    this.http.post(`/rssis/invite/${collabId}`, {});
+  inviteCollab(collabId: string) {
+    console.log("Inviting collab: " + collabId);
+    return this.http.post(`${this.ROOT_URL}/rssis/invite/${collabId}`, {});
   }
 
-  acceptInvitation(){
-    this.http.patch(`/collaborateurs/accept_invite`, {});
+  acceptInvitation() {
+    console.log("Accepting invitation");
+    return this.http.patch(`${this.ROOT_URL}/accept_invite/invitation`, {});
   }
 
   /* Rssi Methods */
@@ -40,7 +42,7 @@ export class WebRequestService {
       observe: 'response'
     });
   }
-  
+
   signUpRSSI(nom: string, raison: string, adresse: string, org: string, email: string, password: string, motivation: string) {
     return this.http.post(`${this.ROOT_URL}/rssis`, {
       nom,
@@ -67,7 +69,7 @@ export class WebRequestService {
     return this.http.delete(`${this.ROOT_URL}/${uri}`);
   }
 
-  hasWorkSpace(id: String){
+  hasWorkSpace(id: String) {
     return this.http.get(`${this.ROOT_URL}/rssis/${id}/workspace`);
   }
 
@@ -107,7 +109,11 @@ export class WebRequestService {
   }
 
   getOrgCollaborators(collabOrg: string) {
-	return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${collabOrg}`);
+    return this.http.get(`${this.ROOT_URL}/collaborateurs/org/${collabOrg}`);
+  }
+
+  getOrgCollaboratorsRssi(rssiOrg: string) {
+    return this.http.get(`${this.ROOT_URL}/collaborateurs/org/rssi/${rssiOrg}`);
   }
 
   get(uri: string) {

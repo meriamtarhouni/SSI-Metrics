@@ -4,6 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,8 +33,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/d
 import { AddCollaborateurComponent } from './pages/add-collaborateur/add-collaborateur.component';
 import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
+import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 
 
 @NgModule({
@@ -56,7 +59,8 @@ import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collabora
     AddCollaborateurComponent,
     WorkSpaceComponent,
     ChecklistComponent,
-    WorkSpaceCollaboratorViewComponent
+    WorkSpaceCollaboratorViewComponent,
+    CollaboratorsListRssiComponent
   ],
   imports: [
     FormsModule,
@@ -68,16 +72,17 @@ import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collabora
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-  MatStepperModule,
-  HttpClientModule,
-  MatDialogModule,
-  DragDropModule
+    MatStepperModule,
+    HttpClientModule,
+    MatDialogModule,
+    DragDropModule,
+    MatTabsModule,
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptorCollaborator, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptorRssi, multi: true },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
   bootstrap: [AppComponent]
 })

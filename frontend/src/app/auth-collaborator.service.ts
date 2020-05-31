@@ -9,47 +9,63 @@ import { shareReplay, tap } from 'rxjs/operators';
 })
 export class AuthCollaboratorService {
 
-  constructor(private http : HttpClient, private webService:WebRequestService,private router: Router ) { }
+  constructor(private http: HttpClient, private webService: WebRequestService, private router: Router) { }
 
 
 
-  signUp(email : string,password : string, org :string, nom : string, ville : string, pays : string, cp: string, motivation : string){
-    
-  console.log("auth service") ; 
-    return this.webService.signUpCollaborator(email,password, org , nom, ville,pays, cp, motivation).pipe(
+  signUp(email: string, password: string, org: string, nom: string, ville: string, pays: string, cp: string, motivation: string) {
+
+    console.log("auth service");
+    return this.webService.signUpCollaborator(email, password, org, nom, ville, pays, cp, motivation).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.InvitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log("Successfully signed up!");
-        console.log(res.headers.get('x-refresh-token')); 
-        
+        console.log(res.headers.get('x-refresh-token'));
+
       })
     )
- 
+
 
 
   }
 
-  login(email : string,password :string){
+  login(email: string, password: string) {
     return this.webService.loginCollaborator(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.invitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         // console.log("LOGGED IN!");
       })
     )
-       
+
   }
 
-  logout(){
+  logout() {
     this.removeSession();
     this.router.navigate(['/login']);
   }
-  
-  isLoggedIn(){
-	  return localStorage.hasOwnProperty('collaborateur-id');
+
+  isLoggedIn() {
+    return localStorage.hasOwnProperty('collaborateur-id');
+  }
+
+  hasInvitation() {
+    return localStorage.hasOwnProperty('invitation-id');
+  }
+
+  getInvitationId() {
+    return localStorage.getItem('invitation-id');
+  }
+
+  hasWorkspace() {
+    return localStorage.hasOwnProperty('workspace-id');
+  }
+
+  getWorkspaceId() {
+    return localStorage.getItem('workspace-id');
   }
 
   getAccessToken() {
@@ -59,7 +75,7 @@ export class AuthCollaboratorService {
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
   }
- 
+
   getRefreshToken() {
     return localStorage.getItem('x-refresh-token');
   }
@@ -72,22 +88,29 @@ export class AuthCollaboratorService {
     return localStorage.getItem('collaborateur-org');
   }
 
-  private setSession(collaborateurId: string, collaborateurOrg: string, accessToken: string, refreshToken: string) {
+  private setSession(collaborateurId: string, collaborateurOrg: string, hasWorkspace: boolean, collaborateurWorkspace: string, hasInvitation: boolean, collaborateurInvitation: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('collaborateur-id', collaborateurId);
     localStorage.setItem('collaborateur-org', collaborateurOrg);
+    if (hasWorkspace) {
+      localStorage.setItem('workspace-id', collaborateurWorkspace);
+    }
+    if (hasInvitation) {
+      localStorage.setItem('invitation-id', collaborateurInvitation);
+    }
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
 
-
   private removeSession() {
     localStorage.removeItem('collaborateur-id');
     localStorage.removeItem('collaborateur-org');
+    localStorage.removeItem('workspace-id');
+    localStorage.removeItem('invitation-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }
 
-    getNewAccessToken() {
+  getNewAccessToken() {
     return this.http.get(`${this.webService.ROOT_URL}/collaborateurs/collaborateur/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
@@ -100,5 +123,5 @@ export class AuthCollaboratorService {
       })
     )
   }
-  
+
 }

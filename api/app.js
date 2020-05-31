@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id, org, has_workspace, workspaceId, has_invitation, invitationId");
 
   res.header(
         'Access-Control-Expose-Headers',
@@ -196,10 +196,9 @@ app.post('/workspaces', authenticateRssi, (req, res) => {
     newWorkspace.save().then((workspaceDoc) => {
         res.send(workspaceDoc);
     }).then(() => {
-        res.sendStatus(200);
+        res.status(200);
     }).catch((e) => {
-		console.log(e);
-        res.sendStatus(400);
+        res.status(400).send(e);
     })
 });
 
@@ -350,6 +349,7 @@ app.get('/rssis/:id/workspace',authenticateRssi,(req,res)=>{
  * Inviting a collaborator to the workspace
  */
 app.post('/rssis/invite/:id_c',authenticateRssi,(req,res)=>{
+    console.log("app.js Inviting collab: " + req.params.id_c);
 	Workspace.findOne({rssiId:req.rssi_id,}).then((workspace)=>{
 		if(!workspace){
 			res.status(400).send('Workspace not found');
@@ -369,20 +369,23 @@ app.post('/rssis/invite/:id_c',authenticateRssi,(req,res)=>{
 						accepted: false,
 					});
 
+                    let new_invitation_id = '';
 					invitation.save().then((invitationDoc) => {
-						Collaborateur.findByIdAndUpdate(invitation.collaboratorId, {
-							has_invitation: true,
-							invitationId: invitationDoc._id,
-						}).then(() => {
-							res.sendStatus(200);
-						}).catch((e)=>{
-							res.status(400).send(e);
-						});
+                        new_invitation_id = invitationDoc._id;
 					}).then(() => {
-						res.sendStatus(200);
+						// res.status(200);
 					}).catch((e) => {
-						res.status(400).send(e);
+						// res.status(400).send(e);
 					})
+
+                    Collaborateur.findByIdAndUpdate(invitation.collaboratorId, {
+                        has_invitation: true,
+                        invitationId: new_invitation_id,
+                    }).then(() => {
+                        res.status(200);
+                    }).catch((e)=>{
+                        res.status(400).send(e);
+                    });
 				}
 			})
 		}    
@@ -455,6 +458,15 @@ app.get('/collaborateurs/org/:org', authenticateCollaborateur, (req, res) => {
 	}).catch((e) => {
 		res.status(400).send(e);
 	});
+})
+
+// Get all Collaborateurs from the same organization
+app.get('/collaborateurs/org/rssi/:org', authenticateRssi, (req, res) => {
+    Collaborateur.find({org: req.params.org}).then((collaborateurs) => {
+        res.send(collaborateurs);
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
 })
 
 
@@ -600,11 +612,12 @@ app.get('/collaborateurs/collaborateur/access-token', verifySessionCollaborateur
 /**
  * Accepting an invitation
  */
-app.patch('/collaborateurs/accept_invite',authenticateCollaborateur,(req,res)=>{
+app.patch('/accept_invite/invitation',authenticateCollaborateur,(req,res)=>{
     let id_invitation = '';
     Invitation.findOne({collaboratorId: req.collaborateur_id, accepted: false}).then((invitation)=>{
         if(!invitation){
             res.status(400).send('Invitation not found');
+            return;
         }
         else{
             id_invitation = invitation._id;
