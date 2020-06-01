@@ -36,6 +36,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 import { WarningComponent } from './pages/warning/warning.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
+import { InvitationDialogContentComponent } from './pages/invitation-dialog-content/invitation-dialog-content.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
     ChecklistComponent,
     WorkSpaceCollaboratorViewComponent,
     WarningComponent,
-    CollaboratorsListRssiComponent
+    CollaboratorsListRssiComponent,
+    InvitationDialogContentComponent
   ],
   imports: [
     FormsModule,

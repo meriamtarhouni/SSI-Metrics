@@ -41,12 +41,14 @@
 									<th>Nom Complet </th>
 									<th>Adresse Mail</th>
 									<th>Ville, Pays</th>
+									<th>Statut</th>
 								</thead>
 								<tbody>
 									<tr  *ngFor="let collaborateur of workspaceCollabs" >
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
+										<td><button mat-raised-button color="warn" (click)="removeCollab($event, collaborateur._id)">Remove</button></td>
 									</tr>
 								</tbody>
 							</table>
