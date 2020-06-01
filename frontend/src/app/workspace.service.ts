@@ -33,6 +33,10 @@ export class WorkspaceService {
 		return this.webService.acceptInvitation();
 	}
 
+	removeCollab(collabId: string) {
+		return this.webService.removeCollab(collabId);
+	}
+
 	setWorkSpaceSession(workspaceId: string) {
 		localStorage.setItem('workspace-id', workspaceId);
 	}
