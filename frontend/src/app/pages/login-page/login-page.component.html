@@ -2,26 +2,52 @@
 <div class="main-content">
     <div class="container-fluid">
        <div class="row">
-        <div class="col-md-4"></div>
-           <div class="col-md-4">
-                <div class="card card-profile">
-                  <div class="card-avatar">
-                      <a href="javascript:void(0)">
-                          <img class="img" src="./assets/img/faces/landing.png" />
-                      </a>
-                  </div>
+        <div class="col-md-3"></div>
+           <div class="col-md-6">
+                <div class="card card-profile" style="background-color: #21296e ; height: 450px; width: 600px;" >
+                  
                   <div class="card-body">
-                    
-                      <h4 class="card-title">Se Connecter </h4>
-                      <p class="card-description">
-                          SSI Mertrics vous pret de ................................ et de ................... en tant que RSSI ............. EN TANT QUE Collaborateur ..............
-                      </p>
                       <br>
+                      <h4 class="card-title" style="font-size: 25px; color: white; font-family: Arial, Helvetica, sans-serif;">Bienvenue à SSI Metrics </h4>
+                      <p class="card-description" style="font-size:20px; font-family: Arial, Helvetica, sans-serif; ">
+                        Choisissez votre rôle 
+                      </p>
+
+                      <div class="row">
+                        <div class="col-md-6" routerLink="/login-rssi" routerLinkActive="active">
+                           <div class="card card-profile" style="height: 220px;">
+                              <div class="card-body">
+                                    
+                                <span class="material-icons" style="font-size: 120px; color:#00bcd4; ">business_center</span>
+                                <br>
+                                <h3 style="font-family:Arial, Helvetica, sans-serif; color: #21296e;">Responsable sécurité des systèmes d'information</h3>     
+                              </div> 
+                           </div>
+                        
+                        </div>
+
+                        <div class="col-md-6" routerLink="/login-collab" routerLinkActive="active">
+                            <div class="card card-profile" style="height: 220px;">
+                               <div class="card-body">
+                                   
+                                  <span class="material-icons" style="font-size: 120px; ;color:#00bcd4; ">person_outline</span>
+                                  <br><br>
+                                  <h3 style="font-family:Arial, Helvetica, sans-serif; color: #21296e;">Collaborateur </h3>
+                                  
+                               </div> 
+                            </div>
+                        </div>  
+
+                      </div>
+
+                    <!-- <br>
                       <a class="btn btn-info btn-round "  routerLink="/login-rssi" routerLinkActive="active">En tant que RSSI </a> 
                       <br>
                       <a class="btn btn-info btn-round " routerLink="/login-collab" routerLinkActive="active"> En tant que Collaborateur </a>
-                  </div>
-              </div>
+                    --> 
+                 </div>
+              
+                </div>
           </div>
         
           <div class="col-md-3"></div>
