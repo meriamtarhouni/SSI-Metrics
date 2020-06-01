@@ -17,8 +17,10 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component'
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
+import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 const routes: Routes = [
+  // { path: 'sidebar', component: SidebarComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },
