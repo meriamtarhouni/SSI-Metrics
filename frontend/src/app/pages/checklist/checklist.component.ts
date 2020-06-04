@@ -18,6 +18,9 @@ export class ChecklistComponent implements OnInit {
   done : Sous_tache[];
   exigences: any[];
   selectedPhase: string;
+ // exigence : any; 
+ // exigenceNom: string;
+  tache :any;
 
   constructor(private route : ActivatedRoute,private phaseService: PhaseService,private exigenceService:ExigenceService, private subTasksService: SubTaskService) { }
   ngOnInit(): void {
@@ -25,6 +28,13 @@ this.route.params.subscribe((params:Params)=>{
   if (params.phaseId){
     this.selectedPhase = params.phaseId;
   }
+
+  /**
+  this.exigence=this.subTasksService.getExigenceById(this.exigenceNom).subscribe((exigence: any) => {
+    this.exigence=exigence[0];
+    console.log(this.exigence);      
+  })
+  */
 })
  
    // this.selectedPhase= '5ed2c8e59bc1e62db17a77e3';  // plan 
@@ -37,7 +47,7 @@ this.route.params.subscribe((params:Params)=>{
 
       this.todo=todo;    
       console.log(this.todo);
-      //console.log(this.todo[0].label);
+      console.log(this.todo[0]);
 
     }); 
 

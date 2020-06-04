@@ -1,3 +1,4 @@
+
 export class Sous_tache {
     _id: string; 
     label: String;
@@ -9,5 +10,6 @@ export class Sous_tache {
     collaborateur_id: string; 
     exigence_id: string ; 
     phase_id: string ; 
-    
+
+  
 }

@@ -148,4 +148,34 @@ checklist.get('/sousTaches/:phaseId/termine',authenticateCollaborateur, (req, re
     })
 }) 
 
+checklist.get('/sousTaches/tache/:id',(req, res) => {
+  
+    Tache.find({
+        _id: req.params.id,
+    }).then((tache) => {
+        res.send(tache);
+    })
+});
+
+checklist.get('/sousTaches/exigence/:id',(req, res) => {
+  
+    Exigence.find({
+        _id: req.params.id,
+    }).then((exigence) => {
+        res.send(exigence);
+    })
+});
+
+checklist.get('/sousTaches/collaborateur/:id',(req, res) => {
+  
+    Collaborateur.find({
+        _id: req.params.id,
+    }).then((collaborateur) => {
+        res.send(collaborateur);
+    })
+});
+
+
+
+
 module.exports = checklist; 
