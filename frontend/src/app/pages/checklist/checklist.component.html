@@ -4,7 +4,7 @@
   <div class="board" >
 
     <div class="board-bar">
-       <p class="board-name"> Plan </p> 
+       <p class="board-name"> {{selectedPhase}} </p> 
     </div>
 
     <div class="board-wrapper">
@@ -19,7 +19,7 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of todo" cdkDrag>
+            <div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id">
               <div class="task-header">
 
                <b>{{task.clause}}</b> 
@@ -43,6 +43,7 @@
               
             </div>
           </div>
+       
         </div>
         <div class="board-column">
           <div class="column-title">
@@ -53,7 +54,7 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of todo" cdkDrag>
+            <div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id">
               <div class="task-header">
                
                <b>{{task.clause}}</b> 
@@ -89,7 +90,7 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of todo" cdkDrag>
+            <div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
               <div class="task-header">
                 
                <b>{{task.clause}}</b> 
@@ -122,4 +123,10 @@
 
     </div>
   </div>
+
+  
+
+
 </div>
+
+

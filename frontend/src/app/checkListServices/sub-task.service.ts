@@ -25,8 +25,11 @@ export class SubTaskService {
 
    getCollaborateurById(collaborateurId){
     return this.webReqService.get(`sousTaches/collaborateur/${collaborateurId}/`);
-  }
+  } 
+  updateSubTaskStatus(subTaskId : string , status : string){
+return this.webReqService.updateSubTaskStatus(subTaskId,status);
 
+}
 
 
 }
