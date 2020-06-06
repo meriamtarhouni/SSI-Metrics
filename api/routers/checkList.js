@@ -176,17 +176,13 @@ checklist.get('/sousTaches/collaborateur/:id',(req, res) => {
 });
 
 checklist.patch(`sousTache/:id`,(req,res)=>{
-    Sous_tache.findByIdAndUpdate({
-        _id:req.params.id
-    },{
-        $set :req.body
-    }).then(()=>{
-        res.send({
-            'message': 'updated successfully'
-        });
-    });
-
+    Sous_tache.findByIdAndUpdate(req.params.id,{
+  
+        etat : this.req.body.status} 
+    )
 });
+
+    
 
 
 
