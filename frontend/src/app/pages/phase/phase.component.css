@@ -1,6 +1,6 @@
 #inner-circle {
    
-    background-color:#f5bb41;
+    background-color:	#000FB0;
     border-radius: 50%;
     height: 250px;
     width: 250px;
@@ -10,7 +10,7 @@
   }
  #outer-circle {
     position: absolute;
-    background-color: #f44336;
+    background-color: #21296E;
     border-radius: 50%;
     height: 250px;
     width: 250px;
@@ -20,7 +20,7 @@
   }
   #inner-circle-2 {
    
-    background-color:   #00bcd4;
+    background-color:#4CAF50;
     border-radius: 50%;
     height: 250px;
     width: 250px;
@@ -30,7 +30,7 @@
   }
   #outer-circle-2{
     position: absolute;
-    background-color: #4caf50;
+    background-color: #2BA8FF;
     border-radius: 50%;
     height: 250px;
     width: 250px;
