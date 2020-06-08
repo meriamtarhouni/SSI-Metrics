@@ -71,6 +71,9 @@ const CollaborateurSchema = new mongoose.Schema({
 	workspaceId:{
 		type: mongoose.Types.ObjectId,
 	},
+    sous_taches: {
+        type: Array
+    },
 
     sessions: [{
         token: {

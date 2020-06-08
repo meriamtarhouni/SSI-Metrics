@@ -46,25 +46,25 @@ let authenticateCollaborateur = (req, res, next) => {
 
 //Get all phases
 checklist.get('/phases' ,authenticateRssi,(req,res) => {
-      
+
     Phase.find({}).then((phases) => {
         res.send(phases);
     })
-  });
+});
 
 
 
-  checklist.get('/PDCA' ,authenticateCollaborateur,(req,res) => {
-      
+checklist.get('/PDCA' ,authenticateCollaborateur,(req,res) => {
+
     Phase.find({}).then((phases) => {
         res.send(phases);
     })
-  });
-  
+});
+
 
 //Get phase credentials by Id
 checklist.get('/phases/:id',authenticateRssi,(req, res) => {
-  
+
     Phase.find({
         _id: req.params.id,
     }).then((phase) => {
@@ -77,7 +77,7 @@ checklist.get('/phases/:id',authenticateRssi,(req, res) => {
 //Get all requirements(exigence) in a specific Phase
 
 checklist.get('/phases/:phaseId/exigences',authenticateRssi,(req,res)=> {
-   
+
     Exigence.find({
         phase_id: req.params.phaseId
     }).then((exigences)=>{
@@ -89,7 +89,7 @@ checklist.get('/phases/:phaseId/exigences',authenticateRssi,(req,res)=> {
 //Get all tasks in a specific requirement(Exigence)
 
 checklist.get('/exigences/:exigenceId/taches',authenticateRssi,(req,res)=>{
-   
+
     Tache.find({
         exigence_id: req.params.exigenceId
     }).then((taches)=>{
@@ -102,7 +102,7 @@ checklist.get('/exigences/:exigenceId/taches',authenticateRssi,(req,res)=>{
 //Get all subTasks in a specific Task
 
 checklist.get('/taches/:tacheId/sousTaches',authenticateRssi,(req,res)=>{
-     
+
     Sous_tache.find({
         tache_id: req.params.tacheId
     }).then((sous_taches)=>{
@@ -147,5 +147,28 @@ checklist.get('/sousTaches/:phaseId/termine',authenticateCollaborateur, (req, re
         res.send(e);
     })
 }) 
+
+/**
+* Affecting a collaborator to a subtask
+*/
+checklist.patch('/soustaches/:tacheId/affect/:collabId', authenticateRssi, (req, res) => {
+    console.log('Affecting task', req.params.tacheId, ' to collab ', req.params.collabId);
+    Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.tacheId), {
+        collaborateur_id: mongoose.Types.ObjectId(req.params.collabId),
+    }).then((sstache) => {
+        Collaborateur.findByIdAndUpdate(req.params.collabId, {
+            $push: {
+                sous_taches: req.params.tacheId,
+            },
+        }).then((collaborateur) => {
+            console.log('Affecting done');
+            res.sendStatus(200);
+        }).catch((e) => {
+            res.send(e);
+        });
+    }).catch((e) => {
+        res.send(e);
+    });
+});
 
 module.exports = checklist; 
