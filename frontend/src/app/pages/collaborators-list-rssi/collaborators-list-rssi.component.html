@@ -48,7 +48,7 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="warn" (click)="removeCollab($event, collaborateur._id)">Remove</button></td>
+										<td><button mat-raised-button color="warn" (click)="removeCollab($event, collaborateur._id)">Supprimer</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -68,7 +68,7 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="info" disabled>Pending</button></td>
+										<td><button mat-raised-button color="info" disabled>En attente</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -88,7 +88,7 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="primary" (click)="inviteCollab($event, collaborateur._id)">Invite</button></td>
+										<td><button mat-raised-button color="primary" (click)="inviteCollab($event, collaborateur._id)">Inviter</button></td>
 									</tr>
 								</tbody>
 							</table>
