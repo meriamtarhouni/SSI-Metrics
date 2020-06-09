@@ -18,6 +18,8 @@ export class ChecklistComponent implements OnInit {
   done : Sous_tache[];
   exigences: any[];
   selectedPhase: string;
+  phase : any;
+  nomPhase : string;
 
   tache :any;
 
@@ -26,29 +28,44 @@ export class ChecklistComponent implements OnInit {
 this.route.params.subscribe((params:Params)=>{
   if (params.phaseId){
     this.selectedPhase = params.phaseId;
+
     //get phase by id 
+    this.subTasksService.getPhaseById(this.selectedPhase).subscribe((phase : any )=>{
+      this.phase = phase ;
+      this.nomPhase= this.phase[0].nom ; 
+    })
   }
 
 
 })
- 
+this.toDoSubTasks();
+this.inProgressSubTasks();
+this.doneSubTasks();
+}
+
 
     // get to do sub tasks 
-    // get in progress sub tasks 
-    // get done sub taskd 
+  toDoSubTasks(){
+
     this.subTasksService.getToDoSubTasks(this.selectedPhase).subscribe((todo: Sous_tache[]) => {
-          this.todo=todo;    
-
-    }); 
-
+      this.todo=todo;    
+     }); 
+  }
+   // get in progress sub tasks 
+  inProgressSubTasks(){
     this.subTasksService.getInProgressSubTasks(this.selectedPhase).subscribe((inprogress: Sous_tache[]) => {
       this.inprogress=inprogress;
     }); 
+  }
 
+
+    // get done sub tasks
+  doneSubTasks(){
     this.subTasksService.getDoneSubTasks(this.selectedPhase).subscribe((done: Sous_tache[]) => {
       this.done=done;
     }); 
   }
+
 
 drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -82,6 +99,9 @@ drop(event: CdkDragDrop<string[]>) {
 
 
     this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
+      this.toDoSubTasks();
+      this.inProgressSubTasks();
+      this.doneSubTasks();
    });
 
 }
