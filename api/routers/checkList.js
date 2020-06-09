@@ -148,7 +148,7 @@ checklist.get('/sousTaches/:phaseId/termine',authenticateCollaborateur, (req, re
     })
 }) 
 
-checklist.get('/sousTaches/tache/:id',(req, res) => {
+checklist.get('/sousTaches/tache/:id',authenticateCollaborateur,(req, res) => {
   
     Tache.find({
         _id: req.params.id,
@@ -157,7 +157,7 @@ checklist.get('/sousTaches/tache/:id',(req, res) => {
     })
 });
 
-checklist.get('/sousTaches/exigence/:id',(req, res) => {
+checklist.get('/sousTaches/exigence/:id',authenticateCollaborateur,(req, res) => {
   
     Exigence.find({
         _id: req.params.id,
@@ -166,7 +166,7 @@ checklist.get('/sousTaches/exigence/:id',(req, res) => {
     })
 });
 
-checklist.get('/sousTaches/collaborateur/:id',(req, res) => {
+checklist.get('/sousTaches/collaborateur/:id',authenticateCollaborateur,(req, res) => {
   
     Collaborateur.find({
         _id: req.params.id,
@@ -175,7 +175,7 @@ checklist.get('/sousTaches/collaborateur/:id',(req, res) => {
     })
 });
 
-checklist.get('/sousTaches/phases/:id',(req, res) => {
+checklist.get('/sousTaches/phases/:id',authenticateCollaborateur,(req, res) => {
   
     Phase.find({
         _id: req.params.id,
@@ -185,7 +185,7 @@ checklist.get('/sousTaches/phases/:id',(req, res) => {
 });
 
 
-checklist.patch('/sousTache/:id',(req,res)=>{
+checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
     console.log('Updating sous_tache');
     Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
         etat : req.body.status
