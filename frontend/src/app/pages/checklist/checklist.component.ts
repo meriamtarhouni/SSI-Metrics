@@ -23,7 +23,12 @@ export class ChecklistComponent implements OnInit {
 
   tache :any;
 
-  constructor(private route : ActivatedRoute,private phaseService: PhaseService,private exigenceService:ExigenceService, private subTasksService: SubTaskService) { }
+mySubscription: any;
+
+  constructor(private route : ActivatedRoute,private phaseService: PhaseService,private exigenceService:ExigenceService, private subTasksService: SubTaskService) { 
+
+
+  }
   ngOnInit(): void {
 this.route.params.subscribe((params:Params)=>{
   if (params.phaseId){
@@ -99,10 +104,9 @@ drop(event: CdkDragDrop<string[]>) {
 
 
     this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
-      this.toDoSubTasks();
-      this.inProgressSubTasks();
-      this.doneSubTasks();
+     
    });
+   window.location.reload()
 
 }
 }
