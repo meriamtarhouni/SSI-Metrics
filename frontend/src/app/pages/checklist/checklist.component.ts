@@ -71,12 +71,18 @@ drop(event: CdkDragDrop<string[]>) {
      */
     if (event.previousContainer.id=="cdk-drop-list-0"){
       status="en cours";
+     
     }
-    else if (event.previousContainer.id=="cdk-drop-list-0"){
+    else if (event.previousContainer.id=="cdk-drop-list-1"){
       status="terminé"; 
+    
     } 
+    console.log(status);
 
-     this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id,status); 
-    }
+
+
+    this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
+   });
+
 }
-
+}

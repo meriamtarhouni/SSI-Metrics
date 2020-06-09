@@ -175,13 +175,14 @@ checklist.get('/sousTaches/collaborateur/:id',(req, res) => {
     })
 });
 
-checklist.patch(`sousTache/:id`,(req,res)=>{
-    Sous_tache.findByIdAndUpdate(req.params.id,{
-  
-        etat : this.req.body.status} 
-    )
+checklist.patch('/sousTache/:id',(req,res)=>{
+    console.log('Updating sous_tache');
+    Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+        etat : req.body.status
+    }).then(() => {
+        console.log('Updated sous_tache');
+    });
 });
-
     
 
 
