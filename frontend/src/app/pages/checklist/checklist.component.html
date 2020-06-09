@@ -52,7 +52,7 @@
 
           <div class="tasks-container"
           cdkDropList
-          [cdkDropListData]="todo"
+          [cdkDropListData]="inprogress"
           (cdkDropListDropped)="drop($event)">
             <div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id">
               <div class="task-header">
@@ -88,7 +88,7 @@
 
           <div class="tasks-container"
           cdkDropList
-          [cdkDropListData]="todo"
+          [cdkDropListData]="done"
           (cdkDropListDropped)="drop($event)">
             <div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
               <div class="task-header">
