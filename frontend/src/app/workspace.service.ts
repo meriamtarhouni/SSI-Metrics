@@ -53,7 +53,8 @@ export class WorkspaceService {
 		localStorage.removeItem('workspace-id');
 	}
 
-
-
+	affectSubtaskCollab(subtaskId: string, collabId: string) {
+		return this.webService.patch(`soustaches/${subtaskId}/affect/${collabId}`, {});
+	}
 
 }
