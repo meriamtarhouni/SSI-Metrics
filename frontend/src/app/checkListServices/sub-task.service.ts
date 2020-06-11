@@ -16,4 +16,25 @@ export class SubTaskService {
   getDoneSubTasks(phaseId : string){
     return this.webReqService.get(`sousTaches/${phaseId}/termine`);
   }
+  getTacheById(tacheId){
+    return this.webReqService.get(`sousTaches/tache/${tacheId}/`);
+  }
+   getExigenceById(exigenceId){
+     return this.webReqService.get(`sousTaches/exigence/${exigenceId}/`);
+   }
+
+   getCollaborateurById(collaborateurId){
+    return this.webReqService.get(`sousTaches/collaborateur/${collaborateurId}/`);
+  } 
+
+  getPhaseById(phaseId){
+    return this.webReqService.get(`sousTaches/phases/${phaseId}/`);
+
+  }
+  updateSubTaskStatus(subTaskId : string , status : string){
+return this.webReqService.updateSubTaskStatus(subTaskId,status);
+
+}
+
+
 }
