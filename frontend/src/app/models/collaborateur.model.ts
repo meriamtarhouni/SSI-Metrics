@@ -9,4 +9,5 @@ export class Collaborateur {
 	motivation: string;
 	has_invitation: boolean;
 	has_workspace: boolean;
+	sous_taches: Array<string>;
 }

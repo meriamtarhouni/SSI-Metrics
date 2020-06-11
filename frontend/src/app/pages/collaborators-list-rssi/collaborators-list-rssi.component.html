@@ -16,7 +16,7 @@
 
 			<div class="card-body">
 				<mat-tab-group animationDuration="0ms" dynamicHeight mat-align-tabs="center">
-					<mat-tab label="All collaborators ({{[totalNumber]}})">
+					<mat-tab label="Tous les collaborateurs ({{[totalNumber]}})">
 						<div class="card-body table-responsive">
 							<table class="table table-hover">
 								<thead class="text-info">
@@ -34,7 +34,7 @@
 							</table>
 						</div>
 					</mat-tab>
-					<mat-tab label="Workspace collaborators ({{[workspaceNumber]}})">
+					<mat-tab label="Collaborateurs de l'espace de travail ({{[workspaceNumber]}})">
 						<div class="card-body table-responsive">
 							<table class="table table-hover">
 								<thead class="text-info">
@@ -48,13 +48,13 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="warn" (click)="removeCollab($event, collaborateur._id)">Remove</button></td>
+										<td><button mat-raised-button color="warn" (click)="removeCollab($event, collaborateur._id)">Supprimer</button></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</mat-tab>
-					<mat-tab label="Invited collaborators ({{[invitedNumber]}})">
+					<mat-tab label="Collaborateurs invités ({{[invitedNumber]}})">
 						<div class="card-body table-responsive">
 							<table class="table table-hover">
 								<thead class="text-info">
@@ -68,13 +68,13 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="info" disabled>Pending</button></td>
+										<td><button mat-raised-button color="info" disabled>En attente</button></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</mat-tab>
-					<mat-tab label="Not invited collaborators ({{[unInvitedNumber]}})">
+					<mat-tab label="Collaborateurs non invités ({{[unInvitedNumber]}})">
 						<div class="card-body table-responsive">
 							<table class="table table-hover">
 								<thead class="text-info">
@@ -88,7 +88,7 @@
 										<td>{{ collaborateur.nom }}</td>
 										<td>{{ collaborateur.email }}</td>
 										<td>{{ collaborateur.ville }}, {{ collaborateur.pays }}</td>
-										<td><button mat-raised-button color="primary" (click)="inviteCollab($event, collaborateur._id)">Invite</button></td>
+										<td><button mat-raised-button color="primary" (click)="inviteCollab($event, collaborateur._id)">Inviter</button></td>
 									</tr>
 								</tbody>
 							</table>

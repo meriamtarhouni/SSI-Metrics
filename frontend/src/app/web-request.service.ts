@@ -108,6 +108,9 @@ export class WebRequestService {
 		});
 	}
 
+	getCollaboratorByIdRssi(id: String) {
+		return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}/rssi`);
+	}
 	getCollaboratorById(id: String) {
 		return this.http.get(`${this.ROOT_URL}/collaborateurs/${id}`);
 	}

@@ -1,40 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Collaborateur } from 'src/app/models/collaborateur.model';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Collaborateur } from 'src/app/models/collaborateur.model'
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { WorkspaceService } from 'src/app/workspace.service';
 
 @Component({
-  selector: 'app-add-collaborateur',
-  templateUrl: './add-collaborateur.component.html',
-  styleUrls: ['./add-collaborateur.component.css']
+	selector: 'app-add-collaborateur',
+	templateUrl: './add-collaborateur.component.html',
+	styleUrls: ['./add-collaborateur.component.css']
 })
 export class AddCollaborateurComponent implements OnInit {
  
-  workspaceCollabs: Collaborateur[] = [];
-  organisationName: string;
-  constructor(public dialogRef: MatDialogRef<AddCollaborateurComponent>,private authRssiService: AuthRssiService, private workspaceService: WorkspaceService) {
+	sstacheId: string;
+	organisationName: string;
+	workspaceCollabs: Collaborateur[] = [];
+	selectedCollabId: string;
+	has_selected: boolean = false;
 
-    this.organisationName = this.authRssiService.getRssiOrg();
-		this.workspaceService.getOrgCollaboratorsRssi(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
-	
-			collaborateurs.forEach((collab: Collaborateur) => {
-				if (collab.has_workspace) {
-					this.workspaceCollabs.push(collab);
-				}			
-			});
+	constructor(private route: ActivatedRoute, private authRssiService: AuthRssiService, private workspaceService: WorkspaceService, public dialogRef: MatDialogRef<AddCollaborateurComponent>, @Inject(MAT_DIALOG_DATA) data) {
+		this.sstacheId = data.sstacheId;
+	}
 
-			console.log('WorkspaceCollabs: ', this.workspaceCollabs);
-
+	ngOnInit(): void {
+		this.route.params.subscribe((params: Params) => {
+			
+			console.log('Tache ID = ', this.sstacheId);
 		});
 
-   }
+		this.organisationName = this.authRssiService.getRssiOrg();
+		this.workspaceService.getOrgCollaboratorsRssi(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
+			this.workspaceCollabs = collaborateurs.filter((collab: Collaborateur) => collab.has_workspace);
+		});
+	}
 
-  ngOnInit(): void {
-  }
-  onCloseButtonClicked(){
-   
-    this.dialogRef.close();
-  }
+	selectCollab(collabId: string) {
+		this.selectedCollabId = collabId;
+		this.has_selected = true;
+	}
+
+	onAffectButtonClicked() {
+		console.log("Affecting to: ", this.selectedCollabId);
+		this.workspaceService.affectSubtaskCollab(this.sstacheId, this.selectedCollabId).subscribe((res) => {
+		});
+		this.onCloseButtonClicked();
+	}
+
+	onCloseButtonClicked() {
+
+		this.dialogRef.close();
+	}
 
 }
