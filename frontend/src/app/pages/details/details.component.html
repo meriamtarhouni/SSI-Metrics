@@ -1,0 +1,42 @@
+<div class="main-content">
+    <div class="container-fluid">
+        
+        <div class="table-responsive">
+            <table class="table">
+              
+              <tbody>
+                  <tr>
+                    <td style="color: #00bcd4;font-family: Arial, Helvetica, sans-serif;">
+                        Exigence
+                    </td>
+                    <td>
+                        {{exigenceNom}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #00bcd4;font-family: Arial, Helvetica, sans-serif;">
+                        Tache
+                    </td>
+                    <td>
+                        {{tacheNom}}
+                    </td>
+                  </tr>
+                  <tr>
+                      <td style="color: #00bcd4;font-family: Arial, Helvetica, sans-serif;">Collaborateur en charge</td>
+                      <td *ngIf="collaborateurNom"> {{ collaborateurNom}}</td>
+                      <td *ngIf="!collaborateurNom">Aucun Collaborateur n'est assigné à cette tâche.</td>
+                  </tr>
+              </tbody>  
+
+            </table>
+        </div>
+
+        <div class="row">
+
+              <div class="col-md-5"></div> 
+              <div><button mat-flat-button (click)=" onCloseButtonClicked();" style="background-color: #4caf50; color: #fff;border-color: #4caf50; width: 80px;">Ok</button></div>
+
+       </div>
+
+   </div>
+</div>

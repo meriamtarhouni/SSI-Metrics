@@ -31,10 +31,10 @@ export class ExigenceComponent implements OnInit {
            this.phaseService.getPhasesById(this.selectedPhase).subscribe((phase : any)=>{
              this.phase=phase;
             // console.log(this.phase);
-             if(this.phase[0].nom =="Plan") {this.color="card-header card-header-tabs card-header-danger"};
-             if(this.phase[0].nom =="Do") {this.color="card-header card-header-tabs card-header-warning"};
-             if(this.phase[0].nom =="Check") {this.color="card-header card-header-tabs card-header-success"};
-             if(this.phase[0].nom =="Act") {this.color="card-header card-header-tabs card-header-info"};
+             if(this.phase[0].nom =="Plan") {this.color="#21296E"};
+             if(this.phase[0].nom =="Do") {this.color="#000FB0"};
+             if(this.phase[0].nom =="Check") {this.color="#2BA8FF"};
+             if(this.phase[0].nom =="Act") {this.color="#4CAF50"};
 
            })
         } 
