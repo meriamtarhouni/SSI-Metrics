@@ -5,7 +5,7 @@
       <div class="row">
           <div class="col-lg-12 col-md-12">
               <div class="card">
-                  <div [class]="color">
+                  <div class="card-header card-header-tabs" [style.background-color]="color">
                       <div class="nav-tabs-navigation">
                           <div class="nav-tabs-wrapper">
                              <div class="row">
@@ -39,6 +39,12 @@
                                         <td style="color:darkgreen;"> {{tache.clause}}  </td>
                                         <td class="e-label"> {{tache.label}}</td>
                                         <td *ngIf="tache.etat == 'pas mis en oeuvre'" class="text-danger">
+                                            {{tache.etat}}
+                                        </td>
+                                        <td *ngIf="tache.etat == 'en cours'" style="text-align: left; color: #2BA8FF;">
+                                            {{tache.etat}}
+                                        </td>
+                                        <td *ngIf="tache.etat == 'terminé'"  style="text-align: left; color: #4CAF50;">
                                             {{tache.etat}}
                                         </td>
                                         <td>

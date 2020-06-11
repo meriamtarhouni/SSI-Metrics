@@ -171,4 +171,54 @@ checklist.patch('/soustaches/:tacheId/affect/:collabId', authenticateRssi, (req,
     });
 });
 
+
+checklist.get('/sousTaches/tache/:id',authenticateCollaborateur,(req, res) => {
+  
+    Tache.find({
+        _id: req.params.id,
+    }).then((tache) => {
+        res.send(tache);
+    })
+});
+
+checklist.get('/sousTaches/exigence/:id',authenticateCollaborateur,(req, res) => {
+  
+    Exigence.find({
+        _id: req.params.id,
+    }).then((exigence) => {
+        res.send(exigence);
+    })
+});
+
+checklist.get('/sousTaches/collaborateur/:id',authenticateCollaborateur,(req, res) => {
+  
+    Collaborateur.find({
+        _id: req.params.id,
+    }).then((collaborateur) => {
+        res.send(collaborateur);
+    })
+});
+
+checklist.get('/sousTaches/phases/:id',authenticateCollaborateur,(req, res) => {
+  
+    Phase.find({
+        _id: req.params.id,
+    }).then((phase) => {
+        res.send(phase);
+    })
+});
+
+
+checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
+    console.log('Updating sous_tache');
+    Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+        etat : req.body.status
+    }).then(() => {
+        console.log('Updated sous_tache');
+    });
+});
+    
+
+
+
 module.exports = checklist; 

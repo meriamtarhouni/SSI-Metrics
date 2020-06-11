@@ -127,8 +127,15 @@ export class WebRequestService {
 		return this.http.get(`${this.ROOT_URL}/collaborateurs/org/rssi/${rssiOrg}`);
 	}
 
+
+	updateSubTaskStatus(subTaskId: string, status: string) {
+		console.log('statussssss =', status);
+		return this.http.patch(`${this.ROOT_URL}/sousTache/${subTaskId}`, { status });
+	}
+
 	get(uri: string) {
 		return this.http.get(`${this.ROOT_URL}/${uri}`);
 	}
+
 
 }

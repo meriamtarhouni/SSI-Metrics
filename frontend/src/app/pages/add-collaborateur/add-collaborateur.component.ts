@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Collaborateur } from 'src/app/models/collaborateur.model'
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { WorkspaceService } from 'src/app/workspace.service';
-import { Collaborateur } from 'src/app/models/collaborateur.model'
 
 @Component({
 	selector: 'app-add-collaborateur',
@@ -11,7 +11,7 @@ import { Collaborateur } from 'src/app/models/collaborateur.model'
 	styleUrls: ['./add-collaborateur.component.css']
 })
 export class AddCollaborateurComponent implements OnInit {
-
+ 
 	sstacheId: string;
 	organisationName: string;
 	workspaceCollabs: Collaborateur[] = [];
@@ -24,6 +24,7 @@ export class AddCollaborateurComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
+			
 			console.log('Tache ID = ', this.sstacheId);
 		});
 

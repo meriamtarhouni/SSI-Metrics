@@ -18,9 +18,13 @@
 								<tr *ngFor="let sousTache of sousTaches; let i = index" >
 									<td style="color:darkgreen; font-size: 15px; text-align: left;"> {{sousTache.clause}}  </td>
 									<td style="text-align: left; font-family: Arial;  font-size: 15px;"> {{sousTache.label}}</td>
-									<td *ngIf="sousTache.etat == 'pas mis en oeuvre'" class="text-danger" style="text-align: left;">
-										{{sousTache.etat}} 
-									</td>
+									
+									<td *ngIf="sousTache.etat == 'pas mis en oeuvre'" class="text-danger" style="text-align: left;"> {{sousTache.etat}} </td>
+									
+									<td *ngIf="sousTache.etat == 'en cours'" style="text-align: left; color: #2BA8FF"> {{sousTache.etat}} </td>
+									
+									<td *ngIf="sousTache.etat == 'terminé'"  style="text-align: left; color: #4CAF50;"> {{sousTache.etat}} </td>
+									
 									<td>
 										<span *ngIf="!affected[i]" class="material-icons" style="color:lightslategray" (click)="onAddCollaboratorClick(sousTache._id)">  add_circle_outline </span>
 
