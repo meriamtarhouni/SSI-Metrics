@@ -4,6 +4,8 @@ import { ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { SubTaskService } from 'src/app/checkListServices/sub-task.service';
 import {Sous_tache} from 'src/app/models/sous_tache.model';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailsComponent } from '../details/details.component';
 @Component({
   selector: 'app-checklist',
   templateUrl: './checklist.component.html',
@@ -22,7 +24,7 @@ export class ChecklistComponent implements OnInit {
   tache :any;
 
 
-  constructor(private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router) { }
+  constructor(private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
   ngOnInit(): void {
     this.route.params.subscribe((params:Params)=>{
       if (params.phaseId){
@@ -102,6 +104,15 @@ drop(event: CdkDragDrop<string[]>) {
    //window.location.reload()
 
 }
+
+detailClick(tacheId:string,exigenceId:string,collaborateurId){
+  const dialogRef = this.dialog.open(DetailsComponent, {
+    height: '300px',
+    width: '500px',
+    data: {tache_id: tacheId,exigence_id:exigenceId,collaborateur_id:collaborateurId}
+  });
+}
+
 
 
 }
