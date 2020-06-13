@@ -2,15 +2,14 @@
 
 
   <div class="board" >
-
-    <div class="board-bar">
+    <div class="board-bar"[style.background-color]="color">
        <p class="board-name"> {{nomPhase}} </p> 
     </div>
 
     <div class="board-wrapper">
 
       <div class="board-columns" cdkDropListGroup>
-        <div class="board-column">
+        <div class="board-column" [style.background]="color">
 
           <div class="column-title">
             PAS MIS EN OEUVRE
@@ -19,7 +18,7 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id">
+            <div [style.background]="color" class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id">
               <div class="task-header">
 
                <b>{{task.clause}}</b> 
@@ -49,7 +48,7 @@
           </div>
        
         </div>
-        <div class="board-column">
+        <div class="board-column" [style.background]="color">
           <div class="column-title">
           EN COURS
           </div>
@@ -84,7 +83,7 @@
             </div>
           </div>
         </div>
-        <div class="board-column">
+        <div class="board-column"[style.background]="color">
 
           <div class="column-title">
             TERMINÉ
@@ -94,7 +93,7 @@
           cdkDropList
           [cdkDropListData]="done"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
+            <div   class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
               <div class="task-header">
                 
                <b>{{task.clause}}</b> 
