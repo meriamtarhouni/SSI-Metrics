@@ -22,6 +22,7 @@ export class ChecklistComponent implements OnInit {
   nomPhase : string;
   mySubscription: any;
   tache :any;
+  color :string;
 
 
   constructor(private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
@@ -34,6 +35,11 @@ export class ChecklistComponent implements OnInit {
       this.subTasksService.getPhaseById(this.selectedPhase).subscribe((phase : any )=>{
       this.phase = phase ;
       this.nomPhase= this.phase[0].nom ; 
+      if(this.nomPhase =="Plan") {this.color="#21296E"};
+      if(this.nomPhase =="Do") {this.color="#000FB0"};
+      if(this.nomPhase =="Check") {this.color="#2BA8FF"};
+      if(this.nomPhase=="Act") {this.color="#4CAF50"};
+
     })
   }
 })
