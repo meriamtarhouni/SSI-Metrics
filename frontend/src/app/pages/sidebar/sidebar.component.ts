@@ -5,6 +5,7 @@ import { WorkspaceService } from '../../workspace.service';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvitationDialogContentComponent } from '../invitation-dialog-content/invitation-dialog-content.component';
+import { stringify } from 'querystring';
 
 @Component({
 	selector: 'app-sidebar',
@@ -16,22 +17,29 @@ export class SidebarComponent implements OnInit {
 	constructor(public dialog: MatDialog, private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService, private workspaceService: WorkspaceService) { }
 	rssiId: string;
 	rssiWorkspaceId: string;
+	rssiName: string;
+	rssiOrg: string;
+
 	collaboratorId: string;
 	collabWorkspaceId: string;
+	collabName: string;
 	collabOrg: string;
 	invitationId: string;
 
 	ngOnInit(): void {
 		this.rssiId = this.authRssiService.getRssiId();
 		this.rssiWorkspaceId = this.authRssiService.getWorkSpaceId();
+		this.rssiName = this.authRssiService.getRssiName();
+		this.rssiOrg = this.authRssiService.getRssiOrg();
 
 		this.collaboratorId = this.authCollaboratorService.getCollaboratorId();
 		this.collabWorkspaceId = this.authCollaboratorService.getWorkspaceId();
-		this.invitationId = this.authCollaboratorService.getInvitationId();
+		this.collabName = this.authCollaboratorService.getCollaboratorName();
 		this.collabOrg = this.authCollaboratorService.getCollaboratorOrg();
+		this.invitationId = this.authCollaboratorService.getInvitationId();
 	}
 
-	getUserState() {                                     // MUST BE CHANGED TO AN EVENT LISTENER FOR PERFORMANCE
+	getUserState() {
 		let isRssi = this.authRssiService.isLoggedIn();
 		let isCollaborator = this.authCollaboratorService.isLoggedIn();
 
@@ -55,22 +63,22 @@ export class SidebarComponent implements OnInit {
 	getUserStateMsg() {
 		switch (this.getUserState()) {
 			case '1': {
-				return 'Logged in as: RSSI';
+				return 'Bienvenue ' + this.rssiName + ' !\n\nResponsable Sécurité du Système d\'Information de ' + this.rssiOrg + ' !';
 			}
 			case '2': {
-				return 'Logged in as: RSSI';
+				return 'Bienvenue ' + this.rssiName + ' !\n\nVous n\'avez pas encore crée un espace de travail.';
 			}
 			case '3': {
-				return 'Logged in as: Collaborator';
+				return 'Bienvenue ' + this.collabName + ' !\n\nCollaborateur chez ' + this.collabOrg;
 			}
 			case '4': {
-				return 'Logged in as: Collaborator';
+				return 'Bienvenue ' + this.collabName + ' !';
 			}
 			case '5': {
-				return 'Logged in as: Collaborator';
+				return 'Bienvenue ' + this.collabName + ' !';
 			}
 			default: {
-				return 'Not logged in';
+				return '';
 			}
 		}
 	}

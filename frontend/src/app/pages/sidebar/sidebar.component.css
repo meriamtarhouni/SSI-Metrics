@@ -4,3 +4,9 @@
     bottom:0;
     width: 100%;
   }
+
+.login-info{
+	background-color: #21296e;
+	color: #2ba8ff;
+	font-weight: 400;
+}

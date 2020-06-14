@@ -20,7 +20,7 @@ export class AuthCollaboratorService {
 			shareReplay(),
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
-				this.setSession(res.body._id, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.InvitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.InvitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
 				console.log("Successfully signed up!");
 				console.log(res.headers.get('x-refresh-token'));
 
@@ -36,7 +36,7 @@ export class AuthCollaboratorService {
 			shareReplay(),
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
-				this.setSession(res.body._id, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.invitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.invitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
 				// console.log("LOGGED IN!");
 			})
 		)
@@ -93,12 +93,17 @@ export class AuthCollaboratorService {
 		return localStorage.getItem('collaborateur-id');
 	}
 
+	getCollaboratorName(){
+		return localStorage.getItem('collaborateur-name');
+	}
+
 	getCollaboratorOrg() {
 		return localStorage.getItem('collaborateur-org');
 	}
 
-	private setSession(collaborateurId: string, collaborateurOrg: string, hasWorkspace: boolean, collaborateurWorkspace: string, hasInvitation: boolean, collaborateurInvitation: string, accessToken: string, refreshToken: string) {
+	private setSession(collaborateurId: string, collaborateurName: string, collaborateurOrg: string, hasWorkspace: boolean, collaborateurWorkspace: string, hasInvitation: boolean, collaborateurInvitation: string, accessToken: string, refreshToken: string) {
 		localStorage.setItem('collaborateur-id', collaborateurId);
+		localStorage.setItem('collaborateur-name', collaborateurName);
 		localStorage.setItem('collaborateur-org', collaborateurOrg);
 		if (hasWorkspace) {
 			localStorage.setItem('workspace-id', collaborateurWorkspace);
@@ -112,6 +117,7 @@ export class AuthCollaboratorService {
 
 	private removeSession() {
 		localStorage.removeItem('collaborateur-id');
+		localStorage.removeItem('collaborateur-name');
 		localStorage.removeItem('collaborateur-org');
 		localStorage.removeItem('workspace-id');
 		localStorage.removeItem('invitation-id');
