@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { WebRequestService } from './web-request.service';
 import { Router } from '@angular/router';
@@ -9,9 +9,9 @@ import { shareReplay, tap } from 'rxjs/operators';
 })
 export class AuthCollaboratorService {
 
+	@Output() loggedIn = new EventEmitter<string>();
+
 	constructor(private http: HttpClient, private webService: WebRequestService, private router: Router) { }
-
-
 
 	signUp(email: string, password: string, org: string, nom: string, ville: string, pays: string, cp: string, motivation: string) {
 
@@ -21,9 +21,9 @@ export class AuthCollaboratorService {
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
 				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.InvitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-				console.log("Successfully signed up!");
-				console.log(res.headers.get('x-refresh-token'));
+				this.loggedIn.emit('123456789');
 
+				console.log("Successfully signed up!");
 			})
 		)
 
@@ -37,6 +37,8 @@ export class AuthCollaboratorService {
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
 				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.invitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+				this.loggedIn.emit('123456789');
+
 				// console.log("LOGGED IN!");
 			})
 		)
@@ -45,6 +47,8 @@ export class AuthCollaboratorService {
 
 	logout() {
 		this.removeSession();
+		this.loggedIn.emit('123456789');
+		
 		this.router.navigate(['/login']);
 	}
 

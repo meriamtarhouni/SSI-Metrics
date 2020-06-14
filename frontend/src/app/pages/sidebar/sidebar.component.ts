@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { WebRequestService } from '../../web-request.service';
 import { WorkspaceService } from '../../workspace.service';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvitationDialogContentComponent } from '../invitation-dialog-content/invitation-dialog-content.component';
-import { stringify } from 'querystring';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-sidebar',
@@ -13,25 +13,65 @@ import { stringify } from 'querystring';
 	styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+	
+	isRssi: boolean;
+	isCollaborator: boolean;
+	hasWorkspace: boolean;
+	isInvited: boolean;
 
-	constructor(public dialog: MatDialog, private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService, private workspaceService: WorkspaceService) { }
 	rssiId: string;
 	rssiWorkspaceId: string;
 	rssiName: string;
 	rssiOrg: string;
-
+	
 	collaboratorId: string;
 	collabWorkspaceId: string;
 	collabName: string;
 	collabOrg: string;
 	invitationId: string;
-
+	
+	userStateNbr: string = '';
+	userStateMsg: string = '';
+	
+	constructor(private router: Router, public dialog: MatDialog, private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService, private workspaceService: WorkspaceService) { }
+	
 	ngOnInit(): void {
+		this.updateAllInfo();
+		console.log(this.userStateMsg);
+		
+		this.authRssiService.loggedIn.subscribe((res) => {
+			this.updateAllInfo();
+			console.log('Updated sidebar from rssi');
+		});
+
+		this.authCollaboratorService.loggedIn.subscribe((res) => {
+			this.updateAllInfo();
+			console.log('Updated sidebar from collaborator');
+		});
+	}
+
+	updateAllInfo(){
+		this.updateFields();
+		this.updateUserStateNbr();
+		this.updateUserStateMsg();
+	}
+
+	ngOnDestroy(): void{
+		this.authRssiService.loggedIn.unsubscribe();
+	}
+
+	updateFields(){
+		this.isRssi = this.authRssiService.isLoggedIn();
+		this.isCollaborator = this.authCollaboratorService.isLoggedIn();
+
+		this.hasWorkspace = this.authCollaboratorService.hasWorkspace();
+		this.isInvited = this.authCollaboratorService.hasInvitation();
+
 		this.rssiId = this.authRssiService.getRssiId();
 		this.rssiWorkspaceId = this.authRssiService.getWorkSpaceId();
 		this.rssiName = this.authRssiService.getRssiName();
 		this.rssiOrg = this.authRssiService.getRssiOrg();
-
+		
 		this.collaboratorId = this.authCollaboratorService.getCollaboratorId();
 		this.collabWorkspaceId = this.authCollaboratorService.getWorkspaceId();
 		this.collabName = this.authCollaboratorService.getCollaboratorName();
@@ -39,53 +79,51 @@ export class SidebarComponent implements OnInit {
 		this.invitationId = this.authCollaboratorService.getInvitationId();
 	}
 
-	getUserState() {
-		let isRssi = this.authRssiService.isLoggedIn();
-		let isCollaborator = this.authCollaboratorService.isLoggedIn();
-
-		console.assert(!isRssi || !isCollaborator);
-
-		if (isRssi) {
-			let hasWorkspace = this.authRssiService.hasWorkspace();
-			if (hasWorkspace) return '1';
-			else return '2';
+	updateUserStateNbr() {
+		if (this.isRssi) {
+			if (this.hasWorkspace) this.userStateNbr = '1';
+			else this.userStateNbr = '2';
 		}
-		else if (isCollaborator) {
-			let hasWorkspace = this.authCollaboratorService.hasWorkspace();
-			let isInvited = this.authCollaboratorService.hasInvitation();
-			if (hasWorkspace) return '3';
-			else if (isInvited) return '4';
-			else return '5';
+		else if (this.isCollaborator) {
+			if (this.hasWorkspace) this.userStateNbr = '3';
+			else if (this.isInvited) this.userStateNbr = '4';
+			else this.userStateNbr = '5';
 		}
-		else return '0';
+		else this.userStateNbr = '0';
 	}
 
-	getUserStateMsg() {
-		switch (this.getUserState()) {
+	updateUserStateMsg(){
+		switch (this.userStateNbr) {
 			case '1': {
-				return 'Bienvenue ' + this.rssiName + ' !\n\nResponsable Sécurité du Système d\'Information de ' + this.rssiOrg + ' !';
+				this.userStateMsg = 'Bienvenue ' + this.rssiName + ' !\n\nResponsable Sécurité du Système d\'Information de ' + this.rssiOrg + ' !';
+				return;
 			}
 			case '2': {
-				return 'Bienvenue ' + this.rssiName + ' !\n\nVous n\'avez pas encore crée un espace de travail.';
+				this.userStateMsg = 'Bienvenue ' + this.rssiName + ' !\n\nVous n\'avez pas encore crée un espace de travail.';
+				return;
 			}
 			case '3': {
-				return 'Bienvenue ' + this.collabName + ' !\n\nCollaborateur chez ' + this.collabOrg;
+				this.userStateMsg = 'Bienvenue ' + this.collabName + ' !\n\nCollaborateur chez ' + this.collabOrg;
+				return;
 			}
 			case '4': {
-				return 'Bienvenue ' + this.collabName + ' !';
+				this.userStateMsg = 'Bienvenue ' + this.collabName + ' !';
+				return;
 			}
 			case '5': {
-				return 'Bienvenue ' + this.collabName + ' !';
+				this.userStateMsg = 'Bienvenue ' + this.collabName + ' !';
+				return;
 			}
 			default: {
-				return '';
+				this.userStateMsg = '';
+				return;
 			}
 		}
 	}
-
+	
 	openInvitationDialog() {
 		const dialogRef = this.dialog.open(InvitationDialogContentComponent);
-
+		
 		dialogRef.afterClosed().subscribe(result => {
 			if (result == true) {
 				let workspaceId = this.authCollaboratorService.getInvitationById(this.invitationId).subscribe((invitation: any) => {
@@ -94,17 +132,17 @@ export class SidebarComponent implements OnInit {
 			}
 		});
 	}
-
+	
 	onLogoutCollaborateurClicked() {
 		this.authCollaboratorService.logout()
 		// we have logged out successfully
 		console.log("Great");
 	}
-
+	
 	onLogoutRssiClicked() {
 		this.authRssiService.logout()
 		// we have logged out successfully
 		console.log("Great");
 	}
-
+	
 }

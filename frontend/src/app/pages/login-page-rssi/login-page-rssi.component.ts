@@ -1,4 +1,4 @@
-import { Component, OnInit, INJECTOR } from '@angular/core';
+import { Component, OnInit, Input, INJECTOR, ViewChild } from '@angular/core';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ConnectableObservable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
+
 declare var $: any;
 @Component({
 	selector: 'app-login-page-rssi',
@@ -16,6 +17,7 @@ export class LoginPageRssiComponent implements OnInit {
 
 	rssi_id: string;
 	hide = true;
+
 	constructor(private authRssiService: AuthRssiService, private router: Router, public dialog: MatDialog) { }
 
 
@@ -29,6 +31,7 @@ export class LoginPageRssiComponent implements OnInit {
 				// we have logged in successfully
 				// console.log("Logged in");
 				this.rssi_id = res.body._id;
+				// this.sidebar.ngOnInit();
 				this.router.navigate(['/edit-rssi', this.rssi_id]);
 
 				//console.log(localStorage.getItem('rssi-id'));

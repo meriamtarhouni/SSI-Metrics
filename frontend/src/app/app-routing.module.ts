@@ -21,7 +21,6 @@ import { CollaboratorsListComponent } from './pages/collaborators-list/collabora
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 const routes: Routes = [
-  // { path: 'sidebar', component: SidebarComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },
@@ -39,7 +38,8 @@ const routes: Routes = [
   { path: 'workspace/rssi/:workspaceId/collaborators', component: CollaboratorsListRssiComponent },
   { path: 'workspace/collaborator/:workspaceId', component: WorkSpaceCollaboratorViewComponent },
   { path: 'workspace/collaborator/:workspaceId/collaborators', component: CollaboratorsListComponent },
-  { path: 'checklist/:phaseId', component: ChecklistComponent }
+  { path: 'checklist/:phaseId', component: ChecklistComponent },
+//   { path: 'sidebar', component: SidebarComponent },
 ];
 
 @NgModule({

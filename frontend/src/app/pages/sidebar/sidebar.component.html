@@ -12,9 +12,9 @@
 	</div>
 
 	
-	<div class="sidebar-wrapper" [ngSwitch]="this.getUserState()">
+	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr">
 
-		<li style="white-space: pre-line" *ngIf="this.getUserState() != '0'" class="list-group-item login-info"> <strong>{{ this.getUserStateMsg() }}</strong> </li>
+		<li style="white-space: pre-line" *ngIf="this.userStateNbr != '0'" class="list-group-item login-info"> <b>{{ this.userStateMsg }}</b> </li>
 		
 		<br>
 		<br>
@@ -99,4 +99,3 @@
 	
 	</div>
 </div>
-<router-outlet></router-outlet>
