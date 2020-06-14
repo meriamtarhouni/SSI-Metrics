@@ -12,7 +12,7 @@
 	</div>
 
 	
-	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr">
+	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr" style="font-size:40px;">
 
 		<li style="white-space: pre-line" *ngIf="this.userStateNbr != '0'" class="list-group-item login-info"> <b>{{ this.userStateMsg }}</b> </li>
 		
