@@ -1,44 +1,44 @@
 <div class="main-content">
-  <div class="container-fluid">
-
-    <div class="row">
-        
-
-      <div class="col-md-4"></div>
-      <div class="col-md-8">
-             <br><br><br><br><br><br><br><br><br><br><br><br>
-             <div class="row">
-              
-                   <div id="inner-circle">
-                      
-                      <div id="text"  *ngIf="phases != undefined && phases[1].enabled ==true; else elseBlock"  [routerLink]="['/exigences', phases[1]._id]">2. {{phases[1].nom}}</div>
-                      <ng-template #elseBlock> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('bottom','left','warning')" >2. {{phases[1].nom}}</div></ng-template> 
-                    
-                    <div id="outer-circle">
-                      <div id="text" *ngIf="phases != undefined && phases[0].enabled ==true; else elseBlock2" [routerLink]="['/exigences', phases[0]._id]" >1. {{phases[0].nom }}</div> </div>
-                      <ng-template #elseBlock2> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('top','left','warning')" >1. {{phases[0].nom}}</div></ng-template> 
-                   
-                   
-                    </div>
-                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-                  <div id="inner-circle-2">
-                    <div id="text" *ngIf="phases != undefined && phases[3].enabled ==true; else elseBlock3" [routerLink]="['/exigences', phases[3]._id]">4. {{phases[3].nom }}</div>
-                    <ng-template #elseBlock3> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('bottom','right','warning')" >4. {{phases[3].nom }}</div></ng-template> 
-                   <div id="outer-circle-2">
-                       
-                      <div id="text" *ngIf="phases != undefined && phases[2].enabled ==true;else elseBlock4" [routerLink]="['/exigences', phases[2]._id]">3. {{phases[2].nom }}</div> </div>
-                      <ng-template #elseBlock4>  <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('top','right','warning')" >3. {{phases[2].nom }}</div></ng-template>
-                
-                  </div>
-               
-            </div>
-     </div>  
-     
-   
-   
-    </div>
-  </div>
-</div>
+	<div class="container-fluid">
+		
+		<div class="row">
+			
+			
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+				<div class="row">
+					
+					<div id="inner-circle">
+						
+						<div id="text"  *ngIf="phases != undefined && phases[1].enabled ==true; else elseBlock"  [routerLink]="['/exigences', phases[1]._id]">2. {{phases[1].nom}}</div>
+						<ng-template #elseBlock> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('bottom','left','warning')" >2. {{phases[1].nom}}</div></ng-template> 
+						
+						<div id="outer-circle">
+							<div id="text" *ngIf="phases != undefined && phases[0].enabled ==true; else elseBlock2" [routerLink]="['/exigences', phases[0]._id]" >1. {{phases[0].nom }}</div> </div>
+							<ng-template #elseBlock2> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('top','left','warning')" >1. {{phases[0].nom}}</div></ng-template> 
+							
+							
+						</div>
+						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+						<div id="inner-circle-2">
+							<div id="text" *ngIf="phases != undefined && phases[3].enabled ==true; else elseBlock3" [routerLink]="['/exigences', phases[3]._id]">4. {{phases[3].nom }}</div>
+							<ng-template #elseBlock3> <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('bottom','right','warning')" >4. {{phases[3].nom }}</div></ng-template> 
+							<div id="outer-circle-2">
+								
+								<div id="text" *ngIf="phases != undefined && phases[2].enabled ==true;else elseBlock4" [routerLink]="['/exigences', phases[2]._id]">3. {{phases[2].nom }}</div> </div>
+								<ng-template #elseBlock4>  <div id="text"  *ngIf="phases != undefined" (click)="this.showNotification('top','right','warning')" >3. {{phases[2].nom }}</div></ng-template>
+								
+							</div>
+							
+						</div>
+					</div>  
+					
+					
+					
+				</div>
+			</div>
+		</div>
