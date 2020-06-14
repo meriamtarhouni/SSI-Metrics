@@ -19,7 +19,7 @@
           cdkDropList
           [cdkDropListData]="todo"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id">
+            <div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }" >
               <div class="task-header">
 
                <b>{{task.clause}}</b> 
@@ -58,7 +58,7 @@
           cdkDropList
           [cdkDropListData]="inprogress"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id">
+            <div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
               <div class="task-header">
                
                <b>{{task.clause}}</b> 
@@ -94,7 +94,7 @@
           cdkDropList
           [cdkDropListData]="done"
           (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
+            <div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
               <div class="task-header">
                 
                <b>{{task.clause}}</b> 
