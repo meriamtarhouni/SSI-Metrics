@@ -51,3 +51,18 @@
     -o-transform: translate(-50%, -50%);
      transform: translate(-50%, -50%);
   }
+
+  .pointer{
+	pointer-events: auto;
+ 	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}
+
+.pointer2:hover{
+  /*background: grey;*/
+  -moz-box-shadow: 0 0 30px 5px #999;
+  -webkit-box-shadow: 0 0 30px 5px #999;
+}

@@ -1,0 +1,8 @@
+.pointer{
+	pointer-events: auto;
+ 	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}
