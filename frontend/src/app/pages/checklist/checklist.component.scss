@@ -61,67 +61,83 @@
 
 
 .tasks-container {
-    flex-grow: 1;
-    overflow-y: auto; 
+	flex-grow: 1;
+	overflow-y: auto; 
 }
 
 .task {
-
-    background: white;
-    border-bottom: solid 1px #ddd;
-    border-radius: 4px;
-padding: 20px;
-    margin-bottom: 15px;
-
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05),
-    0 3px 14px 2px rgba(0, 0, 0, 0.05);
- 
+	
+	background: white;
+	border-bottom: solid 1px #ddd;
+	border-radius: 4px;
+	padding: 20px;
+	margin-bottom: 15px;
+	
+	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05),
+	0 3px 14px 2px rgba(0, 0, 0, 0.05);
+	
 }
 .task-header{
-    color: #000324;
-    
-  }
-  .colab{
-      margin-top: -15px;
-    margin-left:250px;
-     color: #2ba8ff;
-     right: 10px;
-     background-size: cover;
-   }
-  .task-subtitle{
-    color: #4caf50;
-  }
-  .task-content{
-
-  }
-  .colab{
-   // position: absolute;
-    color: #2ba8ff;
-    right: 10px;
-    background-size: cover;
-  }
+	color: #000324;
+	
+}
+.colab{
+	margin-top: -15px;
+	margin-left:250px;
+	color: #2ba8ff;
+	right: 10px;
+	background-size: cover;
+}
+.task-subtitle{
+	color: #4caf50;
+}
+// .task-content{
+	
+// }
+.colab{
+	// position: absolute;
+	color: #2ba8ff;
+	right: 10px;
+	background-size: cover;
+}
 
 .task-footer{
-    text-align: right;
-    padding-right: 10px;
+	text-align: right;
+	padding-right: 10px;
 }
 
 .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	border-radius: 4px;
+	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+	0 8px 10px 1px rgba(0, 0, 0, 0.14),
+	0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
-    opacity: 0;
+	opacity: 0;
 }
 
 .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.pointer{
+	pointer-events: auto;
+	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}
+
+.highlight{
+	// -moz-box-shadow: 0 0 30px 5px #999;
+	// -webkit-box-shadow: 0 0 30px 5px #999;
+	// background-color: red;
+	border: 5px solid #21296e;
 }

@@ -1,136 +1,128 @@
 <div class="main-content">
-
-
-  <div class="board" >
-    <div class="board-bar"[style.background-color]="color">
-       <p class="board-name"> {{nomPhase}} </p> 
-    </div>
-
-    <div class="board-wrapper">
-
-      <div class="board-columns" cdkDropListGroup>
-        <div class="board-column" [style.background]="color">
-
-          <div class="column-title">
-            PAS MIS EN OEUVRE
-          </div>
-          <div class="tasks-container"
-          cdkDropList
-          [cdkDropListData]="todo"
-          (cdkDropListDropped)="drop($event)">
-            <div [style.background]="color" class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id">
-              <div class="task-header">
-
-               <b>{{task.clause}}</b> 
-               <br>
-               <div class="colab">
-                <span class="material-icons" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span>
-                  
-                
-              </div>
-              </div>
-            
-              <div>
-                <div class="task-subtitle">
-                 
-                </div>
-                <br>
-              </div>
-              <div class="task-content"> 
-                {{ task.label}}
-              </div>
-              <br>
-              <div class="task-footer"> 
-                <span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
-              </div>
-              
-            </div>
-          </div>
-       
-        </div>
-        <div class="board-column" [style.background]="color">
-          <div class="column-title">
-          EN COURS
-          </div>
-
-          <div class="tasks-container"
-          cdkDropList
-          [cdkDropListData]="inprogress"
-          (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id">
-              <div class="task-header">
-               
-               <b>{{task.clause}}</b> 
-               <br>
-               <div class="colab">   <span class="material-icons" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
-              </div>
-         
-              <div>
-                <div class="task-subtitle">
-                 
-                </div>
-                <br>
-              </div>
-              <div class="task-content"> 
-                {{ task.label}}
-             
-              </div>
-              <br>
-              <div class="task-footer"> 
-                <span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-        <div class="board-column"[style.background]="color">
-
-          <div class="column-title">
-            TERMINÉ
-          </div>
-
-          <div class="tasks-container"
-          cdkDropList
-          [cdkDropListData]="done"
-          (cdkDropListDropped)="drop($event)">
-            <div   class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id">
-              <div class="task-header">
-                
-               <b>{{task.clause}}</b> 
-               <br>
-               <div class="colab">  <span class="material-icons" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
-               
-              </div>
-              
-              <div>
-                <div class="task-subtitle">
-                 
-                </div>
-                <br>
-              </div>
-              <div class="task-content"> 
-                {{ task.label}}
-              </div>
-              <br>
-              <div class="task-footer"> 
-                <span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-  
-
-      </div>
-
-
-    </div>
-  </div>
-
-  
-
-
+	
+	
+	<div class="board" >
+		<div class="board-bar"[style.background-color]="color">
+			<p class="board-name"> {{nomPhase}} </p> 
+		</div>
+		
+		<div class="board-wrapper">
+			
+			<div class="board-columns" cdkDropListGroup>
+				<div class="board-column" [style.background]="color">
+					
+					<div class="column-title">
+						PAS MIS EN OEUVRE
+					</div>
+					<div class="tasks-container"
+					cdkDropList
+					[cdkDropListData]="todo"
+					(cdkDropListDropped)="drop($event)">
+					<div [style.background]="color" class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }" >
+						<div class="task-header">
+							
+							<b>{{task.clause}}</b> 
+							<br>
+							<div class="colab">
+								<span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span>
+								
+								
+							</div>
+						</div>
+						
+						<div>
+							<div class="task-subtitle">
+								
+							</div>
+							<br>
+						</div>
+						<div class="task-content"> 
+							{{ task.label}}
+						</div>
+						<br>
+						<div class="task-footer"> 
+							<span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="board-column" [style.background]="color">
+				<div class="column-title">
+					EN COURS
+				</div>
+				
+				<div class="tasks-container"
+				cdkDropList
+				[cdkDropListData]="inprogress"
+				(cdkDropListDropped)="drop($event)">
+				<div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
+					<div class="task-header">
+						
+						<b>{{task.clause}}</b> 
+						<br>
+						<div class="colab">   <span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
+					</div>
+					
+					<div>
+						<div class="task-subtitle">
+							
+						</div>
+						<br>
+					</div>
+					<div class="task-content"> 
+						{{ task.label}}
+						
+					</div>
+					<br>
+					<div class="task-footer"> 
+						<span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="board-column"[style.background]="color">
+			
+			<div class="column-title">
+				TERMINÉ
+			</div>
+			
+			<div class="tasks-container"
+			cdkDropList
+			[cdkDropListData]="done"
+			(cdkDropListDropped)="drop($event)">
+			<div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
+				<div class="task-header">
+					
+					<b>{{task.clause}}</b> 
+					<br>
+					<div class="colab">  <span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
+					
+				</div>
+				
+				<div>
+					<div class="task-subtitle">
+						
+					</div>
+					<br>
+				</div>
+				<div class="task-content"> 
+					{{ task.label}}
+				</div>
+				<br>
+				<div class="task-footer"> 
+					<span>{{task.date_debut}} --</span> <span style="color: #f44336;" > {{task.date_fin}} </span>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
 </div>
+
 
 

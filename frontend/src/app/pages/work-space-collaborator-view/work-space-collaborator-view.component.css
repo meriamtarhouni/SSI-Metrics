@@ -20,7 +20,7 @@
   }
   #inner-circle-2 {
    
-    background-color:   #4CAF50;
+    background-color:#4CAF50;
     border-radius: 50%;
     height: 250px;
     width: 250px;
@@ -51,3 +51,18 @@
     -o-transform: translate(-50%, -50%);
      transform: translate(-50%, -50%);
   }
+
+  .pointer{
+	pointer-events: auto;
+ 	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}
+
+.pointer2:hover{
+  /*background: grey;*/
+  -moz-box-shadow: 0 0 30px 5px #999;
+  -webkit-box-shadow: 0 0 30px 5px #999;
+}

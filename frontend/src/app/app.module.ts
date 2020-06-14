@@ -38,6 +38,7 @@ import { WarningComponent } from './pages/warning/warning.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 import { InvitationDialogContentComponent } from './pages/invitation-dialog-content/invitation-dialog-content.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { DetailsComponent } from './pages/details/details.component';
     WarningComponent,
     CollaboratorsListRssiComponent,
     InvitationDialogContentComponent,
-    DetailsComponent
+    DetailsComponent,
+    CollaboratorsListComponent
   ],
   imports: [
     FormsModule,

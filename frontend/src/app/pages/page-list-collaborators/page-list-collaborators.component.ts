@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
-import {CollaboratorService } from 'src/app/collaborator.service' ; 
+import { CollaboratorService } from 'src/app/collaborator.service' ; 
 import { FormControl, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
-import {Collaborateur} from 'src/app/models/collaborateur.model'
+import { Collaborateur } from 'src/app/models/collaborateur.model'
 
 @Component({
   selector: 'app-page-list-collaborators',

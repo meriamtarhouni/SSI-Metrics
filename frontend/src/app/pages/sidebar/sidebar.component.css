@@ -1,13 +1,18 @@
 .align-bottom {
     position: absolute;
-
     bottom:0;
-    
-  
-  }
-  .sidebar{
+    width: 100%;
+}
+
+.login-info{
+	background-color: #21296e;
+	color: #2ba8ff;
+	font-weight: 400;
+}
+
+.sidebar{
     background-color: white;
     font-family: caviar-dreams;
     font-weight: bolder;
     text-align: center;
-  }
+}
