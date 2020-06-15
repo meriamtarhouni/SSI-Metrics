@@ -134,8 +134,8 @@ export class WebRequestService {
 	}
 
 	enablePhase (phaseId : string, enable: boolean){
-		console.log('click');
-		return this.http.patch(`${this.ROOT_URL}/phase/${phaseId}`,{enable});
+		console.log('enabled =', enable);
+		return this.http.patch(`${this.ROOT_URL}/phase/${phaseId}`, { enable });
 	}
 
 	get(uri: string) {

@@ -73,7 +73,6 @@ checklist.get('/phases/:id',authenticateRssi,(req, res) => {
 });
 
 checklist.patch('/phase/:id',(req,res)=>{
-  
    Phase.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
     enabled : req.body.enable
     }).then(() => {

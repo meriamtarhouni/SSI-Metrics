@@ -57,6 +57,7 @@ export class ExigenceComponent implements OnInit {
     
   onEnableButtonClicked(){
   this.phaseService.enablePhase(this.selectedPhase, true) ; 
+  window.location.reload(); 
   
   }
 
