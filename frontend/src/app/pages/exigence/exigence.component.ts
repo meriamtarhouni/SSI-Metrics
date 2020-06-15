@@ -16,6 +16,8 @@ export class ExigenceComponent implements OnInit {
   taches : any[];
   color :string;
   phase : any;
+  selectedPhaseEnabled : boolean; 
+  selectedPhaseName : string; 
   ngOnInit(): void {
      this.route.params.subscribe(
       (params: Params) => {
@@ -30,8 +32,11 @@ export class ExigenceComponent implements OnInit {
            
            this.phaseService.getPhasesById(this.selectedPhase).subscribe((phase : any)=>{
              this.phase=phase;
-            // console.log(this.phase);
-             if(this.phase[0].nom =="Plan") {this.color="#21296E"};
+             this.selectedPhaseEnabled=this.phase[0].enabled; 
+             this.selectedPhaseName= this.phase[0].nom;
+            console.log(this.selectedPhaseEnabled);
+            console.log(this.selectedPhaseName);
+             if(this.phase[0].nom =="Plan") {this.color="#21296E" };
              if(this.phase[0].nom =="Do") {this.color="#000FB0"};
              if(this.phase[0].nom =="Check") {this.color="#2BA8FF"};
              if(this.phase[0].nom =="Act") {this.color="#4CAF50"};
@@ -47,6 +52,12 @@ export class ExigenceComponent implements OnInit {
        
       }
     )
+  }
+
+    
+  onEnableButtonClicked(){
+  this.phaseService.enablePhase(this.selectedPhase, true) ; 
+  
   }
 
  
