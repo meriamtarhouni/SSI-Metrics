@@ -1,8 +1,10 @@
 .align-bottom {
     position: absolute;
+
     bottom:0;
-    width: 100%;
-}
+    
+  
+  }
 
 .login-info{
 	background-color: #21296e;
