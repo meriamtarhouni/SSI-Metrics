@@ -14,11 +14,11 @@ export class PhaseService {
   getAllPhases(){
     return this.webReqService.get('PDCA');
   }
-  getPhasesById(phaseId){
+  getPhasesById(phaseId : string){
     return this.webReqService.get(`phases/${phaseId}/`);
   }
 
-  enablePhase (phaseId, enable){
+  enablePhase (phaseId : string, enable : boolean){
   
     return this.webReqService.enablePhase(phaseId,enable);
  

@@ -56,10 +56,10 @@ export class ExigenceComponent implements OnInit {
 
     
   onEnableButtonClicked(phaseId : string, enable : boolean){
-    if (this.selectedPhaseEnabled==false){
-      this.phaseService.enablePhase(phaseId, enable) ;
+ 
+      this.phaseService.enablePhase(phaseId, enable).subscribe(()=>{}) ;
           window.location.reload(); 
-    }
+    
   
   
   }
