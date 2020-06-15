@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PhaseService } from 'src/app/checkListServices/phase.service';
+import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 declare var $: any;
 
 @Component({
@@ -9,8 +10,9 @@ declare var $: any;
 })
 export class WorkSpaceCollaboratorViewComponent implements OnInit {
   phases: any[];
+  collabOrg: string;
 
-  constructor(private phaseService: PhaseService) { }
+  constructor(private phaseService: PhaseService, private authCollaboratorService: AuthCollaboratorService) { }
 
   showNotification(from, align, type) {
 
@@ -47,6 +49,9 @@ export class WorkSpaceCollaboratorViewComponent implements OnInit {
       console.log(this.phases);
 
     })
+
+	this.collabOrg = this.authCollaboratorService.getCollaboratorOrg();
+
 
   }
 

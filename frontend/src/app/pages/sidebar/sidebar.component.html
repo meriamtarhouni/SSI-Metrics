@@ -12,10 +12,11 @@
 	</div>
 
 	
-	<div class="sidebar-wrapper" [ngSwitch]="this.getUserState()">
+	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr">
 
-		<li class="list-group-item list-group-item-info"> {{ this.getUserStateMsg() }} </li>
+		<li style="white-space: pre-line" *ngIf="this.userStateNbr != '0'" class="list-group-item login-info"> <b>{{ this.userStateMsg }}</b> </li>
 		
+		<br>
 		<br>
 		
 		<ul class="nav" *ngSwitchCase="0" >
@@ -26,54 +27,70 @@
 		</ul>
 
 		<ul class="nav" *ngSwitchCase="5" >
-			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
-		</ul>
-
-		<ul class="nav" *ngSwitchCase="4" >
-			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
-			<br>
-			<li><button class="btn btn-info" (click)="openInvitationDialog()">Vous avez une invitation!</button></li>
-		</ul>
-
-		<ul class="nav" *ngSwitchCase="3" >
-			<li><a routerLink="workspace/collaborator/{{collabWorkspaceId}}" routerLinkActive="active"> Espace de travail </a></li> 
-			<br>
-			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active"> Mon Profil</a></li>
-		</ul>
-
-		<ul class="nav" *ngSwitchCase="2" >
-			<li><a routerLink="/create-space" routerLinkActive="active"> Créer un Espace de Travail</a></li>
-			<br>
-			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active"> Mon Profil</a></li>
-		</ul>
-
-		<ul class="nav" *ngSwitchCase="1" >
-			<li><a routerLink="/workspace/rssi/{{rssiWorkspaceId}}" routerLinkActive="active"> Espace de travail </a></li>
-			<br>
-			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active"> Mon Profil</a></li>
-		</ul>
-
-		<ul *ngSwitchCase="3"class="align-bottom" >
-			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i> Se déconnecter 
-			</button>
-		</ul>
-		<ul *ngSwitchCase="4"class="align-bottom" >
-			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i> Se déconnecter 
-			</button>
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active">
+				<span class="material-icons">person</span>
+				Mon Profil</a></li>
 		</ul>
 		<ul *ngSwitchCase="5"class="align-bottom" >
 			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
 				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
 		</ul>
-		<ul *ngSwitchCase="1"class="align-bottom" >
+
+		<ul class="nav" *ngSwitchCase="4" >
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active">
+				<span class="material-icons">person</span>
+				Mon Profil</a></li>
+			<br>
+			<li><button class="btn btn-info" (click)="openInvitationDialog()">Vous avez une invitation!</button></li>
+		</ul>
+		<ul *ngSwitchCase="4"class="align-bottom" >
+			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
+				<i class="material-icons">exit_to_app</i> Se déconnecter 
+			</button>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="3" >
+			<li><a routerLink="workspace/collaborator/{{collabWorkspaceId}}" routerLinkActive="active">
+				<span class="material-icons">work</span>
+				Espace de travail </a></li> 
+			<br>
+			<li><a routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active">
+				<span class="material-icons">person</span>
+				Mon Profil</a></li>
+		</ul>
+		<ul *ngSwitchCase="3"class="align-bottom" >
+			<button  class="btn  btn-success" (click)="onLogoutCollaborateurClicked()" >
+				<i class="material-icons">exit_to_app</i> Se déconnecter 
+			</button>
+		</ul>
+
+		<ul class="nav" *ngSwitchCase="2" >
+			<li><a routerLink="/create-space" routerLinkActive="active">
+				<span class="material-icons">work</span>
+				Créer un Espace de Travail</a>
+			</li>
+			<br>
+			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active">
+				<span class="material-icons">person</span>
+				Mon Profil</a></li>
+		</ul>
+		<ul *ngSwitchCase="2"class="align-bottom" >
 			<button class="btn  btn-success"  (click)="onLogoutRssiClicked()">
 				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
 		</ul>	
-		<ul *ngSwitchCase="2"class="align-bottom" >
+
+		<ul class="nav" *ngSwitchCase="1" >
+			<li><a routerLink="/workspace/rssi/{{rssiWorkspaceId}}" routerLinkActive="active">
+				<span class="material-icons">work</span>
+				Espace de travail </a></li>
+			<br>
+			<li><a routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active">
+				<span class="material-icons">person</span>
+				Mon Profil</a></li>
+		</ul>
+		<ul *ngSwitchCase="1"class="align-bottom" >
 			<button class="btn  btn-success"  (click)="onLogoutRssiClicked()">
 				<i class="material-icons">exit_to_app</i> Se déconnecter 
 			</button>
@@ -82,4 +99,3 @@
 	
 	</div>
 </div>
-<router-outlet></router-outlet>

@@ -17,10 +17,10 @@ import { WorkSpaceComponent } from './pages/work-space/work-space.component';
 import { ChecklistComponent } from './pages/checklist/checklist.component'
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
+import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 const routes: Routes = [
-  // { path: 'sidebar', component: SidebarComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'signup-rssi', component: SignupPageRssiComponent },
   { path: 'edit-rssi/:rssiId', component: EditRssiComponent },
   { path: 'profil-collaborateur/:collaborateurId', component: ProfilePageCollaboratorComponent },
-  { path: 'collaborateurs', component: PageListCollaboratorsComponent },
+//   { path: 'collaborateurs', component: PageListCollaboratorsComponent },
   { path: 'phases', component: PhaseComponent },
   { path: 'exigences/:phaseId', component: ExigenceComponent },
   { path: 'exigences/:phaseId/:exigenceId', component: ExigenceComponent },
@@ -37,7 +37,9 @@ const routes: Routes = [
   { path: 'workspace/rssi/:workspaceId', component: WorkSpaceComponent },
   { path: 'workspace/rssi/:workspaceId/collaborators', component: CollaboratorsListRssiComponent },
   { path: 'workspace/collaborator/:workspaceId', component: WorkSpaceCollaboratorViewComponent },
-  { path: 'checklist/:phaseId', component: ChecklistComponent }
+  { path: 'workspace/collaborator/:workspaceId/collaborators', component: CollaboratorsListComponent },
+  { path: 'checklist/:phaseId', component: ChecklistComponent },
+//   { path: 'sidebar', component: SidebarComponent },
 ];
 
 @NgModule({
