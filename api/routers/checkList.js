@@ -72,6 +72,16 @@ checklist.get('/phases/:id',authenticateRssi,(req, res) => {
     })
 });
 
+checklist.patch('/phase/:id',(req,res)=>{
+  console.log('enabling ');
+   Phase.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+    enabled : req.body.enable
+    }).then(() => {
+        console.log('enabled');
+    });
+});
+    
+
 
 
 //Get all requirements(exigence) in a specific Phase

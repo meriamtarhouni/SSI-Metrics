@@ -133,6 +133,11 @@ export class WebRequestService {
 		return this.http.patch(`${this.ROOT_URL}/sousTache/${subTaskId}`, { status });
 	}
 
+	enablePhase (phaseId : string, enable: boolean){
+		console.log('enabled =', enable);
+		return this.http.patch(`${this.ROOT_URL}/phase/${phaseId}`, { enable });
+	}
+
 	get(uri: string) {
 		return this.http.get(`${this.ROOT_URL}/${uri}`);
 	}
