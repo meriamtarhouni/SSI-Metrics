@@ -6,7 +6,7 @@
                 <br> 
                 Veuiller vous la déverrouiller? 
                 <br>
-                <button (click)="onEnableButtonClicked()">Déverrouiller</button>
+                <button (click)="onEnableButtonClicked(selectedPhase,!selectedPhaseEnabled)">Déverrouiller</button>
             </div>
             <ng-template #elseBlock> <div>La phase {{selectedPhaseName}} est déverrouillé</div></ng-template> 
             
