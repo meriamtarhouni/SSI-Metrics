@@ -31,7 +31,7 @@ export class ChecklistComponent implements OnInit {
 	collabTasks: string[] = [];
 	
 	
-	constructor(private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
+	constructor(private webRequestService: WebRequestService, private authCollaboratorService: AuthCollaboratorService, private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
 	ngOnInit(): void {
 		this.route.params.subscribe((params:Params)=>{
 			if (params.phaseId){
@@ -49,6 +49,13 @@ export class ChecklistComponent implements OnInit {
 				})
 			}
 		})
+		this.collabId = this.authCollaboratorService.getCollaboratorId();
+		this.webRequestService.getCollaboratorById(this.collabId).subscribe((collabs: Collaborateur[]) => {
+			if(collabs.length == 1){
+				this.collabTasks = collabs[0].sous_taches;
+				console.log('Collaborator tasks = ', this.collabTasks);
+			}
+		});
 		this.toDoSubTasks();
 		this.inProgressSubTasks();
 		this.doneSubTasks();

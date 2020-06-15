@@ -18,7 +18,7 @@
 					cdkDropList
 					[cdkDropListData]="todo"
 					(cdkDropListDropped)="drop($event)">
-					<div [style.background]="color" class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }" >
+					<div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }" >
 						<div class="task-header">
 							
 							<b>{{task.clause}}</b> 
