@@ -18,9 +18,8 @@ export class InvitationDialogContentComponent implements OnInit {
 	}
 
 	acceptInvitation() {
-		this.workspaceService.acceptInvitation().subscribe((res: any) => {
-			console.log("Invitation accepted!");
-		});
+		this.workspaceService.acceptInvitation();
+		console.log("Invitation accepted!");
 	}
 
 }

@@ -9,7 +9,7 @@ import { shareReplay, tap } from 'rxjs/operators';
 })
 export class AuthCollaboratorService {
 
-	@Output() loggedIn = new EventEmitter<string>();
+	@Output() sidebarState = new EventEmitter<string>();
 
 	constructor(private http: HttpClient, private webService: WebRequestService, private router: Router) { }
 
@@ -21,7 +21,7 @@ export class AuthCollaboratorService {
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
 				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.InvitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-				this.loggedIn.emit('123456789');
+				this.sidebarState.emit('123456789');
 
 				console.log("Successfully signed up!");
 			})
@@ -37,7 +37,7 @@ export class AuthCollaboratorService {
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
 				this.setSession(res.body._id, res.body.nom, res.body.org, res.body.has_workspace, res.body.workspaceId, res.body.has_invitation, res.body.invitationId, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-				this.loggedIn.emit('123456789');
+				this.sidebarState.emit('123456789');
 
 				// console.log("LOGGED IN!");
 			})
@@ -47,7 +47,7 @@ export class AuthCollaboratorService {
 
 	logout() {
 		this.removeSession();
-		this.loggedIn.emit('123456789');
+		this.sidebarState.emit('123456789');
 		
 		this.router.navigate(['/login']);
 	}

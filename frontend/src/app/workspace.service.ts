@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { WebRequestService } from './web-request.service';
 import { AuthRssiService } from 'src/app/auth-rssi.service';
@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class WorkspaceService {
 
+	@Output() sidebarState = new EventEmitter<string>();
 	constructor(private http: HttpClient, private webService: WebRequestService) { }
 
 	createWorkspace(nom: string) {
@@ -30,7 +31,9 @@ export class WorkspaceService {
 	}
 
 	acceptInvitation() {
-		return this.webService.acceptInvitation();
+		this.webService.acceptInvitation().subscribe((res) => {
+			this.sidebarState.emit('123456789');
+		});
 	}
 
 	removeCollab(collabId: string) {

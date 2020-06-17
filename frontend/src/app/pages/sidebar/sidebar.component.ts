@@ -5,6 +5,7 @@ import { WorkspaceService } from '../../workspace.service';
 import { AuthCollaboratorService } from 'src/app/auth-collaborator.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InvitationDialogContentComponent } from '../invitation-dialog-content/invitation-dialog-content.component';
+import { CollaboratorService } from 'src/app/collaborator.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,18 +34,23 @@ export class SidebarComponent implements OnInit {
 	userStateNbr: string = '';
 	userStateMsg: string = '';
 	
-	constructor(private router: Router, public dialog: MatDialog, private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private webService: WebRequestService, private workspaceService: WorkspaceService) { }
+	constructor(public dialog: MatDialog, private authRssiService: AuthRssiService, private authCollaboratorService: AuthCollaboratorService, private workspaceService: WorkspaceService) { }
 	
 	ngOnInit(): void {
 		this.updateAllInfo();
 		console.log(this.userStateMsg);
 		
-		this.authRssiService.loggedIn.subscribe((res) => {
+		this.authRssiService.sidebarState.subscribe((res) => {
 			this.updateAllInfo();
 			console.log('Updated sidebar from rssi');
 		});
 
-		this.authCollaboratorService.loggedIn.subscribe((res) => {
+		this.authCollaboratorService.sidebarState.subscribe((res) => {
+			this.updateAllInfo();
+			console.log('Updated sidebar from collaborator');
+		});
+
+		this.workspaceService.sidebarState.subscribe((res) => {
 			this.updateAllInfo();
 			console.log('Updated sidebar from collaborator');
 		});
@@ -57,7 +63,9 @@ export class SidebarComponent implements OnInit {
 	}
 
 	ngOnDestroy(): void{
-		this.authRssiService.loggedIn.unsubscribe();
+		this.authRssiService.sidebarState.unsubscribe();
+		this.authCollaboratorService.sidebarState.unsubscribe();
+		this.workspaceService.sidebarState.unsubscribe();
 	}
 
 	updateFields(){
