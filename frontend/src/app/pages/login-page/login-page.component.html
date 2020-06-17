@@ -1,58 +1,61 @@
 
 <div class="main-content">
-    <div class="container-fluid">
-       <div class="row">
-        <div class="col-md-3"></div>
-           <div class="col-md-6">
-                <div class="card card-profile" style="background-color: #21296e ; height: 450px; width: 600px;" >
-                  
-                  <div class="card-body">
-                      <br>
-                      <h4 class="card-title" style="font-size: 25px; color: white; font-family: Arial, Helvetica, sans-serif;">Bienvenue à SSI Metrics </h4>
-                      <p class="card-description" style="font-size:20px; font-family: Arial, Helvetica, sans-serif; ">
-                        Choisissez votre rôle 
-                      </p>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="card card-profile" style="background-color: #21296e ; height: 500px; width: 525px" >
+					
+					<div class="card-header card-header-tabs card-header-info ">
+						<h4 class="card-title" style="font-size: 25px; color: white;">Bienvenue à SSI Metrics </h4>
+						<br>
+						<p class="card-description" style="font-size:20px; ">
+							Choisissez votre rôle 
+						</p>
+					</div>
+					<div class="card-body">
+						<br>
+						
+						<div class="row">
+							<div class="col-md-6" routerLink="/login-rssi" routerLinkActive="active">
+								<div class="card card-profile pointer" style="height: 220px; background-color:#00bcd4; ">
+									<div class="card-body">
+										
+										<span class="material-icons" style="font-size: 120px; color:white; ">business_center</span>
+										<br>
+										<h3 style=" color: white;">Responsable sécurité des systèmes d'information</h3>     
+									</div> 
+								</div>
+								
+							</div>
+							
+							<div class="col-md-6" routerLink="/login-collab" routerLinkActive="active">
+								<div class="card card-profile pointer" style="height: 220px; background-color:#00bcd4; ">
+									<div class="card-body">
+										
+										<span class="material-icons" style="font-size: 120px; ;color:white; ">person_outline</span>
+										<br><br>
+										<h3 style=" color:white;">Collaborateur </h3>
+										
+									</div> 
+								</div>
+							</div>  
+							
+						</div>
+						
+						<!-- <br>
+							<a class="btn btn-info btn-round "  routerLink="/login-rssi" routerLinkActive="active">En tant que RSSI </a> 
+							<br>
+							<a class="btn btn-info btn-round " routerLink="/login-collab" routerLinkActive="active"> En tant que Collaborateur </a>
+						--> 
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="col-md-3"></div>
+		</div>    
+	</div>
+</div>
 
-                      <div class="row">
-                        <div class="col-md-6" routerLink="/login-rssi" routerLinkActive="active">
-                           <div class="card card-profile pointer" style="height: 220px; background-color:#00bcd4; ">
-                              <div class="card-body">
-                                    
-                                <span class="material-icons" style="font-size: 120px; color:white; ">business_center</span>
-                                <br>
-                                <h3 style="font-family:Arial, Helvetica, sans-serif; color: white;">Responsable sécurité des systèmes d'information</h3>     
-                              </div> 
-                           </div>
-                        
-                        </div>
-
-                        <div class="col-md-6" routerLink="/login-collab" routerLinkActive="active">
-                            <div class="card card-profile pointer" style="height: 220px; background-color:#00bcd4; ">
-                               <div class="card-body">
-                                   
-                                  <span class="material-icons" style="font-size: 120px; ;color:white; ">person_outline</span>
-                                  <br><br>
-                                  <h3 style="font-family:Arial, Helvetica, sans-serif; color:white;">Collaborateur </h3>
-                                  
-                               </div> 
-                            </div>
-                        </div>  
-
-                      </div>
-
-                    <!-- <br>
-                      <a class="btn btn-info btn-round "  routerLink="/login-rssi" routerLinkActive="active">En tant que RSSI </a> 
-                      <br>
-                      <a class="btn btn-info btn-round " routerLink="/login-collab" routerLinkActive="active"> En tant que Collaborateur </a>
-                    --> 
-                 </div>
-              
-                </div>
-          </div>
-        
-          <div class="col-md-3"></div>
-        </div>    
-   </div>
-  </div>
-  
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>

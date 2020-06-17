@@ -39,6 +39,7 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
 import { InvitationDialogContentComponent } from './pages/invitation-dialog-content/invitation-dialog-content.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { CollaboratorsListComponent } from './pages/collaborators-list/collabora
     CollaboratorsListRssiComponent,
     InvitationDialogContentComponent,
     DetailsComponent,
-    CollaboratorsListComponent
+    CollaboratorsListComponent,
+    HomeComponent
   ],
   imports: [
     FormsModule,

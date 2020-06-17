@@ -17,7 +17,7 @@
 							<tbody>
 								<tr *ngFor="let sousTache of sousTaches; let i = index" >
 									<td style="color:darkgreen; font-size: 15px; text-align: left;"> {{sousTache.clause}}  </td>
-									<td style="text-align: left; font-family: Arial;  font-size: 15px;"> {{sousTache.label}}</td>
+									<td style="text-align: left; font-size: 15px;"> {{sousTache.label}}</td>
 									
 									<td *ngIf="sousTache.etat == 'pas mis en oeuvre'" class="text-danger" style="text-align: left;"> {{sousTache.etat}} </td>
 									

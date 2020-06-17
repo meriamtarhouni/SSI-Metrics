@@ -103,23 +103,23 @@ export class SidebarComponent implements OnInit {
 	updateUserStateMsg(){
 		switch (this.userStateNbr) {
 			case '1': {
-				this.userStateMsg = 'Bienvenue:\n' + this.rssiName + '\n\n\nResponsable Sécurité du Système d\'Information de:\n' + this.rssiOrg;
+				this.userStateMsg = 'Bienvenue:  <u>' + this.rssiName + '</u><br><br>Responsable Sécurité du Système d\'Information de:  <u>' + this.rssiOrg + '</u>';
 				return;
 			}
 			case '2': {
-				this.userStateMsg = 'Bienvenue:\n' + this.rssiName + '\n\n\nVous n\'avez pas encore crée un espace de travail.';
+				this.userStateMsg = 'Bienvenue:  <u>' + this.rssiName + '</u>' + '<br><br>Responsable Sécurité du Système d\'Information de:  <u>' + this.rssiOrg + '</u>' + '<br><br>' + 'Vous n\'avez pas encore crée un espace de travail.';
 				return;
 			}
 			case '3': {
-				this.userStateMsg = 'Bienvenue:\n' + this.collabName + '\n\n\nCollaborateur chez:\n' + this.collabOrg;
+				this.userStateMsg = 'Bienvenue:  <u>' + this.collabName + '</u><br>Collaborateur chez:  <u>' + this.collabOrg + '</u>';
 				return;
 			}
 			case '4': {
-				this.userStateMsg = 'Bienvenue:\n' + this.collabName;
+				this.userStateMsg = 'Bienvenue:  <u>' + this.collabName + '</u>';
 				return;
 			}
 			case '5': {
-				this.userStateMsg = 'Bienvenue:\n' + this.collabName;
+				this.userStateMsg = 'Bienvenue:  <u>' + this.collabName + '</u>';
 				return;
 			}
 			default: {
