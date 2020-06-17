@@ -54,7 +54,7 @@ const CollaborateurSchema = new mongoose.Schema({
     },
     motivation: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1
     },
 	has_invitation: {
