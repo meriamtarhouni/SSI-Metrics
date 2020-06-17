@@ -126,12 +126,4 @@ export class ChecklistComponent implements OnInit {
     });
   }
 
-	detailClick(tacheId:string,exigenceId:string,collaborateurId){
-		const dialogRef = this.dialog.open(DetailsComponent, {
-			height: '300px',
-			width: '500px',
-			data: {tache_id: tacheId,exigence_id:exigenceId,collaborateur_id:collaborateurId}
-		});
-	}
-
 }
