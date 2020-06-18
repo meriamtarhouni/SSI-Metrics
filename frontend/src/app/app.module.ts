@@ -40,6 +40,7 @@ import { InvitationDialogContentComponent } from './pages/invitation-dialog-cont
 import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 import { HomeComponent } from './pages/home/home.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatDialogModule,
     DragDropModule,
     MatTabsModule,
+	MatIconModule,
   ],
 
   providers: [

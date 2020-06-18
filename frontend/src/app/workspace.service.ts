@@ -10,34 +10,35 @@ import { tap } from 'rxjs/operators';
 export class WorkspaceService {
 
 	@Output() sidebarState = new EventEmitter<string>();
-	constructor(private http: HttpClient, private webService: WebRequestService) { }
+	constructor(private http: HttpClient, private webRequestService: WebRequestService) { }
 
 	createWorkspace(nom: string) {
 		let rssiId = this.getCurrentRssiId();
-		return this.webService.createWorkspace(nom, rssiId).pipe(
+		return this.webRequestService.createWorkspace(nom, rssiId).pipe(
 			tap((res: any) => {
 				this.setWorkSpaceSession(res._id);
+				this.sidebarState.emit('123456789');
 				console.log("Workspace created!");
 			})
 		)
 	}
 
 	getWorkSpaceByid(id: string) {
-		return this.webService.getWorkSpaceById(id);
+		return this.webRequestService.getWorkSpaceById(id);
 	}
 
 	inviteCollab(collabId: string) {
-		return this.webService.inviteCollab(collabId);
+		return this.webRequestService.inviteCollab(collabId);
 	}
 
 	acceptInvitation() {
-		this.webService.acceptInvitation().subscribe((res) => {
+		this.webRequestService.acceptInvitation().subscribe((res) => {
 			this.sidebarState.emit('123456789');
 		});
 	}
 
 	removeCollab(collabId: string) {
-		return this.webService.removeCollab(collabId);
+		return this.webRequestService.removeCollab(collabId);
 	}
 
 	setWorkSpaceSession(workspaceId: string) {
@@ -45,7 +46,7 @@ export class WorkspaceService {
 	}
 
 	getOrgCollaboratorsRssi(rssiOrg: string) {
-		return this.webService.getOrgCollaboratorsRssi(rssiOrg);
+		return this.webRequestService.getOrgCollaboratorsRssi(rssiOrg);
 	}
 
 	private getCurrentRssiId() {
@@ -56,8 +57,8 @@ export class WorkspaceService {
 		localStorage.removeItem('workspace-id');
 	}
 
-	affectSubtaskCollab(subtaskId: string, collabId: string) {
-		return this.webService.patch(`soustaches/${subtaskId}/affect/${collabId}`, {});
+	affectSubtaskCollab(subtaskId: string, stDate:string, enDate:string, collabId: string) {
+		return this.webRequestService.patch(`soustaches/${subtaskId}/affect/${collabId}`, {stDate, enDate});
 	}
 
 }

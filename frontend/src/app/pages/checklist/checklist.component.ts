@@ -70,6 +70,7 @@ export class ChecklistComponent implements OnInit {
 	// get to do sub tasks 
 	toDoSubTasks(){
 		this.subTasksService.getToDoSubTasks(this.selectedPhase).subscribe((todo: Sous_tache[]) => {
+			console.log(todo);
 			this.todo=todo;    
 		}); 
 	}

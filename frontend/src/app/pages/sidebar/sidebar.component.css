@@ -1,6 +1,8 @@
 .align-bottom {
     position: absolute;
     bottom:25px;
+	margin-left: 0px;
+	margin-right: 60px;
 }
 
 .login-info{
@@ -11,22 +13,22 @@
 .sidebar{
     background-color: white;
     text-align: center;
-	width: 350px;
+	width: 300px;
 }
 
 
 .imgcent {
     display: block;
-	margin-left: 110px;
-	margin-right: 90px;
+	margin-left: 80px;
+	margin-right: 100px;
 	width: 50%;
 }
 
 .btncent {
     display: block;
-	margin-left: 60px;
-	margin-right: 60px;
+	margin-left: 10px;
+	margin-right: 80px;
 	font-size: 14px;
 	/* width: 50%; */
-	width: 230px;
+	width: 200px;
 }

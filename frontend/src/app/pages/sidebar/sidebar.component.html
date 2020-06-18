@@ -1,7 +1,7 @@
 <div class="sidebar w3-sidebar w3-bar-block" data-color="danger" data-background-color="#2ba8ff">
        
    
-	<div class="logo-img" style="width: 350px">
+	<div class="logo-img" style="width: 250px">
 		<img class="imgcent" src="/assets/img/small_logo.png"/>
 	</div>
 	
@@ -9,7 +9,7 @@
 	<br>
 	<br>
 	
-	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr" style="overflow-x: hidden; font-size: 18px; width: 350px" >
+	<div class="sidebar-wrapper" [ngSwitch]="this.userStateNbr" style="overflow-x: hidden; font-size: 18px; width: 300px" >
 
 		<li style="white-space: pre-line" *ngIf="this.userStateNbr != '0'" class="list-group-item login-info" [innerHTML]="this.userStateMsg"> </li>
 		
@@ -37,7 +37,7 @@
 		</ul>
 		<ul *ngSwitchCase="5"class="align-bottom" >
 			<button  class="btn  btn-success btncent" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i> &nbsp;&nbsp; <strong>Se déconnecter</strong> 
+				<i class="material-icons">exit_to_app</i>  <strong>Se déconnecter</strong> 
 			</button>
 		</ul>
 
@@ -51,7 +51,7 @@
 		</ul>
 		<ul *ngSwitchCase="4"class="align-bottom" >
 			<button  class="btn  btn-success btncent" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i> &nbsp;&nbsp; <strong>Se déconnecter</strong> 
+				<i class="material-icons">exit_to_app</i>  <strong>Se déconnecter</strong> 
 			</button>
 		</ul>
 
@@ -67,7 +67,7 @@
 		</ul>
 		<ul *ngSwitchCase="3"class="align-bottom" >
 			<button  class="btn  btn-success btncent" (click)="onLogoutCollaborateurClicked()" >
-				<i class="material-icons">exit_to_app</i> &nbsp;&nbsp; <strong>Se déconnecter</strong> 
+				<i class="material-icons">exit_to_app</i>  <strong>Se déconnecter</strong> 
 			</button>
 		</ul>
 
@@ -84,7 +84,7 @@
 		</ul>
 		<div *ngSwitchCase="2"class="align-bottom" >
 			<button class="btn  btn-success btncent"  (click)="onLogoutRssiClicked()">
-				<span class="material-icons">exit_to_app</span> &nbsp;&nbsp; <strong>Se déconnecter</strong> 
+				<span class="material-icons">exit_to_app</span>  <strong>Se déconnecter</strong> 
 			</button>
 		</div>	
 
@@ -100,7 +100,7 @@
 		</ul>
 		<ul *ngSwitchCase="1" class="align-bottom" >
 			<button class="btn  btn-success btncent"  (click)="onLogoutRssiClicked()">
-				<i class="material-icons">exit_to_app</i> &nbsp;&nbsp; <strong>Se déconnecter</strong>
+				<i class="material-icons">exit_to_app</i>  <strong>Se déconnecter</strong>
 			</button>
 		</ul>	
 		

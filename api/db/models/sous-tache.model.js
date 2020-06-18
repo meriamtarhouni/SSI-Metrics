@@ -17,8 +17,8 @@ const Sous_tache = mongoose.model(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "exigence"
 		},
-		date_debut: Date,
-		date_fin:Date,
+		date_debut: String,
+		date_fin: String,
 		clause: String,
 		collaborateur_id: {
 			type: mongoose.Schema.Types.ObjectId,

@@ -52,7 +52,7 @@ export class SidebarComponent implements OnInit {
 
 		this.workspaceService.sidebarState.subscribe((res) => {
 			this.updateAllInfo();
-			console.log('Updated sidebar from collaborator');
+			console.log('Updated sidebar from workspace');
 		});
 	}
 
@@ -62,11 +62,11 @@ export class SidebarComponent implements OnInit {
 		this.updateUserStateMsg();
 	}
 
-	ngOnDestroy(): void{
-		this.authRssiService.sidebarState.unsubscribe();
-		this.authCollaboratorService.sidebarState.unsubscribe();
-		this.workspaceService.sidebarState.unsubscribe();
-	}
+	// ngOnDestroy(): void{
+	// 	this.authRssiService.sidebarState.unsubscribe();
+	// 	this.authCollaboratorService.sidebarState.unsubscribe();
+	// 	this.workspaceService.sidebarState.unsubscribe();
+	// }
 
 	updateFields(){
 		this.isRssi = this.authRssiService.isLoggedIn();
@@ -111,7 +111,7 @@ export class SidebarComponent implements OnInit {
 				return;
 			}
 			case '3': {
-				this.userStateMsg = 'Bienvenue:  <u>' + this.collabName + '</u><br>Collaborateur chez:  <u>' + this.collabOrg + '</u>';
+				this.userStateMsg = 'Bienvenue:  <u>' + this.collabName + '</u><br><br>Collaborateur chez:  <u>' + this.collabOrg + '</u>';
 				return;
 			}
 			case '4': {

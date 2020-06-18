@@ -17,16 +17,16 @@ export class AddCollaborateurComponent implements OnInit {
 	workspaceCollabs: Collaborateur[] = [];
 	selectedCollabId: string;
 	has_selected: boolean = false;
+	startDate: string;
+	endDate: string;
 
 	constructor(private route: ActivatedRoute, private authRssiService: AuthRssiService, private workspaceService: WorkspaceService, public dialogRef: MatDialogRef<AddCollaborateurComponent>, @Inject(MAT_DIALOG_DATA) data) {
 		this.sstacheId = data.sstacheId;
 	}
 
 	ngOnInit(): void {
-		this.route.params.subscribe((params: Params) => {
-			
-			console.log('Tache ID = ', this.sstacheId);
-		});
+		this.startDate = new Date().toISOString().split('T')[0];
+		this.endDate = new Date().toISOString().split('T')[0];
 
 		this.organisationName = this.authRssiService.getRssiOrg();
 		this.workspaceService.getOrgCollaboratorsRssi(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
@@ -40,14 +40,12 @@ export class AddCollaborateurComponent implements OnInit {
 	}
 
 	onAffectButtonClicked() {
-		console.log("Affecting to: ", this.selectedCollabId);
-		this.workspaceService.affectSubtaskCollab(this.sstacheId, this.selectedCollabId).subscribe((res) => {
-		});
+		console.log("Affecting to: ", this.selectedCollabId, " with start date: ", this.startDate, " and with end date: ", this.endDate);
+		this.workspaceService.affectSubtaskCollab(this.sstacheId, this.startDate, this.endDate, this.selectedCollabId).subscribe((res) => {});
 		this.onCloseButtonClicked();
 	}
 
 	onCloseButtonClicked() {
-
 		this.dialogRef.close();
 	}
 
