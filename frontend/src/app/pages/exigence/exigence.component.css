@@ -8,3 +8,12 @@
     /* font-family: Arial; */
     font-size: 15px;
 }
+
+.pointer{
+	pointer-events: auto;
+ 	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}

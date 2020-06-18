@@ -129,8 +129,13 @@ export class WebRequestService {
 
 
 	updateSubTaskStatus(subTaskId: string, status: string) {
-		console.log('statussssss =', status);
+		console.log('subtask = ', subTaskId, ' status =', status);
 		return this.http.patch(`${this.ROOT_URL}/sousTache/${subTaskId}`, { status });
+	}
+
+	updateTaskStatus(taskId: string, status: string) {
+		console.log('task = ', taskId, ' status =', status);
+		return this.http.patch(`${this.ROOT_URL}/tache/${taskId}`, { status });
 	}
 
 	get(uri: string) {

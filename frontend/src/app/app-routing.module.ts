@@ -19,10 +19,8 @@ import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collabora
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
-import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-//   { path: '', component: HomeComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },

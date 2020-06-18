@@ -39,7 +39,6 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
 import { InvitationDialogContentComponent } from './pages/invitation-dialog-content/invitation-dialog-content.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
-import { HomeComponent } from './pages/home/home.component';
 import {MatIconModule} from '@angular/material/icon';
 
 
@@ -69,7 +68,6 @@ import {MatIconModule} from '@angular/material/icon';
     InvitationDialogContentComponent,
     DetailsComponent,
     CollaboratorsListComponent,
-    HomeComponent
   ],
   imports: [
     FormsModule,

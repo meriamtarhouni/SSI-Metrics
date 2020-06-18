@@ -220,8 +220,15 @@ checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
         console.log('Updated sous_tache');
     });
 });
-    
 
+checklist.patch('/tache/:id',authenticateCollaborateur,(req,res)=>{
+    console.log('Updating tache');
+    Tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+        etat : req.body.status
+    }).then(() => {
+        console.log('Updated tache');
+    });
+});
 
 
 module.exports = checklist; 
