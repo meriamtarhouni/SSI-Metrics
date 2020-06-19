@@ -34,6 +34,7 @@ export class ChecklistComponent implements OnInit {
 	constructor(private webRequestService: WebRequestService, private authCollaboratorService: AuthCollaboratorService, private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
 	ngOnInit(): void {
 		this.route.params.subscribe((params:Params)=>{
+			console.log("Params = ", params);
 			if (params.phaseId){
 				this.selectedPhase = params.phaseId;
 				
@@ -70,6 +71,7 @@ export class ChecklistComponent implements OnInit {
 	// get to do sub tasks 
 	toDoSubTasks(){
 		this.subTasksService.getToDoSubTasks(this.selectedPhase).subscribe((todo: Sous_tache[]) => {
+			console.log(todo);
 			this.todo=todo;    
 		}); 
 	}
@@ -93,20 +95,27 @@ export class ChecklistComponent implements OnInit {
 			// console.log(event.currentIndex);
 		} else {
 			transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-				if (event.previousContainer.id=="cdk-drop-list-0"){
-					status="en cours";
-					
-				} else if (event.previousContainer.id=="cdk-drop-list-1"){
-					status="terminé"; 
-					
-				} 
-				console.log(status);
-				this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
-					
-				});
+			if (event.previousContainer.id=="cdk-drop-list-0"){
+				status="en cours";
 				
-		}
+			} else if (event.previousContainer.id=="cdk-drop-list-1"){
+				status="terminé"; 
+				
+			} 
+			console.log(status);
+			this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
+				console.log('entering');
+				this.subTasksService.getSousTacheById(event.item.element.nativeElement.id).subscribe((res: Sous_tache[]) => {
+					console.log('entered');
+					let tacheId = res[0].tache_id;
+					console.log(res, ' ', tacheId);
+					
+					this.webRequestService.updateTaskStatus(tacheId, this.getUpdatedTaskStatus(tacheId)).subscribe(() => {});
+				});
+			});
 			
+		}
+		
 		console.log(event.item.element.nativeElement.id)  ;
 		console.log(event.previousContainer.id );
 		
@@ -117,15 +126,17 @@ export class ChecklistComponent implements OnInit {
 		*/
 		
 		//window.location.reload()
-  }
-  detailClick(tacheId:string,exigenceId:string,collaborateurId){
-    const dialogRef = this.dialog.open(DetailsComponent, {
-      height: '300px',
-      width: '500px',
-      data: {tache_id: tacheId,exigence_id:exigenceId,collaborateur_id:collaborateurId}
-    });
-  }
-
-
-
+	}
+	detailClick(tacheId:string,exigenceId:string,collaborateurId){
+		const dialogRef = this.dialog.open(DetailsComponent, {
+			height: '300px',
+			width: '500px',
+			data: {tache_id: tacheId,exigence_id:exigenceId,collaborateur_id:collaborateurId}
+		});
+	}
+	
+	getUpdatedTaskStatus(tacheId){
+		return 'en cours';
+	}
+	
 }

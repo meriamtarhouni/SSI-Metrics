@@ -10,7 +10,7 @@ import { WorkspaceService } from './workspace.service';
 })
 export class AuthRssiService {
 	
-	@Output() loggedIn = new EventEmitter<string>();
+	@Output() sidebarState = new EventEmitter<string>();
 	constructor(private http: HttpClient, private webService: WebRequestService, private router: Router, private workspaceService: WorkspaceService) { }
 	
 	login(email: string, password: string) {
@@ -26,7 +26,7 @@ export class AuthRssiService {
 						
 						this.workspaceService.setWorkSpaceSession(res[0]._id);
 						
-						this.loggedIn.emit('123456789');
+						this.sidebarState.emit('123456789');
 					})
 					// console.log("LOGGED IN!");
 				}),
@@ -40,7 +40,7 @@ export class AuthRssiService {
 			tap((res: HttpResponse<any>) => {
 				// the auth tokens will be in the header of this response
 				this.setSession(res.body._id, res.body.nom, res.body.org, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-				this.loggedIn.emit('123456789');
+				this.sidebarState.emit('123456789');
 				
 				console.log("Successfully signed up!");
 			})
@@ -64,7 +64,7 @@ export class AuthRssiService {
 	logout() {
 		this.removeSession();
 		this.workspaceService.removeWorkspaceSession();
-		this.loggedIn.emit('123456789');
+		this.sidebarState.emit('123456789');
 		this.router.navigate(['/login-rssi']);
 	}
 	

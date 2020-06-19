@@ -4,9 +4,9 @@ import { ExigenceService } from 'src/app/checkListServices/exigence.service';
 import { PhaseService } from 'src/app/checkListServices/phase.service';
 
 @Component({
-  selector: 'app-exigence',
-  templateUrl: './exigence.component.html',
-  styleUrls: ['./exigence.component.css']
+	selector: 'app-exigence',
+	templateUrl: './exigence.component.html',
+	styleUrls: ['./exigence.component.css']
 })
 export class ExigenceComponent implements OnInit {
 
@@ -16,8 +16,9 @@ export class ExigenceComponent implements OnInit {
   taches : any[];
   color :string;
   phase : any;
-  selectedPhaseEnabled : boolean; 
-  selectedPhaseName : string; 
+selectedPhaseEnabled : boolean; 
+selectedPhaseName : string; 
+  
   ngOnInit(): void {
      this.route.params.subscribe(
       (params: Params) => {
@@ -32,14 +33,17 @@ export class ExigenceComponent implements OnInit {
            
            this.phaseService.getPhasesById(this.selectedPhase).subscribe((phase : any)=>{
              this.phase=phase;
-             this.selectedPhaseEnabled=this.phase[0].enabled; 
-             this.selectedPhaseName= this.phase[0].nom;
-            console.log(this.selectedPhaseEnabled);
-            console.log(this.selectedPhaseName);
-             if(this.phase[0].nom =="Plan") {this.color="#21296E" };
+            // console.log(this.phase);
+             if(this.phase[0].nom =="Plan") {this.color="#21296E"};
              if(this.phase[0].nom =="Do") {this.color="#000FB0"};
              if(this.phase[0].nom =="Check") {this.color="#2BA8FF"};
              if(this.phase[0].nom =="Act") {this.color="#4CAF50"};
+
+
+             this.selectedPhaseEnabled=this.phase[0].enabled; 
+             this.selectedPhaseName= this.phase[0].nom;
+            //console.log(this.selectedPhaseEnabled);
+          //  console.log(this.selectedPhaseName);
 
            })
         } 
@@ -47,22 +51,17 @@ export class ExigenceComponent implements OnInit {
           this.exigenceService.getTasks(params.exigenceId).subscribe((tasks:any[])=>{
             this.taches=tasks;
             console.log(this.taches);
-          })
+          });
         }
        
-      }
-    )
+      });
   }
 
-    
+ 
+ 
   onEnableButtonClicked(phaseId : string, enable : boolean){
  
       this.phaseService.enablePhase(phaseId, enable).subscribe(()=>{}) ;
           window.location.reload(); 
-    
-  
-  
   }
-
- 
 }

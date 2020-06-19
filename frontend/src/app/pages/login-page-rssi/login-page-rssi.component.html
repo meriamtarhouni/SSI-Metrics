@@ -1,62 +1,60 @@
+
 <div class="main-content">
-    <div class="container-fluid">
-       <div class="row">
-        <div class="col-md-4"></div>
-           <div class="col-md-4">
-                <div class="card card-profile">
-                  <div class="card-header card-header-tabs card-header-info ">
-                    <h3 class="card-title">Se connecter En tant que RSSI</h3>
-                </div>
-                    <div class="card-body">
-                        
-                     
-                        
-                        <div class="row">            
-                            <div class="col-md-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">email</i>
-                                    </span>
-                                  </div>
-                            </div>
-                            <div class="col-md-11">
-                              <mat-form-field  >
-                                <input #emailInput matInput placeholder="Adresse Mail" id="email" type="email">
-                              </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="row">            
-                            <div class="col-md-1">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">mode_edit</i>
-                                    </span>
-                                  </div>
-                            </div>
-                            <div class="col-md-11">
-                              <div class="row">
-                                <div class="col-md-10">
-                                  <mat-form-field>
-                                    <input #passwordInput matInput placeholder="Mot de passe" id="password" [type]="hide ? 'password' : 'text'">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-1">
-                                 <i class="material-icons" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
-                                </div>
-                             </div>
-                          </div>
-                        </div>
-
-
-                        
-                        <br>
-                        <a (click)="onLoginButtonClicked(emailInput.value,passwordInput.value)" class="btn btn-info">Connexion</a>
-                    </div>
-                </div>
-          </div>
-        
-          <div class="col-md-3"></div>
-        </div>    
-   </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="card card-profile">
+					<div class="card-header card-header-tabs card-header-info ">
+						<h3 class="card-title">Se connecter En tant que RSSI</h3>
+					</div>
+					<div class="card-body">
+						<div class="row">            
+							<div class="col-md-1">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="material-icons">email</i>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-11">
+								<mat-form-field  >
+									<input #emailInput matInput placeholder="Adresse Mail" id="email" type="email">
+								</mat-form-field>
+							</div>
+						</div>
+						
+						<div class="row">            
+							<div class="col-md-1">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="material-icons">mode_edit</i>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-11">
+								<div class="row">
+									<div class="col-md-10">
+										<mat-form-field>
+											<input #passwordInput matInput placeholder="Mot de passe" id="password" [type]="hide ? 'password' : 'text'">
+										</mat-form-field>
+									</div>
+									<div class="col-md-1">
+										<i class="material-icons" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						<br>
+						<a (click)="onLoginButtonClicked(emailInput.value,passwordInput.value)" class="btn btn-info">Connexion</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3"></div>
+		</div>    
+	</div>
 </div>

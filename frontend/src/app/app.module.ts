@@ -39,6 +39,7 @@ import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/
 import { InvitationDialogContentComponent } from './pages/invitation-dialog-content/invitation-dialog-content.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { CollaboratorsListComponent } from './pages/collaborators-list/collabora
     CollaboratorsListRssiComponent,
     InvitationDialogContentComponent,
     DetailsComponent,
-    CollaboratorsListComponent
+    CollaboratorsListComponent,
   ],
   imports: [
     FormsModule,
@@ -83,6 +84,7 @@ import { CollaboratorsListComponent } from './pages/collaborators-list/collabora
     MatDialogModule,
     DragDropModule,
     MatTabsModule,
+	MatIconModule,
   ],
 
   providers: [

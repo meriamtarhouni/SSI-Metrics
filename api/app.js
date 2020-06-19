@@ -392,12 +392,12 @@ app.post('/rssis/invite/:id_c', authenticateRssi, (req, res) => {
                             has_invitation: true,
                             invitationId: invitationDoc._id,
                         }).then(() => {
-                            res.status(200);
+                            res.send(invitationDoc);
                         }).catch((e) => {
                             res.status(400).send(e);
                         });
                     }).then(() => {
-                        res.status(200);
+                        res.send(collaborateur);
                     }).catch((e) => {
                         res.status(400).send(e);
                     })

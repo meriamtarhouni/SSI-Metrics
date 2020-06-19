@@ -162,9 +162,12 @@ checklist.get('/sousTaches/:phaseId/termine',authenticateCollaborateur, (req, re
 * Affecting a collaborator to a subtask
 */
 checklist.patch('/soustaches/:tacheId/affect/:collabId', authenticateRssi, (req, res) => {
-    console.log('Affecting task', req.params.tacheId, ' to collab ', req.params.collabId);
+    console.log('Affecting task', req.params.tacheId, ' to collab ', req.params.collabId, 'with dates: ', req.body.stDate, ' and ', req.body.enDate);
+
     Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.tacheId), {
         collaborateur_id: mongoose.Types.ObjectId(req.params.collabId),
+		date_debut: req.body.stDate,
+		date_fin: req.body.enDate,
     }).then((sstache) => {
         Collaborateur.findByIdAndUpdate(req.params.collabId, {
             $push: {
@@ -172,7 +175,7 @@ checklist.patch('/soustaches/:tacheId/affect/:collabId', authenticateRssi, (req,
             },
         }).then((collaborateur) => {
             console.log('Affecting done');
-            res.sendStatus(200);
+            res.send(collaborateur);
         }).catch((e) => {
             res.send(e);
         });
@@ -227,8 +230,15 @@ checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
         console.log('Updated sous_tache');
     });
 });
-    
 
+checklist.patch('/tache/:id',authenticateCollaborateur,(req,res)=>{
+    console.log('Updating tache');
+    Tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+        etat : req.body.status
+    }).then(() => {
+        console.log('Updated tache');
+    });
+});
 
 
 module.exports = checklist; 
