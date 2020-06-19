@@ -34,7 +34,6 @@ export class ChecklistComponent implements OnInit {
 	constructor(private webRequestService: WebRequestService, private authCollaboratorService: AuthCollaboratorService, private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
 	ngOnInit(): void {
 		this.route.params.subscribe((params:Params)=>{
-			console.log("Params = ", params);
 			if (params.phaseId){
 				this.selectedPhase = params.phaseId;
 				
@@ -102,22 +101,25 @@ export class ChecklistComponent implements OnInit {
 				status="terminé"; 
 				
 			} 
-			console.log(status);
-			this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
-				console.log('entering');
-				this.subTasksService.getSousTacheById(event.item.element.nativeElement.id).subscribe((res: Sous_tache[]) => {
-					console.log('entered');
-					let tacheId = res[0].tache_id;
-					console.log(res, ' ', tacheId);
+			// console.log(status);
+
+			console.log('here');
+			let sstacheId = event.item.element.nativeElement.id;
+			this.subTasksService.updateSubTaskStatus(sstacheId, status).subscribe((res) => {
+				console.log('sstacheId = ', sstacheId);
+				this.subTasksService.getSousTacheById(sstacheId).subscribe((res) => {
+					// let tacheId = res[0].tache_id;
+					let tacheId = '';
+					console.log('res = ', res, ' tacheId = ', tacheId);
 					
-					this.webRequestService.updateTaskStatus(tacheId, this.getUpdatedTaskStatus(tacheId)).subscribe(() => {});
+					this.webRequestService.updateTaskStatus(tacheId, this.getUpdatedTaskStatus(tacheId)).subscribe((res) => {});
 				});
 			});
 			
 		}
 		
-		console.log(event.item.element.nativeElement.id)  ;
-		console.log(event.previousContainer.id );
+		// console.log(event.item.element.nativeElement.id)  ;
+		// console.log(event.previousContainer.id );
 		
 		/**
 		* cdk-drop-list-0 == pas mis en oeuvre

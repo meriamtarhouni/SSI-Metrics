@@ -216,8 +216,9 @@ checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
     console.log('Updating sous_tache');
     Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
         etat : req.body.status
-    }).then(() => {
+    }).then((sstache) => {
         console.log('Updated sous_tache');
+		res.send(sstache);
     });
 });
 
