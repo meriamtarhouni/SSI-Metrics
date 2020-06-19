@@ -2,14 +2,14 @@
 	
 	
 	<div class="board" >
-		<div class="board-bar"[style.background-color]="color">
-			<p class="board-name"> {{nomPhase}} </p> 
+		<div class="board-bar" [style.background-color]="color">
+			<p class="board-name"  > {{nomPhase}} </p> 
 		</div>
 		
-		<div class="board-wrapper">
+		<div class="board-wrapper"[style.background-color]="color">
 			
 			<div class="board-columns" cdkDropListGroup>
-				<div class="board-column" [style.background]="color">
+				<div class="board-column" style="background-color: #eee;">
 					
 					<div class="column-title">
 						PAS MIS EN OEUVRE
@@ -48,7 +48,7 @@
 				</div>
 				
 			</div>
-			<div class="board-column" [style.background]="color">
+			<div class="board-column" style="background-color: #eee;">
 				<div class="column-title">
 					EN COURS
 				</div>
@@ -83,7 +83,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="board-column"[style.background]="color">
+		<div class="board-column"style="background-color: #eee;">
 			
 			<div class="column-title">
 				TERMINÉ

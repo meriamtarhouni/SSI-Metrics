@@ -34,8 +34,7 @@
 						</div>
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 						<div id="inner-circle-2">
 							<div id="text" class="pointer" *ngIf="phases != undefined && phases[3].enabled ==true; else elseBlock3" [routerLink]="['/checklist', phases[3]._id]">4. {{phases[3].nom }}</div>
 							<ng-template #elseBlock3> <div id="text" class="pointer" *ngIf="phases != undefined" (click)="this.showNotification('bottom','right','info')" >4. {{phases[3].nom }}</div></ng-template> 

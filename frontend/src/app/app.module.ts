@@ -40,6 +40,7 @@ import { InvitationDialogContentComponent } from './pages/invitation-dialog-cont
 import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 import {MatIconModule} from '@angular/material/icon';
+import { ReportingComponent } from './pages/reporting/reporting.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {MatIconModule} from '@angular/material/icon';
     InvitationDialogContentComponent,
     DetailsComponent,
     CollaboratorsListComponent,
+    ReportingComponent,
   ],
   imports: [
     FormsModule,
