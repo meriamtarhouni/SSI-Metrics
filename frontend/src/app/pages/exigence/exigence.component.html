@@ -1,7 +1,28 @@
-<br><br><br><br>
 <div class="main-content">
     <div class="container-fluid">
-    
+        <div class="row">
+            <div class="col-md-4" ></div>
+            <div class="col-md-4" style="text-align: center;" *ngIf=" selectedPhaseEnabled == false; else elseBlock" > <p style="font-size: large;">  La phase <b>{{selectedPhaseName}} </b> est verrouillé chez les collaborateurs   </p>
+                <br> 
+                <p style="font-size: large; ">  Veuiller vous la déverrouiller?  </p>     
+                <br>
+                <label class="switch">
+                    <input type="checkbox" (click)="onEnableButtonClicked(selectedPhase,!selectedPhaseEnabled)" >
+                    <span class="slider round"></span>
+                  </label>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                  
+            </div>
+            <ng-template #elseBlock> 
+                <div class="col-md-4" style="text-align: center;" > <p style="font-size: large;">  La phase <b>{{selectedPhaseName}}</b> est déverrouillé</p>
+                <label class="switch">
+                    <input type="checkbox" checked (click)="onEnableButtonClicked(selectedPhase,!selectedPhaseEnabled)">
+                    <span class="slider round"></span>
+                  </label>   
+                </div>
+            </ng-template> 
+            <div class="col-md-4" ></div> 
+        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
       <div class="row">
           <div class="col-lg-12 col-md-12">
               <div class="card">

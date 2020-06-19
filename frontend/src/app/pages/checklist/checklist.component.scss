@@ -13,9 +13,10 @@
 		padding: 8px 15px;
 		
 		.board-name {
-			font-size: 20px;
+			font-size: 30px;
 			font-weight: bold;
 			color: white;
+			padding: 10px;
 		}
 	}
 	
@@ -23,6 +24,7 @@
 		display: flex;
 		flex-grow: 1;
 		overflow-x: auto;
+		margin-top: 20px;
 		
 		.board-columns {
 			display: flex;
@@ -52,7 +54,7 @@
 					// font-family: 'Lato', sans-serif;
 					text-transform: uppercase;
 					margin-bottom: 20px;
-					color: white;
+					color: #3C4858;
 				}
 			}
 		}

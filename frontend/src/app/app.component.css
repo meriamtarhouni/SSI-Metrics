@@ -76,22 +76,28 @@ container-fluid.main{
 
 .covertext {
 	position: absolute; /* To make the div to be place anywhere. It is out of the document flow */
-	top: 200px; /* The distance between the div with the top of document */
+/*	top: 200px; /* The distance between the div with the top of document */
 	left: 0px; /* Make the div full width */
 	right: 0px; /* Make the div full width */
 	text-align: center;
-	margin-top:100px;
+	/*margin-top:100px;*/
 	background-color: #21296e;
 	padding: 100px;
-}
+	height: 952px;;
 
-.title {
+ }
+  
+ .title {
 	font-family: 'CaviarDreams';
 	font-weight: 600;
 	font-size: 60px;
 	color: white;
 	text-align: center;
-}
+	margin-top: 300px;
+ }
+  
+  
+ 
 
 .subtitle {
 	font-family: 'CaviarDreams';
