@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'workspace/collaborator/:workspaceId', component: WorkSpaceCollaboratorViewComponent },
   { path: 'workspace/collaborator/:workspaceId/collaborators', component: CollaboratorsListComponent },
   { path: 'checklist/:phaseId', component: ChecklistComponent },
-  { path: 'reporting', component: ReportingComponent },
+  { path: 'workspace/rssi/:workspaceId/reporting', component: ReportingComponent },
 //   { path: 'sidebar', component: SidebarComponent },
 ];
 

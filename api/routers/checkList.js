@@ -158,6 +158,32 @@ checklist.get('/sousTaches/:phaseId/termine',authenticateCollaborateur, (req, re
     })
 }) 
 
+checklist.get('/sousTaches/:phaseId/pas_mis_en_oeuvre/rssi',authenticateRssi, (req, res)=> {
+    Sous_tache.find({phase_id: req.params.phaseId,etat : "pas mis en oeuvre"}).then((todo_sstaches)=>{
+        res.send(todo_sstaches);
+    }).catch( (e) => {
+        res.send(e);
+    })
+}) 
+
+
+checklist.get('/sousTaches/:phaseId/en_cours/rssi',authenticateRssi, (req, res)=> {
+    Sous_tache.find({etat : "en cours",phase_id: req.params.phaseId}).then((inprogress_sstaches)=>{
+        res.send(inprogress_sstaches);
+    }).catch( (e) => {
+        res.send(e);
+    })
+}) 
+
+
+checklist.get('/sousTaches/:phaseId/termine/rssi',authenticateRssi, (req, res)=> {
+    Sous_tache.find({etat : "terminé", phase_id: req.params.phaseId }).then((done_sstaches)=>{
+        res.send(done_sstaches);
+    }).catch( (e) => {
+        res.send(e);
+    })
+}) 
+
 /**
 * Affecting a collaborator to a subtask
 */
@@ -223,9 +249,10 @@ checklist.get('/sousTaches/phases/:id',authenticateCollaborateur,(req, res) => {
 
 
 checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
-    console.log('Updating sous_tache');
+    console.log('Updating sous_tache with: ', req.body);
     Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
-        etat : req.body.status
+        etat : req.body.status,
+		date_reele: req.body.cur_date,
     }).then((sstache) => {
         console.log('Updated sous_tache');
 		res.send(sstache);
@@ -233,7 +260,7 @@ checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
 });
 
 checklist.patch('/tache/:id',authenticateCollaborateur,(req,res)=>{
-    console.log('Updating tache');
+    console.log('Updating tache with: ', req.body);
     Tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
         etat : req.body.status
     }).then(() => {

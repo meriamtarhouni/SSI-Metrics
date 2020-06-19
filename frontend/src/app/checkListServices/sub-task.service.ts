@@ -16,9 +16,21 @@ export class SubTaskService {
 	getDoneSubTasks(phaseId : string){
 		return this.webReqService.get(`sousTaches/${phaseId}/termine`);
 	}
+
+	getToDoSubTasksRssi(phaseId : string){
+		return this.webReqService.get(`sousTaches/${phaseId}/pas_mis_en_oeuvre/rssi`);
+	}
+	getInProgressSubTasksRssi(phaseId : string){
+		return this.webReqService.get(`sousTaches/${phaseId}/en_cours/rssi`);
+	}
+	getDoneSubTasksRssi(phaseId : string){
+		return this.webReqService.get(`sousTaches/${phaseId}/termine/rssi`);
+	}
+
 	getSousTacheById(sstacheId){
 		return this.webReqService.get(`sousTaches/tache/${sstacheId}/`);
 	}
+
 	getExigenceById(exigenceId){
 		return this.webReqService.get(`sousTaches/exigence/${exigenceId}/`);
 	}

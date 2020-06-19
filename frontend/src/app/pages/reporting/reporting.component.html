@@ -2,14 +2,97 @@
 <div class="board-bar" >
     <p class="board-name"  > Répartition des taches selon leurs etats </p> 
 </div>
-<div>
-    <canvas id ="pieChart1"></canvas>
+<div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
+    <div class="col-md-1" >
+		<span>{{phases[0].nom}}</span>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart1_0"></canvas>
+	</div>
+    
+	<!-- <div class="col-md-1" >
+	</div> -->
+
+    <div class="col-md-1" >
+		<p>{{phases[1].nom}}</p>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart1_1"></canvas>
+	</div>
+</div>
+<br>
+<div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
+    <div class="col-md-1" >
+		<span>{{phases[2].nom}}</span>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart1_2"></canvas>
+	</div>
+    
+	<!-- <div class="col-md-1" >
+	</div> -->
+
+    <div class="col-md-1" >
+		<p>{{phases[3].nom}}</p>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart1_3"></canvas>
+	</div>
 </div>
 
-<div class="board-bar" >
-    <p class="board-name"  > Les taches terminés avant la date limite </p> 
+<br>
+<br>
+<br>
+
+<div class="board-bar">
+    <p class="board-name"  > Les taches terminées avant la date limite </p> 
+</div>
+<div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
+    <div class="col-md-1" >
+		<span>{{phases[0].nom}}</span>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart2_0"></canvas>
+	</div>
+    
+	<!-- <div class="col-md-1" >
+	</div> -->
+
+    <div class="col-md-1" >
+		<p>{{phases[1].nom}}</p>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart2_1"></canvas>
+	</div>
+</div>
+<br>
+<div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
+    <div class="col-md-1" >
+		<span>{{phases[2].nom}}</span>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart2_2"></canvas>
+	</div>
+    
+	<!-- <div class="col-md-1" >
+	</div> -->
+
+    <div class="col-md-1" >
+		<p>{{phases[3].nom}}</p>
+	</div>
+    <div class="col-md-5" >
+		<canvas id ="pieChart2_3"></canvas>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="board-bar">
+    <p class="board-name"  > Ordre des collaborateurs en fonction du nombre de taches terminées </p> 
 </div>
 <div>
-    <canvas id ="pieChart2"></canvas>
+    <p>board 3</p>
 </div>
 
