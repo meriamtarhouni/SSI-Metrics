@@ -1,6 +1,5 @@
-
 <div class="board-bar" >
-    <p class="board-name"  > Répartition des taches selon leurs etats </p> 
+    <p class="board-name"  > Répartition des tâches selon leurs états </p> 
 </div>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
@@ -45,7 +44,7 @@
 <br>
 
 <div class="board-bar">
-    <p class="board-name"  > Les taches terminées avant la date limite </p> 
+    <p class="board-name"  > Les tâches terminées avant la date limite </p> 
 </div>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
@@ -90,14 +89,14 @@
 <br>
 
 <div class="board-bar">
-    <p class="board-name"  > Ordre des collaborateurs en fonction du nombre de taches terminées </p> 
+    <p class="board-name"  > Ordre des collaborateurs en fonction du nombre de tâches terminées </p> 
 </div>
 <div>
     <div class="card-body table-responsive">
 		<table class="table table-hover">
 			<thead class="text-info">
 				<th>Nom Complet </th>
-				<th>Nombre de taches terminées</th>
+				<th>Nombre de tâches terminées</th>
 			</thead>
 			<tbody>
 				<tr  *ngFor="let entry of collaboratorsOrderMap.entries()" >
@@ -108,4 +107,3 @@
 		</table>
 	</div>
 </div>
-
