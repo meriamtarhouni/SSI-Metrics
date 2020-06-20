@@ -48,7 +48,7 @@ tasksDeliverdOnTimeChart = [];
     this.tasksDeliverdOnTimeChart = new Chart('pieChart2' , {
       type: 'pie',
       data: {
-        labels: ["Taches Non Terminés Avant la date limite ",  "Taches Terminés Avant la date limite "], 
+        labels: ["Tâches Non Terminés avant la date limite ",  "Tâches Terminés avant la date limite "], 
         datasets:[{
           label:'Vote Now', 
           data : [10,15], // 10 : nbr de Taches Non Terminés Avant la date limite , 15 : nbr de Taches  Terminés Avant la date limite
