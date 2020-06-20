@@ -211,11 +211,16 @@ checklist.patch('/soustaches/:tacheId/affect/:collabId', authenticateRssi, (req,
 });
 
 
+checklist.get('/sousTaches/:id',authenticateCollaborateur,(req, res) => {
+  
+    Sous_tache.findById(mongoose.Types.ObjectId(req.params.id)).then((sstache) => {
+        res.send(sstache);
+    })
+});
+
 checklist.get('/sousTaches/tache/:id',authenticateCollaborateur,(req, res) => {
   
-    Tache.find({
-        _id: req.params.id,
-    }).then((tache) => {
+    Tache.find({_id: mongoose.Types.ObjectId(req.params.id)}).then((tache) => {
         res.send(tache);
     })
 });

@@ -9,59 +9,60 @@ import { PhaseService } from 'src/app/checkListServices/phase.service';
 	styleUrls: ['./exigence.component.css']
 })
 export class ExigenceComponent implements OnInit {
-
-  constructor(private route : ActivatedRoute,private exigenceService:ExigenceService,private phaseService:PhaseService) { }
-  selectedPhase: string;
-  exigences : any[];
-  taches : any[];
-  color :string;
-  phase : any;
-selectedPhaseEnabled : boolean; 
-selectedPhaseName : string; 
-  
-  ngOnInit(): void {
-     this.route.params.subscribe(
-      (params: Params) => {
-        
-        if (params.phaseId) {
-          this.selectedPhase = params.phaseId;
-          console.log(this.selectedPhase);
-          this.exigenceService.getExigences(this.selectedPhase).subscribe((exigences: any[])=>{
-            this.exigences=exigences;
-           // console.log(this.exigences);
-          })
-           
-           this.phaseService.getPhasesById(this.selectedPhase).subscribe((phase : any)=>{
-             this.phase=phase;
-            // console.log(this.phase);
-             if(this.phase[0].nom =="Plan") {this.color="#21296E"};
-             if(this.phase[0].nom =="Do") {this.color="#000FB0"};
-             if(this.phase[0].nom =="Check") {this.color="#2BA8FF"};
-             if(this.phase[0].nom =="Act") {this.color="#4CAF50"};
-
-
-             this.selectedPhaseEnabled=this.phase[0].enabled; 
-             this.selectedPhaseName= this.phase[0].nom;
-            //console.log(this.selectedPhaseEnabled);
-          //  console.log(this.selectedPhaseName);
-
-           })
-        } 
-        if(params.exigenceId){
-          this.exigenceService.getTasks(params.exigenceId).subscribe((tasks:any[])=>{
-            this.taches=tasks;
-            console.log(this.taches);
-          });
-        }
-       
-      });
-  }
-
- 
- 
-  onEnableButtonClicked(phaseId : string, enable : boolean){
- 
-      this.phaseService.enablePhase(phaseId, enable).subscribe(()=>{}) ;
-          window.location.reload(); 
-  }
-}
+	
+	constructor(private route : ActivatedRoute,private exigenceService:ExigenceService,private phaseService:PhaseService) { }
+	selectedPhase: string;
+	exigences : any[];
+	taches : any[];
+	color :string;
+	phase : any;
+	selectedPhaseEnabled : boolean; 
+	selectedPhaseName : string; 
+	
+	ngOnInit(): void {
+		this.route.params.subscribe(
+			(params: Params) => {
+				
+				if (params.phaseId) {
+					this.selectedPhase = params.phaseId;
+					console.log(this.selectedPhase);
+					this.exigenceService.getExigences(this.selectedPhase).subscribe((exigences: any[])=>{
+						this.exigences=exigences;
+						// console.log(this.exigences);
+					})
+					
+					this.phaseService.getPhasesById(this.selectedPhase).subscribe((phase : any)=>{
+						this.phase=phase;
+						// console.log(this.phase);
+						if(this.phase[0].nom =="Plan") {this.color="#21296E"};
+						if(this.phase[0].nom =="Do") {this.color="#000FB0"};
+						if(this.phase[0].nom =="Check") {this.color="#2BA8FF"};
+						if(this.phase[0].nom =="Act") {this.color="#4CAF50"};
+						
+						
+						this.selectedPhaseEnabled=this.phase[0].enabled; 
+						this.selectedPhaseName= this.phase[0].nom;
+						//console.log(this.selectedPhaseEnabled);
+						//  console.log(this.selectedPhaseName);
+						
+					})
+				} 
+				if(params.exigenceId){
+					this.exigenceService.getTasks(params.exigenceId).subscribe((tasks:any[])=>{
+						this.taches=tasks;
+						console.log(this.taches);
+					});
+				}
+				
+			});
+		}
+		
+		
+		
+		onEnableButtonClicked(phaseId : string, enable : boolean){
+			
+			this.phaseService.enablePhase(phaseId, enable).subscribe(()=>{}) ;
+			window.location.reload(); 
+		}
+	}
+	

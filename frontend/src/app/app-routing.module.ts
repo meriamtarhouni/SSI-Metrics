@@ -18,11 +18,12 @@ import { ChecklistComponent } from './pages/checklist/checklist.component'
 import { WorkSpaceCollaboratorViewComponent } from './pages/work-space-collaborator-view/work-space-collaborator-view.component';
 import { CollaboratorsListRssiComponent } from './pages/collaborators-list-rssi/collaborators-list-rssi.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
-import { SidebarComponent } from './pages/sidebar/sidebar.component';
-import {ReportingComponent} from './pages/reporting/reporting.component'; 
+import { HomeComponent } from './pages/home/home.component';
+import { ReportingComponent } from './pages/reporting/reporting.component'; 
 
 const routes: Routes = [
 
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'login-collab', component: LoginPageCollaboratorComponent },
   { path: 'signup-collab', component: SignupPageCollaboratorComponent },

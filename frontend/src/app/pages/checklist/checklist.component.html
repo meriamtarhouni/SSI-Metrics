@@ -21,12 +21,11 @@
 					<div class="task" *ngFor="let task of todo" cdkDrag   [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }" >
 						<div class="task-header">
 							
-							<b>{{task.clause}}</b> 
-							<br>
+							<!-- <br> -->
 							<div class="colab">
+							<b>{{task.clause}}</b> 
+							&nbsp; &nbsp; 
 								<span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span>
-								
-								
 							</div>
 						</div>
 						

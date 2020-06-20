@@ -21,6 +21,9 @@ export class ReportingComponent implements OnInit {
 	nbApresLimite: number[] = [];
 	tasksDeliverdOnTimeChart = [[]]; 
 
+	collaboratorsOrderMap: Map<String, number> = new Map<String, number>();
+	// collaboratorsOrder: [[]];
+
 	constructor(private phaseService: PhaseService, private subTasksService: SubTaskService) { }
 	
 	ngOnInit(): void {
@@ -47,19 +50,36 @@ export class ReportingComponent implements OnInit {
 
 			let j = 0;
 			this.phases.forEach((phase) => {
-				this.nbAvantLimite[j] = 0;
-				this.nbApresLimite[j] = 0;
-
 				this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
+					this.nbAvantLimite[j] = 0;
+					this.nbApresLimite[j] = 0;
+
 					done.forEach((sstache) => {
-						if(sstache.etat == 'terminÃ©'){
-							if(this.avantLimite(sstache)) ++this.nbAvantLimite[j];
-							else ++this.nbApresLimite[j];
-						}
+						console.log('Sous Tache = ', sstache);
+						if(this.avantLimite(sstache)) ++this.nbAvantLimite[j];
+						else ++this.nbApresLimite[j];
 					});
 
 					this.updateChart2(j);
 					++j;
+				});
+			});
+
+			this.phases.forEach((phase) => {
+				this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
+					done.forEach((sstache) => {
+						let collabId = sstache.collaborateur_id;
+						if(collabId){
+							console.log(collabId);
+							--this.collaboratorsOrderMap[collabId];
+						}
+					});
+					console.log(this.collaboratorsOrderMap);
+
+					// this.collaboratorsOrder = [[]];
+					// this.collaboratorsOrderMap.forEach((value, key) => {
+					// 	// this.collaboratorsOrder.push([String(key), String(value)]);
+					// });
 				});
 			});
 		});
@@ -67,6 +87,7 @@ export class ReportingComponent implements OnInit {
 	}
 
 	avantLimite(sstache: Sous_tache): boolean{
+		if(sstache.date_fin == '') return false;
 		let date_fin = sstache.date_fin.split('-').map(Number);
 		let date_reele = sstache.date_reele.split('-').map(Number);
 		
@@ -77,7 +98,7 @@ export class ReportingComponent implements OnInit {
 	}
 
 	updateChart1(i: number){
-		// console.log('Phase ', i, ' numbers = ', this.nbPasMisEnOeuvre[i], this.nbEnCours[i], this.nbTermine[i]);
+		// console.log('1) Phase ', i, ' numbers = ', this.nbPasMisEnOeuvre[i], this.nbEnCours[i], this.nbTermine[i]);
 		
 		this.tasksPieChart.push(new Chart('pieChart1_' + i.toString() , {
 			type: 'pie',
@@ -103,7 +124,9 @@ export class ReportingComponent implements OnInit {
 	}
 
 	updateChart2(i: number){
-		this.tasksDeliverdOnTimeChart.push(new Chart('pieChart2' , {
+		console.log('2) Phase ', i, ' numbers = ', this.nbAvantLimite[i], this.nbApresLimite[i]);
+
+		this.tasksDeliverdOnTimeChart.push(new Chart('pieChart2_' + i.toString() , {
 			type: 'pie',
 			data: {
 				labels: ["Taches Non Terminés Avant la date limite ",  "Taches Terminés Aprés la date limite "], 
@@ -111,8 +134,8 @@ export class ReportingComponent implements OnInit {
 					label:'Vote Now', 
 					data : [this.nbAvantLimite[i], this.nbApresLimite[i]], // 10 : nbr de Taches Non Terminés Avant la date limite , 15 : nbr de Taches  Terminés Avant la date limite
 					backgroundColor:[
-						'#f44336', 
 						'#4CAF50', 
+						'#f44336', 
 					],
 				}]
 			},

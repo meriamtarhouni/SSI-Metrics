@@ -41,6 +41,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { CollaboratorsListComponent } from './pages/collaborators-list/collaborators-list.component';
 import {MatIconModule} from '@angular/material/icon';
 import { ReportingComponent } from './pages/reporting/reporting.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { ReportingComponent } from './pages/reporting/reporting.component';
     DetailsComponent,
     CollaboratorsListComponent,
     ReportingComponent,
+    HomeComponent,
   ],
   imports: [
     FormsModule,

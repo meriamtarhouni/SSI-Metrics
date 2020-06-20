@@ -61,7 +61,7 @@ export class SousTacheComponent implements OnInit {
 	onAddCollaboratorClick(sstacheId: string) {
 
 		const dialogRef = this.dialog.open(AddCollaborateurComponent, {
-			height: '450px',
+			height: '525px',
 			width: '800px',
 			data: {
 				sstacheId: sstacheId,

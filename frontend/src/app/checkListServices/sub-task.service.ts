@@ -27,8 +27,12 @@ export class SubTaskService {
 		return this.webReqService.get(`sousTaches/${phaseId}/termine/rssi`);
 	}
 
+	getSousTacheByTacheId(tacheId){
+		return this.webReqService.get(`sousTaches/tache/${tacheId}/`);
+	}
+
 	getSousTacheById(sstacheId){
-		return this.webReqService.get(`sousTaches/tache/${sstacheId}/`);
+		return this.webReqService.get(`sousTaches/${sstacheId}/`);
 	}
 
 	getExigenceById(exigenceId){

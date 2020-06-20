@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit {
 	
 	ngOnInit(): void {
 		
-		this.subTasksService.getSousTacheById(this.data.tache_id).subscribe((tache : any)=>{
+		this.subTasksService.getSousTacheByTacheId(this.data.tache_id).subscribe((tache : any)=>{
 			
 			this.tacheNom= tache[0].label;
 			console.log(this.tacheNom);

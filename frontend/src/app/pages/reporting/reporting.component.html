@@ -93,6 +93,19 @@
     <p class="board-name"  > Ordre des collaborateurs en fonction du nombre de taches terminées </p> 
 </div>
 <div>
-    <p>board 3</p>
+    <div class="card-body table-responsive">
+		<table class="table table-hover">
+			<thead class="text-info">
+				<th>Nom Complet </th>
+				<th>Nombre de taches terminées</th>
+			</thead>
+			<tbody>
+				<tr  *ngFor="let entry of collaboratorsOrderMap.entries()" >
+					<td>{{ entry[0] }}</td>
+					<td>{{ -entry[1] }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
