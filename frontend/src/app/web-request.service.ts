@@ -130,7 +130,8 @@ export class WebRequestService {
 
 	updateSubTaskStatus(subTaskId: string, status: string) {
 		console.log('subtask = ', subTaskId, ' status =', status);
-		return this.http.patch(`${this.ROOT_URL}/sousTache/${subTaskId}`, { status });
+		let cur_date = new Date().toISOString().split('T')[0];
+		return this.http.patch(`${this.ROOT_URL}/sousTache/${subTaskId}`, { status, cur_date });
 	}
 
 	enablePhase (phaseId : string, enable: boolean){

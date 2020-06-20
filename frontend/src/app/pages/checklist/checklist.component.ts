@@ -10,6 +10,7 @@ import { AuthCollaboratorService } from '../.././auth-collaborator.service'
 import { WebRequestService } from '../.././web-request.service'
 import { Collaborateur } from 'src/app/models/collaborateur.model';
 
+
 @Component({
 	selector: 'app-checklist',
 	templateUrl: './checklist.component.html',
@@ -34,7 +35,6 @@ export class ChecklistComponent implements OnInit {
 	constructor(private webRequestService: WebRequestService, private authCollaboratorService: AuthCollaboratorService, private route : ActivatedRoute, private subTasksService: SubTaskService, private router: Router,public dialog: MatDialog) { }
 	ngOnInit(): void {
 		this.route.params.subscribe((params:Params)=>{
-			console.log("Params = ", params);
 			if (params.phaseId){
 				this.selectedPhase = params.phaseId;
 				
@@ -97,46 +97,54 @@ export class ChecklistComponent implements OnInit {
 			transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
 			if (event.previousContainer.id=="cdk-drop-list-0"){
 				status="en cours";
-				
 			} else if (event.previousContainer.id=="cdk-drop-list-1"){
 				status="terminé"; 
-				
 			} 
-			console.log(status);
-			this.subTasksService.updateSubTaskStatus(event.item.element.nativeElement.id, status).subscribe(() => {
-				console.log('entering');
-				this.subTasksService.getSousTacheById(event.item.element.nativeElement.id).subscribe((res: Sous_tache[]) => {
-					console.log('entered');
-					let tacheId = res[0].tache_id;
-					console.log(res, ' ', tacheId);
+
+			console.log('here');
+
+			let sstacheId = event.item.element.nativeElement.id;
+			this.subTasksService.updateSubTaskStatus(sstacheId, status).subscribe((res) => {
+				console.log('sstacheId = ', sstacheId);
+				this.subTasksService.getSousTacheById(sstacheId).subscribe((res: Sous_tache) => {
+					let tacheId = res.tache_id;
+					console.log('res = ', res, ' tacheId = ', tacheId);
 					
-					this.webRequestService.updateTaskStatus(tacheId, this.getUpdatedTaskStatus(tacheId)).subscribe(() => {});
+					let newStatus = '';
+					this.subTasksService.getSousTacheByTacheId(tacheId).subscribe((res: Sous_tache[]) => {
+						let nbPasMisEnOeuvre = 0;
+						let nbEnCours = 0;
+						let nbTerminees = 0;
+						res.forEach((sstache: Sous_tache) => {
+							if(sstache.etat == 'pas mis en oeuvre'){
+								++nbPasMisEnOeuvre;
+							} else if(sstache.etat == 'en cours'){
+								++nbEnCours;
+							} else ++nbTerminees;
+						})
+
+						if(nbPasMisEnOeuvre == 0 && nbEnCours == 0) newStatus = 'termin?�';
+						else if(nbEnCours == 0 && nbTerminees == 0) newStatus = 'pas mis en oeuvre';
+						else newStatus = 'en cours';
+						
+						this.webRequestService.updateTaskStatus(tacheId, newStatus).subscribe((res) => {});
+					});
 				});
 			});
 			
 		}
-		
-		console.log(event.item.element.nativeElement.id)  ;
-		console.log(event.previousContainer.id );
-		
 		/**
 		* cdk-drop-list-0 == pas mis en oeuvre
 		* cdk-drop-list-1 == en cours
 		* cdk-drop-list-2 == termié
 		*/
-		
-		//window.location.reload()
 	}
-	detailClick(tacheId:string,exigenceId:string,collaborateurId){
+	detailClick(tacheId:string, exigenceId:string, collaborateurId){
 		const dialogRef = this.dialog.open(DetailsComponent, {
 			height: '300px',
 			width: '500px',
 			data: {tache_id: tacheId,exigence_id:exigenceId,collaborateur_id:collaborateurId}
 		});
-	}
-	
-	getUpdatedTaskStatus(tacheId){
-		return 'en cours';
 	}
 	
 }

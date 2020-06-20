@@ -65,7 +65,7 @@ export class AuthRssiService {
 		this.removeSession();
 		this.workspaceService.removeWorkspaceSession();
 		this.sidebarState.emit('123456789');
-		this.router.navigate(['/login-rssi']);
+		this.router.navigate(['/login']);
 	}
 	
 	isLoggedIn() {

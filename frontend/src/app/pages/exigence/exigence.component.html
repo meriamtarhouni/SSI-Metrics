@@ -59,13 +59,13 @@
                                     <tr *ngFor="let tache of taches" >
                                         <td style="color:darkgreen;"> {{tache.clause}}  </td>
                                         <td class="e-label"> {{tache.label}}</td>
-                                        <td *ngIf="tache.etat == 'pas mis en oeuvre'" class="text-danger">
+                                        <td *ngIf="tache.etat[0] == 'p'" class="text-danger">
                                             {{tache.etat}}
                                         </td>
-                                        <td *ngIf="tache.etat == 'en cours'" style="text-align: left; color: #2BA8FF;">
+                                        <td *ngIf="tache.etat[0] == 'e'" style="color: #2BA8FF;">
                                             {{tache.etat}}
                                         </td>
-                                        <td *ngIf="tache.etat == 'terminé'"  style="text-align: left; color: #4CAF50;">
+                                        <td *ngIf="tache.etat[0] == 't'"  style="color: #4CAF50;">
                                             {{tache.etat}}
                                         </td>
                                         <td>

@@ -6,6 +6,7 @@ export class Sous_tache {
     tache_id:string;
     date_debut: String;
     date_fin: String;
+	date_reele: String;
     clause: String;
     collaborateur_id: string; 
     exigence_id: string ; 
