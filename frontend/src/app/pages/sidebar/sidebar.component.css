@@ -1,19 +1,34 @@
 .align-bottom {
     position: absolute;
-
-    bottom:0;
-    
-  
-  }
+    bottom:25px;
+	margin-left: 0px;
+	margin-right: 60px;
+}
 
 .login-info{
 	background-color: #21296e;
 	color: #2ba8ff;
-	/* font-weight: bolder; */
 }
 
 .sidebar{
     background-color: white;
-    font-weight: bolder;
     text-align: center;
+	width: 300px;
+}
+
+
+.imgcent {
+    display: block;
+	margin-left: 80px;
+	margin-right: 100px;
+	width: 50%;
+}
+
+.btncent {
+    display: block;
+	margin-left: 10px;
+	margin-right: 80px;
+	font-size: 14px;
+	/* width: 50%; */
+	width: 200px;
 }

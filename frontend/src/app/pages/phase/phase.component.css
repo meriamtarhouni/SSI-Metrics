@@ -1,60 +1,60 @@
 #inner-circle {
-   
-    background-color:	#000FB0;
-    border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    position: relative;
-    text-align: center;
-    
-  }
- #outer-circle {
-    position: absolute;
-    background-color: #21296E;
-    border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    top: 50%;
-    left: 10%;
-    margin: -240px -50px 50px -240px;
-  }
-  #inner-circle-2 {
-   
-    background-color:#4CAF50;
-    border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    position: relative;
-    text-align: center;
-    
-  }
-  #outer-circle-2{
-    position: absolute;
-    background-color: #2BA8FF;
-    border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    top: 50%;
-    left: 10%;
-    margin: -240px -50px 50px -240px;
-  }
+	
+	background-color:	#000FB0;
+	border-radius: 50%;
+	height: 250px;
+	width: 250px;
+	position: relative;
+	text-align: center;
+	
+}
+#outer-circle {
+	position: absolute;
+	background-color: #21296E;
+	border-radius: 50%;
+	height: 250px;
+	width: 250px;
+	top: 50%;
+	left: 10%;
+	margin: -240px -50px 50px -240px;
+}
+#inner-circle-2 {
+	
+	background-color:#4CAF50;
+	border-radius: 50%;
+	height: 250px;
+	width: 250px;
+	position: relative;
+	text-align: center;
+	
+}
+#outer-circle-2{
+	position: absolute;
+	background-color: #2BA8FF;
+	border-radius: 50%;
+	height: 250px;
+	width: 250px;
+	top: 50%;
+	left: 10%;
+	margin: -240px -50px 50px -240px;
+}
 
-  #text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 28px;
-    font-style: italic;
-    color: white;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-     transform: translate(-50%, -50%);
-  }
+#text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 28px;
+	font-style: italic;
+	color: white;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
 
-  .pointer{
+.pointer{
 	pointer-events: auto;
- 	/* cursor: pointer; */
+	/* cursor: pointer; */
 }
 
 .pointer:hover{

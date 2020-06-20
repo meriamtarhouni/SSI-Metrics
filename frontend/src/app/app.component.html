@@ -1,8 +1,30 @@
- <div class="wrapper">
+ <div *ngIf="show" class="wrapper">
 	<div class="main-panel caviar">
-		<app-sidebar></app-sidebar> 
-		<router-outlet></router-outlet>
-		<app-footer></app-footer>
+		<div class="sidenav">
+			<app-sidebar></app-sidebar> 
+		</div>
+		<div class="main">
+			<router-outlet></router-outlet>
+			<app-footer></app-footer>
+		</div>
 	</div>
 	
+</div>
+
+<div *ngIf="!show" class="main-content" >
+	<div class="container-fluid main" >
+		<div class="covertext" >
+			<div class="col-lg-10" style="float:none; margin:0 auto;">
+				<h1 class="title">SSI Metrics</h1>
+				<h3 class="subtitle">Pour une meilleur gestion de l'implementation de la norme ISO 27001.</h3>
+			</div>
+			<div>
+				<button  class="btn btn-success btn-round" (click)="onClickStartButton()">
+					<i class="material-icons">launch</i> Commencer
+				</button>
+				
+			</div>
+		</div>
+		
+	</div>
 </div>

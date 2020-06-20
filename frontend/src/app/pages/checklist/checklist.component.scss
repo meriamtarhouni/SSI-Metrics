@@ -13,9 +13,10 @@
 		padding: 8px 15px;
 		
 		.board-name {
-			font-size: 20px;
+			font-size: 30px;
 			font-weight: bold;
 			color: white;
+			padding: 10px;
 		}
 	}
 	
@@ -23,6 +24,7 @@
 		display: flex;
 		flex-grow: 1;
 		overflow-x: auto;
+		margin-top: 20px;
 		
 		.board-columns {
 			display: flex;
@@ -49,10 +51,10 @@
 				.column-title {
 					font-size: 20px;
 					font-weight: 800;
-					font-family: 'Lato', sans-serif;
+					// font-family: 'Lato', sans-serif;
 					text-transform: uppercase;
 					margin-bottom: 20px;
-					color: white;
+					color: #3C4858;
 				}
 			}
 		}
@@ -83,24 +85,13 @@
 }
 .colab{
 	margin-top: -15px;
-	margin-left:250px;
-	color: #2ba8ff;
-	right: 10px;
+	margin-left:0px;
+	// color: #2ba8ff;
+	right: 80px;
 	background-size: cover;
 }
 .task-subtitle{
 	color: #4caf50;
-}
-
-// .task-content{
-	
-	// }
-	
-.colab{
-	// position: absolute;
-	color: #2ba8ff;
-	right: 10px;
-	background-size: cover;
 }
 
 .task-footer{
@@ -137,7 +128,7 @@
 	cursor: pointer;
 }
 
-	.highlight{
+.highlight{
 	// -moz-box-shadow: 0 0 30px 5px #999;
 	// -webkit-box-shadow: 0 0 30px 5px #999;
 	// background-color: red;

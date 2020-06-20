@@ -39,6 +39,10 @@ export class WorkSpaceComponent implements OnInit {
     this.router.navigate(['/workspace/rssi', this.workspaceId, 'collaborators']);
   }
 
+  onReportingClick() {
+    this.router.navigate(['/workspace/rssi', this.workspaceId, 'reporting']);
+  }
+
   onPhasesClick() {
     this.router.navigate(['/phases']);
   }

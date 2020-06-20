@@ -10,7 +10,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 })
 export class CollaboratorService {
 
-	constructor(private authRssiService: AuthRssiService, private webService: WebRequestService, private authCollaboratorService: AuthCollaboratorService) { }
+	constructor(private webService: WebRequestService) { }
 
 	// prendre une tache 
 	getCollaboratorByIdRssi(collaborateurId: string) {
@@ -24,10 +24,6 @@ export class CollaboratorService {
 	}
 	getOrgCollaborators(collabOrg: string) {
 		return this.webService.getOrgCollaborators(collabOrg);
-	}
-
-	acceptInvitation() {
-		this.webService.acceptInvitation();
 	}
 
 	updateCollaborator(collaborateurId: string, email: string, org: string, nom: string, ville: string, pays: string, cp: string, motivation: string) {

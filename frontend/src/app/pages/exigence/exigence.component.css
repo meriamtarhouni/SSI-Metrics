@@ -1,11 +1,11 @@
 .e-name{
-    font-family: Arial;
+    /* font-family: Arial; */
     font-size: 15px;
    
 }
 
 .e-label{
-    font-family: Arial;
+    /* font-family: Arial; */
     font-size: 15px;
 }
 
@@ -21,7 +21,7 @@
     width: 0;
     height: 0;
   }
-  
+
   .slider {
     position: absolute;
     cursor: pointer;
@@ -33,7 +33,6 @@
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
   .slider:before {
     position: absolute;
     content: "";
@@ -45,13 +44,9 @@
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
   input:checked + .slider {
     background-color: #4caf50;
   }
-  
-
-  
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
@@ -60,9 +55,18 @@
   
   /* Rounded sliders */
   .slider.round {
-    border-radius: 34px;
+          border-radius: 34px;
   }
-  
   .slider.round:before {
     border-radius: 50%;
   }
+  
+
+.pointer{
+	pointer-events: auto;
+ 	/* cursor: pointer; */
+}
+
+.pointer:hover{
+	cursor: pointer;
+}
