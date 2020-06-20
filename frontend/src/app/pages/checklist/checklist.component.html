@@ -58,11 +58,15 @@
 				(cdkDropListDropped)="drop($event)">
 				<div class="task" *ngFor="let task of inprogress" cdkDrag  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
 					<div class="task-header">
-						
+							
+						<!-- <br> -->
+						<div class="colab">
 						<b>{{task.clause}}</b> 
-						<br>
-						<div class="colab">   <span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
+						&nbsp; &nbsp; 
+							<span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span>
+						</div>
 					</div>
+					
 					
 					<div>
 						<div class="task-subtitle">
@@ -94,12 +98,15 @@
 			(cdkDropListDropped)="drop($event)">
 			<div class="task" *ngFor="let task of done" cdkDragDisabled  [id]="task._id" [ngClass]="{ highlight: collabTasks.indexOf(task._id) != -1 }">
 				<div class="task-header">
-					
+							
+					<!-- <br> -->
+					<div class="colab">
 					<b>{{task.clause}}</b> 
-					<br>
-					<div class="colab">  <span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span></div>
-					
+					&nbsp; &nbsp; 
+						<span class="material-icons pointer" (click)="detailClick(task.tache_id,task.exigence_id,task.collaborateur_id)" style="color: #4caf50;;">pending</span>
+					</div>
 				</div>
+				
 				
 				<div>
 					<div class="task-subtitle">
