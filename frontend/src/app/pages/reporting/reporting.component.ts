@@ -151,7 +151,7 @@ export class ReportingComponent implements OnInit {
 		this.tasksDeliverdOnTimeChart.push(new Chart('pieChart2_' + i.toString() , {
 			type: 'pie',
 			data: {
-				labels: ["Taches Non Terminés Avant la date limite ",  "Taches Terminés Aprés la date limite "], 
+				labels: ["Tâches Non Terminés Avant la date limite ",  "Tâches Terminés Aprés la date limite "], 
 				datasets:[{
 					label:'Vote Now', 
 					data : [this.nbAvantLimite[i], this.nbApresLimite[i]], // 10 : nbr de Taches Non Terminés Avant la date limite , 15 : nbr de Taches  Terminés Avant la date limite
