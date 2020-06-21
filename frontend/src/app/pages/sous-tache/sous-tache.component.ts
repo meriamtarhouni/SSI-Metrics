@@ -72,9 +72,22 @@ export class SousTacheComponent implements OnInit {
 
 
 	}
-onClickResetButton() {
+onClickResetButton(sousTacheId : string , sousTacheEtat: string) {
+	if (sousTacheEtat == "en cours"){
+		let status= "pas mis en oeuvre"
+		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+		window.location.reload(); 
+	}
+	
+	else if (sousTacheEtat == "terminé"){
+		let status= "pas mis en oeuvre"
+		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+		window.location.reload(); 
+
+	} else {
+		console.log("not started yet")
+
+	}
 
 }
-
-
 }

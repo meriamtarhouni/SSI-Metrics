@@ -142,6 +142,11 @@ export class WebRequestService {
 		console.log('task = ', taskId, ' status =', status);
 		return this.http.patch(`${this.ROOT_URL}/tache/${taskId}`, { status });
 	}
+
+	resetSubTaskStatusRssi(subTaskId : string, status : string){
+		return this.http.patch(`${this.ROOT_URL}/rssi/ResetSousTaches/${subTaskId}`, { status });
+
+	}
 	get(uri: string) {
 		return this.http.get(`${this.ROOT_URL}/${uri}`);
 	}

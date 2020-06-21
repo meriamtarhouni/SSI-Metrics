@@ -22,4 +22,9 @@ export class ExigenceService {
     return this.webReqService.get(`taches/${taskId}/sousTaches`);
   }
 
+  resetSubTaskStatus(subTaskId : string, status : string){
+
+    return this.webReqService.resetSubTaskStatusRssi(subTaskId,status);
+  }
+
 }
