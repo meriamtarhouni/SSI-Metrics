@@ -44,6 +44,7 @@ import { ReportingComponent } from './pages/reporting/reporting.component';
 import { HomeComponent } from './pages/home/home.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -5,7 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AddCollaborateurComponent } from '../add-collaborateur/add-collaborateur.component';
 import { CollaboratorService } from '../../collaborator.service';
 import { Collaborateur } from 'src/app/models/collaborateur.model'
-import { Sous_tache } from 'src/app/models/sous_tache.model'
+import { Sous_tache } from 'src/app/models/sous_tache.model';
+
 
 @Component({
 	selector: 'app-sous-tache',
@@ -68,6 +69,12 @@ export class SousTacheComponent implements OnInit {
 			}
 		});
 
+
+
 	}
+onClickResetButton() {
+
+}
+
 
 }
