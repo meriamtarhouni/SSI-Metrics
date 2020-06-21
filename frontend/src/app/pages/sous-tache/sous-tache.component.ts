@@ -5,7 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AddCollaborateurComponent } from '../add-collaborateur/add-collaborateur.component';
 import { CollaboratorService } from '../../collaborator.service';
 import { Collaborateur } from 'src/app/models/collaborateur.model'
-import { Sous_tache } from 'src/app/models/sous_tache.model'
+import { Sous_tache } from 'src/app/models/sous_tache.model';
+
 
 @Component({
 	selector: 'app-sous-tache',
@@ -68,6 +69,25 @@ export class SousTacheComponent implements OnInit {
 			}
 		});
 
+
+
+	}
+onClickResetButton(sousTacheId : string , sousTacheEtat: string) {
+	if (sousTacheEtat == "en cours"){
+		let status= "pas mis en oeuvre"
+		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+		window.location.reload(); 
+	}
+	
+	else if (sousTacheEtat == "terminé"){
+		let status= "pas mis en oeuvre"
+		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+		window.location.reload(); 
+
+	} else {
+		console.log("not started yet")
+
 	}
 
+}
 }

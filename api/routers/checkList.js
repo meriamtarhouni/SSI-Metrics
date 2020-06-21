@@ -120,6 +120,18 @@ checklist.get('/taches/:tacheId/sousTaches',authenticateRssi,(req,res)=>{
     })
 
 });
+
+
+checklist.patch('/rssi/ResetSousTaches/:id',authenticateRssi,(req,res)=>{
+  
+    Sous_tache.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id),{
+        etat : req.body.status,
+		
+    }).then((sstache) => {
+        console.log('Updated sous_tache');
+		res.send(sstache);
+    });
+});
 /*
 checklist.get('/sousTaches' ,(req,res)=> {
     Sous_tache.find({}).then((sstaches) => {
@@ -263,6 +275,9 @@ checklist.patch('/sousTache/:id',authenticateCollaborateur,(req,res)=>{
 		res.send(sstache);
     });
 });
+
+
+
 
 checklist.patch('/tache/:id',authenticateCollaborateur,(req,res)=>{
     console.log('Updating tache with: ', req.body);

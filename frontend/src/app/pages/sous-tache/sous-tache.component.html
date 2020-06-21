@@ -19,17 +19,24 @@
 									<td style="color:darkgreen; font-size: 15px; text-align: left;"> {{sousTache.clause}}  </td>
 									<td style="text-align: left; font-size: 15px;"> {{sousTache.label}}</td>
 									
-									<td *ngIf="sousTache.etat == 'pas mis en oeuvre'" class="text-danger" style="text-align: left;"> {{sousTache.etat}} </td>
+									<td *ngIf="sousTache.etat == 'pas mis en oeuvre'" > <p class="text-danger" style="text-align: left;  font-size: 20px;" > {{sousTache.etat}}  </p> </td>
 									
-									<td *ngIf="sousTache.etat == 'en cours'" style="text-align: left; color: #2BA8FF"> {{sousTache.etat}} </td>
+									<td *ngIf="sousTache.etat == 'en cours'">  <p  style="text-align: left; color: #2BA8FF ; font-size: 20px;" > {{sousTache.etat}}  </p>  </td>
 									
-									<td *ngIf="sousTache.etat == 'terminé'"  style="text-align: left; color: #4CAF50;"> {{sousTache.etat}} </td>
+									<td *ngIf="sousTache.etat == 'terminé'"> <p  style="text-align: left; color: #4CAF50 ; font-size: 20px;" > {{sousTache.etat}}  </p> </td>
 									
 									<td>
 										<span *ngIf="!affected[i]" class="material-icons pointer" style="color:lightslategray" (click)="onAddCollaboratorClick(sousTache._id)">  add_circle_outline </span>
 
 										<h2 *ngIf="affected[i]" > {{ affectedCollabsNames[i] }} </h2>
 										
+									</td>
+									
+									<td>
+										<button class="btn btn-danger btn-block mat-raised-button" placement="top" ngbTooltip="La sous-tâche doit être révisé" (click)="onClickResetButton( sousTache._id,sousTache.etat)">
+											<i class="material-icons" > thumb_down</i>
+										  </button>
+									
 									</td>
 
 									

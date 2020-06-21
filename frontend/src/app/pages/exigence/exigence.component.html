@@ -60,13 +60,13 @@
                                         <td style="color:darkgreen;"> {{tache.clause}}  </td>
                                         <td class="e-label"> {{tache.label}}</td>
                                         <td *ngIf="tache.etat[0] == 'p'" class="text-danger">
-                                            {{tache.etat}}
+                                           <p style="font-size: 20px;"> {{tache.etat}}</p> 
                                         </td>
                                         <td *ngIf="tache.etat[0] == 'e'" style="color: #2BA8FF;">
-                                            {{tache.etat}}
+                                          <p style="font-size: 20px;">{{tache.etat}}</p>  
                                         </td>
                                         <td *ngIf="tache.etat[0] == 't'"  style="color: #4CAF50;">
-                                            {{tache.etat}}
+                                           <p style="font-size: 20px;"> {{tache.etat}}</p> 
                                         </td>
                                         <td>
                                             <span class="material-icons pointer" style="color:darkgreen;" [routerLink]="['/sousTaches', tache._id]"  >double_arrow</span>
