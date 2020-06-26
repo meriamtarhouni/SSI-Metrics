@@ -57,9 +57,13 @@
 
 		<ul class="nav" *ngSwitchCase="3" >
 			<br>
+			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="workspace/collaborator/{{collabWorkspaceId}}/collaborators" routerLinkActive="active">
+				<span class="material-icons">people</span>
+				Mes Collegues </a></li> 
+			<br>
 			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="workspace/collaborator/{{collabWorkspaceId}}" routerLinkActive="active">
 				<span class="material-icons">work</span>
-				Espace de travail </a></li> 
+				Cycle PDCA </a></li> 
 			<br>
 			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/profil-collaborateur/{{collaboratorId}}" routerLinkActive="active">
 				<span class="material-icons">person</span>
@@ -91,8 +95,20 @@
 		<ul class="nav" *ngSwitchCase="1" >
 			<br>
 			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/workspace/rssi/{{rssiWorkspaceId}}" routerLinkActive="active">
-				<span class="material-icons">work</span>
+				<span class="material-icons">dashboard</span>
 				Espace de travail </a></li>
+			<br>
+			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/workspace/rssi/{{rssiWorkspaceId}}/collaborators" routerLinkActive="active">
+				<span class="material-icons">people</span>
+				Collaborateurs </a></li>
+			<br>
+			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/phases" routerLinkActive="active">
+				<span class="material-icons">work</span>
+				Cycle PDCA </a></li>
+			<br>
+			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/workspace/rssi/{{rssiWorkspaceId}}/reporting" routerLinkActive="active">
+				<span class="material-icons">analytics</span>
+				Interface de Reporting </a></li>
 			<br>
 			<li><a class="w3-bar-item w3-button" style="font-size: 16px;" routerLink="/edit-rssi/{{rssiId}}" routerLinkActive="active">
 				<span class="material-icons">person</span>
