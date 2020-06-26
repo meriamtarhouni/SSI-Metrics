@@ -42,6 +42,7 @@ export class AddCollaborateurComponent implements OnInit {
 	onAffectButtonClicked() {
 		console.log("Affecting to: ", this.selectedCollabId, " with start date: ", this.startDate, " and with end date: ", this.endDate);
 		this.workspaceService.affectSubtaskCollab(this.sstacheId, this.startDate, this.endDate, this.selectedCollabId).subscribe((res) => {});
+		window.location.reload();
 		this.onCloseButtonClicked();
 	}
 

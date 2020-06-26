@@ -3,7 +3,7 @@
 </div>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
-		<span>{{phases[0].nom}}</span>
+		<span>{{phases[0]}}</span>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart1_0"></canvas>
@@ -13,7 +13,7 @@
 	</div> -->
 
     <div class="col-md-1" >
-		<p>{{phases[1].nom}}</p>
+		<p>{{phases[1]}}</p>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart1_1"></canvas>
@@ -22,7 +22,7 @@
 <br>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
-		<span>{{phases[2].nom}}</span>
+		<span>{{phases[2]}}</span>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart1_2"></canvas>
@@ -32,7 +32,7 @@
 	</div> -->
 
     <div class="col-md-1" >
-		<p>{{phases[3].nom}}</p>
+		<p>{{phases[3]}}</p>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart1_3"></canvas>
@@ -48,7 +48,7 @@
 </div>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
-		<span>{{phases[0].nom}}</span>
+		<span>{{phases[0]}}</span>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart2_0"></canvas>
@@ -58,7 +58,7 @@
 	</div> -->
 
     <div class="col-md-1" >
-		<p>{{phases[1].nom}}</p>
+		<p>{{phases[1]}}</p>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart2_1"></canvas>
@@ -67,7 +67,7 @@
 <br>
 <div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
     <div class="col-md-1" >
-		<span>{{phases[2].nom}}</span>
+		<span>{{phases[2]}}</span>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart2_2"></canvas>
@@ -77,7 +77,7 @@
 	</div> -->
 
     <div class="col-md-1" >
-		<p>{{phases[3].nom}}</p>
+		<p>{{phases[3]}}</p>
 	</div>
     <div class="col-md-5" >
 		<canvas id ="pieChart2_3"></canvas>
@@ -91,19 +91,21 @@
 <div class="board-bar">
     <p class="board-name"  > Ordre des collaborateurs en fonction du nombre de tâches terminées </p> 
 </div>
-<div>
-    <div class="card-body table-responsive">
+<div class="row" style="text-align:right; vertical-align:text-bottom; font-weight: bolder; font-size: 20px;">
+	<div class="col-md-2"></div>
+    <div class="col-md-8 card-body table-responsive">
 		<table class="table table-hover">
 			<thead class="text-info">
 				<th>Nom Complet </th>
 				<th>Nombre de tâches terminées</th>
 			</thead>
 			<tbody>
-				<tr  *ngFor="let entry of collaboratorsOrderMap.entries()" >
-					<td>{{ entry[0] }}</td>
-					<td>{{ -entry[1] }}</td>
+				<tr  *ngFor="let entry of collaboratorsArray1; let index = index" >
+					<td>{{ collaboratorsArray1[index] }}</td>
+					<td>{{ collaboratorsArray2[index] }}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<div class="col-md-2"></div>
 </div>

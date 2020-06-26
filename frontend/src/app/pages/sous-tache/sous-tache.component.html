@@ -25,14 +25,19 @@
 									
 									<td *ngIf="sousTache.etat == 'terminé'"> <p  style="text-align: left; color: #4CAF50 ; font-size: 20px;" > {{sousTache.etat}}  </p> </td>
 									
-									<td>
-										<span *ngIf="!affected[i]" class="material-icons pointer" style="color:lightslategray" (click)="onAddCollaboratorClick(sousTache._id)">  add_circle_outline </span>
+									<td *ngIf="!affected[i]">
+										<span class="material-icons pointer" style="color:lightslategray" (click)="onAddCollaboratorClick(sousTache._id)">  add_circle_outline </span>
+									</td>
 
-										<h2 *ngIf="affected[i]" > {{ affectedCollabsNames[i] }} </h2>
-										
+									<td *ngIf="affected[i]">
+										<span class="material-icons">person</span> 
+									</td>
+
+									<td *ngIf="affected[i]">
+										<h2> {{ affectedCollabsNames[i] }} </h2>
 									</td>
 									
-									<td>
+									<td *ngIf="affected[i]">
 										<button class="btn btn-danger btn-block mat-raised-button" placement="top" ngbTooltip="La sous-tâche doit être révisé" (click)="onClickResetButton( sousTache._id,sousTache.etat)">
 											<i class="material-icons" > thumb_down</i>
 										  </button>
