@@ -14,13 +14,13 @@ import { Sous_tache } from 'src/app/models/sous_tache.model';
 	styleUrls: ['./sous-tache.component.css']
 })
 export class SousTacheComponent implements OnInit {
-
+	
 	constructor(private exigenceService: ExigenceService, private route: ActivatedRoute, public dialog: MatDialog, private collaboratorService: CollaboratorService) { }
 	sousTaches: Sous_tache[] = [];
 	affected: boolean[] = [];
 	selectedTaskId: string;
 	affectedCollabsNames: string[] = [];
-
+	
 	ngOnInit(): void {
 		this.route.params.subscribe((params: Params) => {
 			if (params.tacheId) {
@@ -29,20 +29,20 @@ export class SousTacheComponent implements OnInit {
 				this.exigenceService.getSubTasks(this.selectedTaskId).subscribe((sousTaches: Sous_tache[]) => {
 					this.sousTaches = sousTaches;
 					console.log('Sous taches = ', this.sousTaches);
-
+					
 					this.sousTaches.forEach((sst) => {
 						if (sst.collaborateur_id) {
 							console.log('collab id = ', sst.collaborateur_id);
 							this.collaboratorService.getCollaboratorByIdRssi(sst.collaborateur_id).subscribe((collab: Collaborateur) => {
 								console.log('collab = ', collab);
-
+								
 								let has_sst: boolean = false;
 								this.sousTaches.forEach((sst2) => {
 									if (sst2.collaborateur_id == collab._id) has_sst = true;
 								});
-
+								
 								this.affected.push(has_sst);
-
+								
 								if (has_sst) {
 									this.affectedCollabsNames.push(collab.nom);
 								}
@@ -52,15 +52,15 @@ export class SousTacheComponent implements OnInit {
 							});
 						}
 					});
-
+					
 					console.log('Affected array = ', this.affected);
 				})
 			}
 		})
 	}
-
+	
 	onAddCollaboratorClick(sstacheId: string) {
-
+		
 		const dialogRef = this.dialog.open(AddCollaborateurComponent, {
 			height: '525px',
 			width: '800px',
@@ -68,26 +68,26 @@ export class SousTacheComponent implements OnInit {
 				sstacheId: sstacheId,
 			}
 		});
-
-
-
+		
+		
+		
 	}
-onClickResetButton(sousTacheId : string , sousTacheEtat: string) {
-	if (sousTacheEtat == "en cours"){
-		let status= "pas mis en oeuvre"
-		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
-		window.location.reload(); 
+	onClickResetButton(sousTacheId : string , sousTacheEtat: string) {
+		if (sousTacheEtat == "en cours"){
+			let status= "pas mis en oeuvre"
+			this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+			window.location.reload(); 
+		}
+		
+		else if (sousTacheEtat == "terminé"){
+			let status= "pas mis en oeuvre"
+			this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
+			window.location.reload(); 
+			
+		} else {
+			console.log("not started yet")
+			
+		}
+		
 	}
-	
-	else if (sousTacheEtat == "terminé"){
-		let status= "pas mis en oeuvre"
-		this.exigenceService.resetSubTaskStatus(sousTacheId, status).subscribe((res) => {} );
-		window.location.reload(); 
-
-	} else {
-		console.log("not started yet")
-
-	}
-
-}
 }

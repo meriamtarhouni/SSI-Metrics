@@ -32,3 +32,8 @@
 	/* width: 50%; */
 	width: 200px;
 }
+
+.pointer{
+	pointer-events: auto;
+ 	cursor: pointer;
+}
