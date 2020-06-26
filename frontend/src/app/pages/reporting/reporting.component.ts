@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { SubTaskService } from 'src/app/checkListServices/sub-task.service';
 import { Sous_tache } from 'src/app/models/sous_tache.model';
 import { Chart } from 'chart.js';
+import { AuthRssiService } from 'src/app/auth-rssi.service';
+import { WorkspaceService } from 'src/app/workspace.service';
+import { Collaborateur } from 'src/app/models/collaborateur.model'
 
 @Component({
 	selector: 'app-reporting',
@@ -11,7 +14,8 @@ import { Chart } from 'chart.js';
 })
 export class ReportingComponent implements OnInit {
 	
-	phases: any[];
+	organisationName: string;
+	phases: string[] = [];
 	nbPasMisEnOeuvre: number[] = [];
 	nbEnCours: number[] = [];
 	nbTermine: number[] = [];
@@ -22,17 +26,22 @@ export class ReportingComponent implements OnInit {
 	tasksDeliverdOnTimeChart = [[]]; 
 
 	collaboratorsOrderMap: Map<String, number> = new Map<String, number>();
-	// collaboratorsOrder: [[]];
+	collaboratorsArray1: String[] = [];
+	collaboratorsArray2: number[] = [];
 
-	constructor(private phaseService: PhaseService, private subTasksService: SubTaskService) { }
+	collaboratorsIdNameMap: Map<String, String> = new Map<String, String>();
+
+	constructor(private phaseService: PhaseService, private subTasksService: SubTaskService, private authRssiService: AuthRssiService, private workspaceService: WorkspaceService) { }
 	
 	ngOnInit(): void {
+		this.organisationName = this.authRssiService.getRssiOrg();
+
 		this.phaseService.getPhases().subscribe((phases: any[]) => {
 			console.log('Phases = ', phases);
-			this.phases = phases;
+			phases.forEach((phase: any) => { this.phases.push(phase.nom); });
 			
 			let i = 0;
-			this.phases.forEach((phase) => {
+			phases.forEach((phase) => {
 				this.subTasksService.getToDoSubTasksRssi(phase._id).subscribe((todo: Sous_tache[]) => {
 					this.nbPasMisEnOeuvre.push(todo.length);
 
@@ -49,7 +58,7 @@ export class ReportingComponent implements OnInit {
 			});
 
 			let j = 0;
-			this.phases.forEach((phase) => {
+			phases.forEach((phase) => {
 				this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
 					this.nbAvantLimite[j] = 0;
 					this.nbApresLimite[j] = 0;
@@ -65,47 +74,53 @@ export class ReportingComponent implements OnInit {
 				});
 			});
 
-			this.phases.forEach((phase) => {
-				this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
-					done.forEach((sstache) => {
-						let collabId = sstache.collaborateur_id;
-						if(collabId){
-							console.log(collabId);
-							--this.collaboratorsOrderMap[collabId];
-						}
-					});
-					console.log(this.collaboratorsOrderMap);
+			this.workspaceService.getOrgCollaboratorsRssi(this.organisationName).subscribe((collaborateurs: Collaborateur[]) => {
+				let nbCollabs = 0;
+				collaborateurs.forEach((collab: Collaborateur) => {
+					++nbCollabs;
+					if (collab.has_workspace) {
+						this.collaboratorsOrderMap.set(collab._id, 0);
+						this.collaboratorsIdNameMap.set(collab._id, collab.nom);
+					}
+					
+					if(nbCollabs == collaborateurs.length){
+						// let nbPhases = 0;
+						phases.forEach((phase) => {
+							this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
+								// console.log("Done = ", done);
 
-					// this.collaboratorsOrder = [[]];
-					// this.collaboratorsOrderMap.forEach((value, key) => {
-					// 	// this.collaboratorsOrder.push([String(key), String(value)]);
-					// });
+								// ++nbPhases;
+								let nbSubTasks = 0;
+								done.forEach((sstache) => {
+									++nbSubTasks;
+									let collabId = sstache.collaborateur_id;
+									if(collabId){
+										console.log(collabId);
+										this.collaboratorsOrderMap.set(collabId, this.collaboratorsOrderMap.get(collabId) + 1);
+									}
+
+									// console.log("INDEX = ", i);
+								});
+
+								if(phase._id == "5eedf82db4e55b10de2db30d" && nbSubTasks == done.length){
+									this.collaboratorsOrderMap.forEach((val, key, map) => {
+										this.collaboratorsArray1.push(this.collaboratorsIdNameMap.get(key));
+										this.collaboratorsArray2.push(val);
+									});
+									this.collaboratorsArray1.reverse();
+									this.collaboratorsArray2.reverse();
+
+									console.log("Collabs map = ", this.collaboratorsOrderMap);
+									console.log("Collabs array 1 = ", this.collaboratorsArray1);
+									console.log("Collabs array 2 = ", this.collaboratorsArray2);
+								}
+							});
+						});
+					}
 				});
+
 			});
 		});
-
-    this.tasksDeliverdOnTimeChart = new Chart('pieChart2' , {
-      type: 'pie',
-      data: {
-        labels: ["Tâches Non Terminés avant la date limite ",  "Tâches Terminés avant la date limite "], 
-        datasets:[{
-          label:'Vote Now', 
-          data : [10,15], // 10 : nbr de Taches Non Terminés Avant la date limite , 15 : nbr de Taches  Terminés Avant la date limite
-          backgroundColor:[
-            '#f44336', 
-            '#4CAF50', 
-          ],
-        }]
-      },
-      options: {
-        title : {
-          Text: "Bar Chart ",
-          display:true
-        }
-      }
-    }
-    );
-  
 	}
 
 	avantLimite(sstache: Sous_tache): boolean{
@@ -120,7 +135,7 @@ export class ReportingComponent implements OnInit {
 	}
 
 	updateChart1(i: number){
-		// console.log('1) Phase ', i, ' numbers = ', this.nbPasMisEnOeuvre[i], this.nbEnCours[i], this.nbTermine[i]);
+		console.log('1) Phase ', i, ' numbers = ', this.nbPasMisEnOeuvre[i], this.nbEnCours[i], this.nbTermine[i]);
 		
 		this.tasksPieChart.push(new Chart('pieChart1_' + i.toString() , {
 			type: 'pie',
