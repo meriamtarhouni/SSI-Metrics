@@ -12,11 +12,11 @@
 					
 					<div id="inner-circle">
 						
-						<div id="text" *ngIf="phases != undefined "   [routerLink]="['/exigences', phases[1]._id]">2. {{phases[1].nom}}</div>
+						<div id="text" class="pointer" *ngIf="phases != undefined "   [routerLink]="['/exigences', phases[1]._id]">2. {{phases[1].nom}}</div>
 						
 						
 						<div id="outer-circle">
-							<div id="text" *ngIf="phases != undefined "  [routerLink]="['/exigences', phases[0]._id]" >1. {{phases[0].nom }}</div> </div>
+							<div id="text" *ngIf="phases != undefined " class="pointer" [routerLink]="['/exigences', phases[0]._id]" >1. {{phases[0].nom }}</div> </div>
 						
 							
 							
@@ -25,11 +25,11 @@
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 						<div id="inner-circle-2">
-							<div id="text" *ngIf="phases != undefined "[routerLink]="['/exigences', phases[3]._id]">4. {{phases[3].nom }}</div>
+							<div id="text" class="pointer" *ngIf="phases != undefined "[routerLink]="['/exigences', phases[3]._id]">4. {{phases[3].nom }}</div>
 							
 							<div id="outer-circle-2">
 								
-								<div id="text" *ngIf="phases != undefined " [routerLink]="['/exigences', phases[2]._id]">3. {{phases[2].nom }}</div> </div>
+								<div id="text" class="pointer" *ngIf="phases != undefined " [routerLink]="['/exigences', phases[2]._id]">3. {{phases[2].nom }}</div> </div>
 							
 								
 							</div>

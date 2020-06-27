@@ -16,14 +16,16 @@ export class ReportingComponent implements OnInit {
 	
 	organisationName: string;
 	phases: string[] = [];
-	nbPasMisEnOeuvre: number[] = [];
-	nbEnCours: number[] = [];
-	nbTermine: number[] = [];
+	nbPasMisEnOeuvre: number[] = [0, 0, 0, 0];
+	nbEnCours: number[] = [0, 0, 0, 0];
+	nbTermine: number[] = [0, 0, 0, 0];
 	tasksPieChart = [[]];
 
-	nbAvantLimite: number[] = [];
-	nbApresLimite: number[] = [];
+	nbAvantLimite: number[] = [0, 0, 0, 0];
+	nbApresLimite: number[] = [0, 0, 0, 0];
 	tasksDeliverdOnTimeChart = [[]]; 
+
+	phaseIndex: Map<String, number> = new Map<String, number>();
 
 	collaboratorsOrderMap: Map<String, number> = new Map<String, number>();
 	collaboratorsArray1: String[] = [];
@@ -38,39 +40,49 @@ export class ReportingComponent implements OnInit {
 
 		this.phaseService.getPhases().subscribe((phases: any[]) => {
 			console.log('Phases = ', phases);
-			phases.forEach((phase: any) => { this.phases.push(phase.nom); });
+			let nbPhases = 0;
+			phases.forEach((phase: any) => {
+				this.phaseIndex[phase._id] = nbPhases;
+				++nbPhases;
+
+				this.phases[this.phaseIndex[phase._id]] = phase.nom;
+			});
 			
-			let i = 0;
+			// let i = 0;
+			// let j = 0;
 			phases.forEach((phase) => {
 				this.subTasksService.getToDoSubTasksRssi(phase._id).subscribe((todo: Sous_tache[]) => {
-					this.nbPasMisEnOeuvre.push(todo.length);
+					this.nbPasMisEnOeuvre[this.phaseIndex[phase._id]] = todo.length;
 
 					this.subTasksService.getInProgressSubTasksRssi(phase._id).subscribe((inprogress: Sous_tache[]) => {
-						this.nbEnCours.push(inprogress.length);
+						this.nbEnCours[this.phaseIndex[phase._id]] = inprogress.length;
 						
 						this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
-							this.nbTermine.push(done.length);
-							this.updateChart1(i);
-							++i;
+							this.nbTermine[this.phaseIndex[phase._id]] = done.length;
+							this.updateChart1(this.phaseIndex[phase._id]);
+							// ++i;
 						}); 
 					});
 				});
-			});
 
-			let j = 0;
-			phases.forEach((phase) => {
 				this.subTasksService.getDoneSubTasksRssi(phase._id).subscribe((done: Sous_tache[]) => {
-					this.nbAvantLimite[j] = 0;
-					this.nbApresLimite[j] = 0;
-
+					let nbSubTasks = 0;
 					done.forEach((sstache) => {
 						console.log('Sous Tache = ', sstache);
-						if(this.avantLimite(sstache)) ++this.nbAvantLimite[j];
-						else ++this.nbApresLimite[j];
+						if(this.avantLimite(sstache)) ++this.nbAvantLimite[this.phaseIndex[phase._id]];
+						else ++this.nbApresLimite[this.phaseIndex[phase._id]];
+
+						++nbSubTasks;
+						if(nbSubTasks == done.length){
+							this.updateChart2(this.phaseIndex[phase._id]);
+							// ++j;
+						}
 					});
 
-					this.updateChart2(j);
-					++j;
+					if(done.length == 0){
+						this.updateChart2(this.phaseIndex[phase._id]);
+						// ++j;
+					}
 				});
 			});
 
@@ -102,7 +114,7 @@ export class ReportingComponent implements OnInit {
 									// console.log("INDEX = ", i);
 								});
 
-								if(phase._id == "5eedf82db4e55b10de2db30d" && nbSubTasks == done.length){
+								if(this.phaseIndex[phase._id] == 3 && nbSubTasks == done.length){
 									this.collaboratorsOrderMap.forEach((val, key, map) => {
 										this.collaboratorsArray1.push(this.collaboratorsIdNameMap.get(key));
 										this.collaboratorsArray2.push(val);
@@ -142,7 +154,7 @@ export class ReportingComponent implements OnInit {
 			data: {
 				labels: ["Pas mis en oeuvre", "En Cours", "Terminé "], 
 				datasets:[{
-					label:'Vote Now', 
+					label:'Vote Now' + i.toString(), 
 					data : [this.nbPasMisEnOeuvre[i], this.nbEnCours[i], this.nbTermine[i]], 
 					backgroundColor:[
 						'#f44336', 
@@ -168,7 +180,7 @@ export class ReportingComponent implements OnInit {
 			data: {
 				labels: ["Tâches Non Terminés Avant la date limite ",  "Tâches Terminés Aprés la date limite "], 
 				datasets:[{
-					label:'Vote Now', 
+					label:'Vote Now' + i.toString(), 
 					data : [this.nbAvantLimite[i], this.nbApresLimite[i]], // 10 : nbr de Taches Non Terminés Avant la date limite , 15 : nbr de Taches  Terminés Avant la date limite
 					backgroundColor:[
 						'#4CAF50', 
