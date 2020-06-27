@@ -81,7 +81,7 @@ container-fluid.main{
 	right: 0px; /* Make the div full width */
 	text-align: center;
 	/*margin-top:100px;*/
-	background-color: #21296e;
+	background-color: white;
 	padding: 100px;
 	height: 952px;;
 
@@ -102,6 +102,6 @@ container-fluid.main{
 .subtitle {
 	font-family: 'CaviarDreams';
 	font-size: 23px;
-	color: white;
+	color: #21296e;
 	text-align: center;
 }
