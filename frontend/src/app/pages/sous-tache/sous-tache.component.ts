@@ -30,25 +30,24 @@ export class SousTacheComponent implements OnInit {
 					this.sousTaches = sousTaches;
 					console.log('Sous taches = ', this.sousTaches);
 					
+					let nbSubTasks = 0;
 					this.sousTaches.forEach((sst) => {
+						let current_index = nbSubTasks;
+						++nbSubTasks;
 						if (sst.collaborateur_id) {
 							console.log('collab id = ', sst.collaborateur_id);
 							this.collaboratorService.getCollaboratorByIdRssi(sst.collaborateur_id).subscribe((collab: Collaborateur) => {
 								console.log('collab = ', collab);
 								
-								let has_sst: boolean = false;
+								this.affected[current_index] = false;
+								this.affectedCollabsNames[current_index] = '';
+
 								this.sousTaches.forEach((sst2) => {
-									if (sst2.collaborateur_id == collab._id) has_sst = true;
+									if (sst2.collaborateur_id == collab._id){
+										this.affected[current_index] = true;
+										this.affectedCollabsNames[current_index] = collab.nom;
+									}
 								});
-								
-								this.affected.push(has_sst);
-								
-								if (has_sst) {
-									this.affectedCollabsNames.push(collab.nom);
-								}
-								else {
-									this.affectedCollabsNames.push('');
-								}
 							});
 						}
 					});
